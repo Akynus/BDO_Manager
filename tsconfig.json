@@ -8,14 +8,17 @@
     ],
     "jsx": "react",
     "moduleResolution": "node",
+    "baseUrl": ".",
+    "allowJs": true,
     "forceConsistentCasingInFileNames": true,
-    "strict": true,
-    "noEmit": true,
-    "experimentalDecorators": true,
-    "baseUrl": "./",
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "noUnusedLocals": true,
     "allowSyntheticDefaultImports": true,
-    "noErrorTruncation": true,
-    "allowJs": true
+    "experimentalDecorators": true
   },
   "exclude": [
     "**/build/"
