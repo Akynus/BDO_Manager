@@ -1,0 +1,40 @@
+{
+  "name": "simple-todos-react",
+  "private": true,
+  "scripts": {
+    "start": "meteor run --port 5000",
+    "test": "meteor test --once --driver-package meteortesting:mocha",
+    "test-app": "TEST_WATCH=1 meteor test --full-app --driver-package meteortesting:mocha",
+    "visualize": "meteor --production --extra-packages bundle-visualizer"
+  },
+  "dependencies": {
+    "@ant-design/icons": "^4.2.1",
+    "antd": "^4.3.3",
+    "classnames": "^2.2.6",
+    "indexof": "0.0.1",
+    "meteor-node-stubs": "^0.4.1",
+    "moment": "^2.24.0",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "react-router": "^5.2.0",
+    "react-router-dom": "^5.0.1",
+    "simpl-schema": "^1.5.5",
+    "tesseract.js": "^2.1.1"
+  },
+  "meteor": {
+    "mainModule": {
+      "client": "client/main.js",
+      "server": "server/main.js"
+    }
+  },
+  "devDependencies": {
+    "@babel/runtime": "^7.10.2",
+    "@types/meteor": "^1.4.29",
+    "@types/node": "^12.6.8",
+    "@types/react": "^16.8.23",
+    "@types/react-dom": "^16.8.4",
+    "@types/react-router-dom": "^4.3.4",
+    "@types/simpl-schema": "^0.2.3",
+    "chai": "^4.2.0"
+  }
+}
