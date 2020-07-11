@@ -1,11 +1,13 @@
 export default interface ILang {
-    actions: {
+    action: {
         save: string;
         cancel: string;
         close: string;
         back: string;
         open: string;
         edit: string;
+        login: string;
+        forgotPassword: string;
     },
     title: {
         application: string;
@@ -13,5 +15,9 @@ export default interface ILang {
     },
     description: {
         login: string;
+    },
+    field: {
+        user: string;
+        password: string;
     }
 }

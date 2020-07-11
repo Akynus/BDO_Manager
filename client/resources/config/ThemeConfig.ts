@@ -6,7 +6,7 @@ export default class ThemeConfig {
             type: "light"
         },
         shape: {
-            borderRadius: 10
+            borderRadius: 6
         }
     });
 

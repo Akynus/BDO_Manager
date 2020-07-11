@@ -4,13 +4,14 @@ const styles = (theme: Theme) => createStyles({
     root: {},
     content: {
         width: 300,
+        padding: theme.spacing(3),
+        paddingTop: theme.spacing(10),
+    },
+    icon: {
+        color: theme.palette.secondary.main
     },
     titleCard: {
         marginBottom: theme.spacing(0)
-    },
-    divider:{
-        marginTop: theme.spacing(1),
-        marginBottom: theme.spacing(1),
     }
 });
 
