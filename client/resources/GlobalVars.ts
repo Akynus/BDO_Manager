@@ -5,6 +5,6 @@ export enum URLBackground {
     ABOUT_LOGIN = '/images/about_login.png'
 }
 
-export enum SessionVars {
-    IS_AUTHENTICATION = "IS_AUTHENTICATION"
+export enum SessionKeys {
+    THEME_STYLE = "THEME_STYLE"
 }

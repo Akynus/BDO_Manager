@@ -19,3 +19,4 @@ react-meteor-data
 accounts-password
 ecmascript
 typescript
+session

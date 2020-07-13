@@ -1,14 +1,6 @@
-import {Accounts} from "meteor/accounts-base";
-import {Tracker} from "meteor/tracker";
+import {Session} from "meteor/session";
+import {SessionKeys} from "/client/resources/GlobalVars";
 
 Tracker.autorun(function () {
-
-});
-
-Accounts.onLogin(()=>{
-
-});
-
-Accounts.onLogout(()=>{
-
+    Session.set(SessionKeys.THEME_STYLE, "light");
 });
