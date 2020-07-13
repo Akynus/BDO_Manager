@@ -10,17 +10,26 @@ const values: ILang = {
         open: 'Abrir',
         save: 'Salvar',
         login: 'Entrar',
-        forgotPassword: 'Esqueci minha senha'
+        logout: 'Sair',
+        forgotPassword: 'Esqueci minha senha',
+        yes: 'Sim',
+        no: 'Não'
+    },
+    item: {
+        profile: 'Perfil',
+        setting: 'Configurações'
     },
     title: {
         application: 'BDO Manager',
-        welcome: 'Bem-Vindo'
+        welcome: 'Bem-Vindo',
+        logout: 'Encerrar sessão'
     },
     description: {
         loginWithDiscord: 'Entrar com Discord',
         loginWithFacebook: 'Entrar com Facebook',
         loginWithGoogle: "Entrar com Google",
-        invalidAuthentication:"Autenticação inválida"
+        invalidAuthentication: "Autenticação inválida",
+        logoutUser: 'Deseja encerrar a sessão do usuário atual?'
     },
     field: {
         user: 'Usuário',

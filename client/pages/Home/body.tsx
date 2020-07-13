@@ -2,13 +2,17 @@ import * as React from "react";
 import {WithStyles} from "@material-ui/core";
 import style from "./style";
 
+import AppBar from "/client/components/layout/AppBar";
+
 export default class extends React.Component<IProps, IState> {
     constructor(props: IProps) {
         super(props);
     }
 
     render() {
-        return 'Home Page';
+        return <div>
+            <AppBar/>
+        </div>;
     }
 }
 
