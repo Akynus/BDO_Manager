@@ -14,7 +14,7 @@ export default class extends React.Component<IProps, IState> {
     }
 
     componentDidMount() {
-        setInterval(this.loopBG, 3000);
+        setInterval(this.loopBG, 5000);
     }
 
     private loopBG(): void {

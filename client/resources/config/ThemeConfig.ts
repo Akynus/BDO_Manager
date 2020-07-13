@@ -7,7 +7,10 @@ export default class ThemeConfig {
         },
         shape: {
             borderRadius: 6
-        }
+        },
+        typography: {
+            fontFamily: 'Nunito, Arial',
+        },
     });
 
     //private static readonly USER = createMuiTheme({});

@@ -1,7 +1,7 @@
 import i18n, {Resource} from "i18next";
 import {initReactI18next} from "react-i18next";
 
-import pt_BR from "imports/langs/pt_BR";
+import pt_BR from "/imports/langs/pt_BR";
 
 const resources: Resource = {
     pt_BR

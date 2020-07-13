@@ -1,6 +1,6 @@
 import {createStyles, Theme} from '@material-ui/core/styles';
 
-import {URLBackground} from "client/resources/GlobalVars";
+import {URLBackground} from "/client/resources/GlobalVars";
 
 const styles = (theme: Theme) => createStyles({
     root: {
@@ -13,6 +13,7 @@ const styles = (theme: Theme) => createStyles({
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
+        overflow: 'hidden',
         '&.bg01': {
             backgroundImage: `url(${URLBackground.BG01})`
         },

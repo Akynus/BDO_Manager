@@ -1,5 +1,5 @@
 import {ResourceLanguage} from "i18next";
-import ILang from "imports/interfaces/ILang";
+import ILang from "/imports/interfaces/ILang";
 
 const values: ILang = {
     action: {
@@ -14,14 +14,20 @@ const values: ILang = {
     },
     title: {
         application: 'BDO Manager',
-        login: 'Entrar'
+        welcome: 'Bem-Vindo'
     },
     description: {
-        login: 'Autenticação do usuário'
+        loginWithDiscord: 'Entrar com Discord',
+        loginWithFacebook: 'Entrar com Facebook',
+        loginWithGoogle: "Entrar com Google",
+        invalidAuthentication:"Autenticação inválida"
     },
     field: {
         user: 'Usuário',
         password: 'Senha'
+    },
+    validation: {
+        required: 'Campo obrigatório'
     }
 }
 

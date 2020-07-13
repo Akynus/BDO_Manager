@@ -11,13 +11,19 @@ export default interface ILang {
     },
     title: {
         application: string;
-        login: string;
+        welcome: string;
     },
     description: {
-        login: string;
+        loginWithFacebook: string;
+        loginWithGoogle: string;
+        loginWithDiscord: string;
+        invalidAuthentication: string;
     },
     field: {
         user: string;
         password: string;
+    },
+    validation: {
+        required: string;
     }
 }
