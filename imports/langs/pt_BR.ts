@@ -17,7 +17,8 @@ const values: ILang = {
     },
     item: {
         profile: 'Perfil',
-        setting: 'Configurações'
+        setting: 'Configurações',
+        home:'Página Inicial'
     },
     title: {
         application: 'BDO Manager',

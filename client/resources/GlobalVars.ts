@@ -5,6 +5,15 @@ export enum URLBackground {
     ABOUT_LOGIN = '/images/about_login.png'
 }
 
+export enum RoutePage {
+    HOME = '/home',
+    PROFILE = '/profile',
+    SETTING = '/setting',
+
+
+    LOGIN = '/login'
+}
+
 export enum SessionKeys {
     THEME_STYLE = "THEME_STYLE",
     DRAWER_HANDLE = "DRAWER_HANDLE"

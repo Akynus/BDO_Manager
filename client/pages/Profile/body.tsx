@@ -9,7 +9,7 @@ export default class extends React.Component<IProps, IState> {
 
     render() {
         return <div>
-            Home Page
+            Profile Page
         </div>;
     }
 }

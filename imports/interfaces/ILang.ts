@@ -15,6 +15,7 @@ export default interface ILang {
     item: {
         setting: string;
         profile: string;
+        home: string;
     },
     title: {
         application: string;

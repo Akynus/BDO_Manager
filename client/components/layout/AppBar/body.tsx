@@ -15,7 +15,7 @@ import clsx from 'clsx';
 import style from "./style";
 import IComponent from "/imports/interfaces/IComponent";
 import {withTracker} from "meteor/react-meteor-data";
-import {SessionKeys} from "/client/resources/GlobalVars";
+import {RoutePage, SessionKeys} from "/client/resources/GlobalVars";
 
 class AppBarComponent extends React.Component<IProps, IState> {
     readonly menuUser = "menu-user-bar";
@@ -54,7 +54,7 @@ class AppBarComponent extends React.Component<IProps, IState> {
     }
 
     private contentUserMenu(): React.ReactNode {
-        const {classes, t} = this.props;
+        const {t} = this.props;
         const {targetUser} = this.state;
 
         return <Menu
@@ -65,21 +65,21 @@ class AppBarComponent extends React.Component<IProps, IState> {
             transformOrigin={{vertical: 'top', horizontal: 'right'}}
             open={Boolean(targetUser)}
             onClose={this.handleCloseUserMenu}>
-            <MenuItem onClick={this.handleCloseUserMenu}>
+            <MenuItem onClick={this.onClickRoute.bind(this, RoutePage.PROFILE)}>
                 <ListItemIcon>
-                    <Icon fontSize={"small"} className={clsx(['fas fa-id-card', classes.iconMenuItem])}/>
+                    <Icon fontSize={"small"} className={'fas fa-id-card'}/>
                 </ListItemIcon>
                 <Typography variant={"inherit"} noWrap={true}>{t('item.profile')}</Typography>
             </MenuItem>
-            <MenuItem onClick={this.handleCloseUserMenu}>
+            <MenuItem onClick={this.onClickRoute.bind(this, RoutePage.SETTING)}>
                 <ListItemIcon>
-                    <Icon fontSize={"small"} className={clsx(['fas fa-user-cog', classes.iconMenuItem])}/>
+                    <Icon fontSize={"small"} className={'fas fa-user-cog'}/>
                 </ListItemIcon>
                 <Typography variant={"inherit"} noWrap={true}>{t('item.setting')}</Typography>
             </MenuItem>
             <MenuItem onClick={this.handleConfirmLogout.bind(this, true)}>
                 <ListItemIcon>
-                    <Icon fontSize={"small"} className={clsx(['fas fa-door-open', classes.iconMenuItem])}/>
+                    <Icon fontSize={"small"} className={'fas fa-door-open'}/>
                 </ListItemIcon>
                 <Typography variant={"inherit"} noWrap={true}>{t('action.logout')}</Typography>
             </MenuItem>
@@ -109,17 +109,23 @@ class AppBarComponent extends React.Component<IProps, IState> {
         </Dialog>
     }
 
-    private handleDrawer():void{
+    private handleDrawer(): void {
         Session.set(SessionKeys.DRAWER_HANDLE, true);
     }
 
+    private onClickRoute(route: string): void {
+        const {history} = this.props;
+        this.handleCloseUserMenu();
+        history.push({pathname: route});
+    }
+
     render() {
-        const {classes, t, drawerIsOpen} = this.props;
+        const {classes, t, drawerIsOpened} = this.props;
         return <AppBar elevation={10} position={"fixed"}
-                       className={clsx(classes.toolbar, {[classes.toolbarShift]: drawerIsOpen})}>
+                       className={clsx(classes.toolbar, {[classes.toolbarShift]: drawerIsOpened})}>
             <Toolbar className={classes.content}>
                 <Tooltip title={t('description.drawerMenuShow')} placement="bottom-end"
-                         className={clsx({[classes.hideMenuIcon]: drawerIsOpen})}>
+                         className={clsx({[classes.hideMenuIcon]: drawerIsOpened})}>
                     <IconButton color="inherit" edge="start" onClick={this.handleDrawer}>
                         <Icon className={'fas fa-bars'}/>
                     </IconButton>
@@ -139,7 +145,7 @@ class AppBarComponent extends React.Component<IProps, IState> {
 }
 
 interface IProps extends IComponent, WithStyles<keyof ReturnType<typeof style>> {
-    drawerIsOpen: boolean;
+    drawerIsOpened: boolean;
 }
 
 interface IState {
@@ -149,6 +155,6 @@ interface IState {
 
 export default withTracker(() => {
     return {
-        drawerIsOpen: Session.get(SessionKeys.DRAWER_HANDLE)
+        drawerIsOpened: Session.get(SessionKeys.DRAWER_HANDLE)
     }
 })(AppBarComponent);

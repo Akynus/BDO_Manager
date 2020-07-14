@@ -29,9 +29,6 @@ const styles = (theme: Theme) => createStyles({
             display: 'block',
         },
     },
-    iconMenuItem: {
-        width: 'auto'
-    },
     sectionMobile: {
         display: 'none',
         marginLeft: 'auto',
