@@ -27,6 +27,8 @@ export default interface ILang {
         loginWithDiscord: string;
         invalidAuthentication: string;
         logoutUser: string;
+        drawerMenuHide: string;
+        drawerMenuShow: string;
     },
     field: {
         user: string;

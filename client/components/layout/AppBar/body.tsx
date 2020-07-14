@@ -7,15 +7,17 @@ import {
     ListItemIcon,
     Menu,
     MenuItem,
-    Toolbar,
+    Toolbar, Tooltip,
     Typography,
     WithStyles
 } from "@material-ui/core";
 import clsx from 'clsx';
 import style from "./style";
 import IComponent from "/imports/interfaces/IComponent";
+import {withTracker} from "meteor/react-meteor-data";
+import {SessionKeys} from "/client/resources/GlobalVars";
 
-export default class extends React.Component<IProps, IState> {
+class AppBarComponent extends React.Component<IProps, IState> {
     readonly menuUser = "menu-user-bar";
     readonly dialogConfirmLogout = "confirm-logout-user"
 
@@ -62,8 +64,7 @@ export default class extends React.Component<IProps, IState> {
             keepMounted
             transformOrigin={{vertical: 'top', horizontal: 'right'}}
             open={Boolean(targetUser)}
-            onClose={this.handleCloseUserMenu}
-        >
+            onClose={this.handleCloseUserMenu}>
             <MenuItem onClick={this.handleCloseUserMenu}>
                 <ListItemIcon>
                     <Icon fontSize={"small"} className={clsx(['fas fa-id-card', classes.iconMenuItem])}/>
@@ -85,7 +86,7 @@ export default class extends React.Component<IProps, IState> {
         </Menu>
     }
 
-    private contentConfirmLogou(): React.ReactNode {
+    private contentConfirmLogout(): React.ReactNode {
         const {t} = this.props;
         const {showConfirmLogout} = this.state;
 
@@ -98,41 +99,56 @@ export default class extends React.Component<IProps, IState> {
                 </DialogContentText>
             </DialogContent>
             <DialogActions>
-                <Button autoFocus onClick={this.handleConfirmLogout.bind(this, false)} color="primary">
+                <Button autoFocus onClick={this.handleConfirmLogout.bind(this, false)} color="secondary">
                     {t('action.no')}
                 </Button>
-                <Button onClick={this.logout} color="primary">
+                <Button onClick={this.logout} color="secondary">
                     {t('action.yes')}
                 </Button>
             </DialogActions>
         </Dialog>
     }
 
+    private handleDrawer():void{
+        Session.set(SessionKeys.DRAWER_HANDLE, true);
+    }
+
     render() {
-        const {classes, t} = this.props;
-        return <AppBar elevation={10} position={"fixed"} className={classes.root}>
-            <Toolbar className={classes.toolbar}>
-                <IconButton edge="start">
-                    <Icon className={'fas fa-bars'}/>
-                </IconButton>
+        const {classes, t, drawerIsOpen} = this.props;
+        return <AppBar elevation={10} position={"fixed"}
+                       className={clsx(classes.toolbar, {[classes.toolbarShift]: drawerIsOpen})}>
+            <Toolbar className={classes.content}>
+                <Tooltip title={t('description.drawerMenuShow')} placement="bottom-end"
+                         className={clsx({[classes.hideMenuIcon]: drawerIsOpen})}>
+                    <IconButton color="inherit" edge="start" onClick={this.handleDrawer}>
+                        <Icon className={'fas fa-bars'}/>
+                    </IconButton>
+                </Tooltip>
                 <Typography className={classes.title} variant={"h6"} noWrap={true}>{t('title.application')}</Typography>
                 <div className={classes.sectionMobile}>
-                    <IconButton onClick={this.handleOpenUserMenu} edge="end" aria-controls={this.menuUser}>
+                    <IconButton color="inherit" onClick={this.handleOpenUserMenu} edge="end"
+                                aria-controls={this.menuUser}>
                         <Icon className={'fas fa-user'}/>
                     </IconButton>
                 </div>
             </Toolbar>
             {this.contentUserMenu()}
-            {this.contentConfirmLogou()}
+            {this.contentConfirmLogout()}
         </AppBar>;
     }
 }
 
 interface IProps extends IComponent, WithStyles<keyof ReturnType<typeof style>> {
-
+    drawerIsOpen: boolean;
 }
 
 interface IState {
     targetUser: HTMLButtonElement | null;
     showConfirmLogout: boolean;
 }
+
+export default withTracker(() => {
+    return {
+        drawerIsOpen: Session.get(SessionKeys.DRAWER_HANDLE)
+    }
+})(AppBarComponent);

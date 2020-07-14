@@ -29,7 +29,9 @@ const values: ILang = {
         loginWithFacebook: 'Entrar com Facebook',
         loginWithGoogle: "Entrar com Google",
         invalidAuthentication: "Autenticação inválida",
-        logoutUser: 'Deseja encerrar a sessão do usuário atual?'
+        logoutUser: 'Deseja encerrar a sessão do usuário atual?',
+        drawerMenuHide: 'Compactar menu lateral',
+        drawerMenuShow: 'Expandir menu lateral'
     },
     field: {
         user: 'Usuário',

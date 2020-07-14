@@ -4,7 +4,7 @@
   "scripts": {
     "start": "meteor run --port 5000",
     "test": "meteor test --once --driver-package meteortesting:mocha",
-    "debug": "set METEOR_PROFILE=1 set METEOR_LOG=debug && meteor --verbose",
+    "debug": "set METEOR_PROFILE=1 set METEOR_LOG=debug && meteor run",
     "test-app": "TEST_WATCH=1 meteor test --full-app --driver-package meteortesting:mocha",
     "visualize": "meteor --production --extra-packages bundle-visualizer"
   },

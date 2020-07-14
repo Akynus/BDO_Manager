@@ -6,5 +6,6 @@ export enum URLBackground {
 }
 
 export enum SessionKeys {
-    THEME_STYLE = "THEME_STYLE"
+    THEME_STYLE = "THEME_STYLE",
+    DRAWER_HANDLE = "DRAWER_HANDLE"
 }
