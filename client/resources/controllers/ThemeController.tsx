@@ -8,12 +8,18 @@ import {TypographyOptions} from "@material-ui/core/styles/createTypography";
 class ThemeController extends React.Component<IProps, any> {
 
     private override(): Overrides {
+        const {themeStyle} = this.props;
         return {
             MuiIcon: {
                 root: {
                     fontSize: '1.2rem',
                     minWidth: '1em',
                     width: "auto"
+                }
+            },
+            MuiCard: {
+                root: {
+                    background: themeStyle == "dark" ? 'rgba(255, 255, 255, 0.15)' : '#FFFFFF'
                 }
             },
             MuiListItemIcon: {

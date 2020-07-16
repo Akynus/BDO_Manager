@@ -18,12 +18,14 @@ const values: ILang = {
     item: {
         profile: 'Perfil',
         setting: 'Configurações',
-        home:'Página Inicial'
+        home: 'Página Inicial',
+        theming: 'Tematização',
     },
     title: {
         application: 'BDO Manager',
         welcome: 'Bem-Vindo',
-        logout: 'Encerrar sessão'
+        logout: 'Encerrar sessão',
+        accessibility: 'Acessibilidade'
     },
     description: {
         loginWithDiscord: 'Entrar com Discord',
@@ -36,7 +38,8 @@ const values: ILang = {
     },
     field: {
         user: 'Usuário',
-        password: 'Senha'
+        password: 'Senha',
+        darkMode: 'Modo Escuro'
     },
     validation: {
         required: 'Campo obrigatório'

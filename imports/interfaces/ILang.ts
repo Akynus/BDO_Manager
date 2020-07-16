@@ -16,11 +16,13 @@ export default interface ILang {
         setting: string;
         profile: string;
         home: string;
+        theming: string;
     },
     title: {
         application: string;
         welcome: string;
         logout: string;
+        accessibility: string;
     },
     description: {
         loginWithFacebook: string;
@@ -34,6 +36,7 @@ export default interface ILang {
     field: {
         user: string;
         password: string;
+        darkMode: string;
     },
     validation: {
         required: string;
