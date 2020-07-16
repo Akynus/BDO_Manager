@@ -1,9 +1,20 @@
 import {Session} from "meteor/session";
-import {SessionKeys} from "/client/resources/GlobalVars";
+import {Accounts} from "meteor/accounts-base";
+import {SessionKeys} from "/imports/objects/GlobalVars";
+import EPublish from "/imports/objects/EPublish";
 
 Tracker.autorun(function () {
-    Session.set(SessionKeys.THEME_STYLE, "light");
-    Session.set(SessionKeys.PRIMARY_COLOR,"#5c6bc0");
-    Session.set(SessionKeys.SECONDARY_COLOR,"#2196f3");
     Session.set(SessionKeys.DRAWER_HANDLE, true);
+});
+
+let subSetting: Meteor.SubscriptionHandle;
+
+Accounts.onLogin(function () {
+    subSetting = Meteor.subscribe(EPublish.SETTING, {
+        onError: console.log,
+    });
+});
+
+Accounts.onLogout(function () {
+    if (subSetting) subSetting.stop();
 });

@@ -20,3 +20,6 @@ accounts-password
 ecmascript
 typescript
 session
+aldeed:collection2
+aldeed:schema-index
+aldeed:schema-deny

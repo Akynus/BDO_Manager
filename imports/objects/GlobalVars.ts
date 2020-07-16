@@ -15,8 +15,5 @@ export enum RoutePage {
 }
 
 export enum SessionKeys {
-    THEME_STYLE = "THEME_STYLE",
-    PRIMARY_COLOR = "PRIMARY_COLOR",
-    SECONDARY_COLOR = "SECONDARY_COLOR",
     DRAWER_HANDLE = "DRAWER_HANDLE"
 }

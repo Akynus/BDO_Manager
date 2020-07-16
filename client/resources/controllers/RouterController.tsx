@@ -8,7 +8,7 @@ import ProfilePage from "/client/pages/Profile";
 import SettingPage from "/client/pages/Setting";
 
 import LoginPage from "/client/pages/Login";
-import {RoutePage} from "/client/resources/GlobalVars";
+import {RoutePage} from "/imports/objects/GlobalVars";
 
 class RouterController extends React.Component<{ isAuth: string | null }> {
     static Authenticated = class extends React.Component<any, any> {

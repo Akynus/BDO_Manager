@@ -1,15 +1,16 @@
 import * as React from "react";
 import {createMuiTheme, Theme, ThemeProvider} from '@material-ui/core/styles';
 import {withTracker} from "meteor/react-meteor-data";
-import {SessionKeys} from "/client/resources/GlobalVars";
 import {Overrides} from "@material-ui/core/styles/overrides";
 import {TypographyOptions} from "@material-ui/core/styles/createTypography";
 import {PaletteOptions} from "@material-ui/core/styles/createPalette";
+import Settings from "/imports/collections/SettingCollection";
+import Setting from "/imports/models/Setting";
 
 class ThemeController extends React.Component<IProps, any> {
 
     private override(): Overrides {
-        const {themeStyle} = this.props;
+        const {setting} = this.props;
         return {
             MuiIcon: {
                 root: {
@@ -20,7 +21,7 @@ class ThemeController extends React.Component<IProps, any> {
             },
             MuiCardContent: {
                 root: {
-                    background: themeStyle == "dark" ? 'rgba(255, 255, 255, 0.15)' : '#FFFFFF'
+                    background: setting.theming.type == "dark" ? 'rgba(255, 255, 255, 0.15)' : '#FFFFFF'
                 }
             },
             MuiListItemIcon: {
@@ -38,15 +39,15 @@ class ThemeController extends React.Component<IProps, any> {
     }
 
     private palette(): PaletteOptions {
-        const {themeStyle, primaryColor, secondaryColor} = this.props;
+        const {setting} = this.props;
 
         return {
-            type: themeStyle,
+            type: setting.theming.type,
             primary: {
-                main: primaryColor,
+                main: setting.theming.primary,
             },
             secondary: {
-                main: secondaryColor,
+                main: setting.theming.secondary,
             }
         }
     }
@@ -69,16 +70,19 @@ class ThemeController extends React.Component<IProps, any> {
     }
 }
 
-export default withTracker<any, IProps>((props) => {
+export default withTracker<any, IProps>(() => {
+    const defaultSetting = new Setting();
+    defaultSetting.theming = {
+        type: "light",
+        primary: '#5c6bc0',
+        secondary: '#2196f3'
+    }
+
     return {
-        themeStyle: Session.get(SessionKeys.THEME_STYLE),
-        primaryColor: Session.get(SessionKeys.PRIMARY_COLOR),
-        secondaryColor: Session.get(SessionKeys.SECONDARY_COLOR)
+        setting: Settings.findOne() || defaultSetting
     }
 })(ThemeController);
 
 interface IProps {
-    themeStyle: "dark" | "light";
-    primaryColor: string;
-    secondaryColor: string;
+    setting: Setting;
 }

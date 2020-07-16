@@ -1,6 +1,6 @@
 import {createStyles, Theme} from '@material-ui/core/styles';
 
-import {URLBackground} from "/client/resources/GlobalVars";
+import {URLBackground} from "/imports/objects/GlobalVars";
 
 const styles = (theme: Theme) => createStyles({
     root: {

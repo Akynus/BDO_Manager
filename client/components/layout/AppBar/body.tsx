@@ -15,7 +15,7 @@ import clsx from 'clsx';
 import style from "./style";
 import IComponent from "/imports/interfaces/IComponent";
 import {withTracker} from "meteor/react-meteor-data";
-import {RoutePage, SessionKeys} from "/client/resources/GlobalVars";
+import {RoutePage, SessionKeys} from "/imports/objects/GlobalVars";
 
 class AppBarComponent extends React.Component<IProps, IState> {
     readonly menuUser = "menu-user-bar";

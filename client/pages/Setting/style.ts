@@ -31,6 +31,7 @@ const styles = (theme: Theme) => createStyles({
         padding: 0
     },
     colorPalette: {
+        background: 'transparent',
         boxShadow: "none"
     }
 });
