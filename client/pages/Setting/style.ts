@@ -26,6 +26,12 @@ const styles = (theme: Theme) => createStyles({
     },
     form: {
         flex: "auto"
+    },
+    dialogContentColorPalette: {
+        padding: 0
+    },
+    colorPalette: {
+        boxShadow: "none"
     }
 });
 

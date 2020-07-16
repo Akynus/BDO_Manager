@@ -4,6 +4,7 @@ import {withTracker} from "meteor/react-meteor-data";
 import {SessionKeys} from "/client/resources/GlobalVars";
 import {Overrides} from "@material-ui/core/styles/overrides";
 import {TypographyOptions} from "@material-ui/core/styles/createTypography";
+import {PaletteOptions} from "@material-ui/core/styles/createPalette";
 
 class ThemeController extends React.Component<IProps, any> {
 
@@ -17,7 +18,7 @@ class ThemeController extends React.Component<IProps, any> {
                     width: "auto"
                 }
             },
-            MuiCard: {
+            MuiCardContent: {
                 root: {
                     background: themeStyle == "dark" ? 'rgba(255, 255, 255, 0.15)' : '#FFFFFF'
                 }
@@ -32,22 +33,27 @@ class ThemeController extends React.Component<IProps, any> {
 
     private typography(): TypographyOptions {
         return {
-            fontFamily: 'Nunito, Arial',
+            fontFamily: 'Poppins, Arial',
+        }
+    }
+
+    private palette(): PaletteOptions {
+        const {themeStyle, primaryColor, secondaryColor} = this.props;
+
+        return {
+            type: themeStyle,
+            primary: {
+                main: primaryColor,
+            },
+            secondary: {
+                main: secondaryColor,
+            }
         }
     }
 
     private get(): Theme {
-        const {themeStyle} = this.props;
         return createMuiTheme({
-            palette: {
-                type: themeStyle,
-                primary: {
-                    main: "#3f51b5",
-                },
-                secondary: {
-                    main: "#2979ff",
-                }
-            },
+            palette: this.palette(),
             shape: {
                 borderRadius: 6
             },
@@ -65,10 +71,14 @@ class ThemeController extends React.Component<IProps, any> {
 
 export default withTracker<any, IProps>((props) => {
     return {
-        themeStyle: Session.get(SessionKeys.THEME_STYLE)
+        themeStyle: Session.get(SessionKeys.THEME_STYLE),
+        primaryColor: Session.get(SessionKeys.PRIMARY_COLOR),
+        secondaryColor: Session.get(SessionKeys.SECONDARY_COLOR)
     }
 })(ThemeController);
 
 interface IProps {
-    themeStyle: "dark" | "light"
+    themeStyle: "dark" | "light";
+    primaryColor: string;
+    secondaryColor: string;
 }

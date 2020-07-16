@@ -17,12 +17,14 @@ export default interface ILang {
         profile: string;
         home: string;
         theming: string;
+        notification: string;
     },
     title: {
         application: string;
         welcome: string;
         logout: string;
         accessibility: string;
+        colorLayout: string;
     },
     description: {
         loginWithFacebook: string;
@@ -32,11 +34,14 @@ export default interface ILang {
         logoutUser: string;
         drawerMenuHide: string;
         drawerMenuShow: string;
+        darkModeVisibility: string;
     },
     field: {
         user: string;
         password: string;
         darkMode: string;
+        primaryColor: string;
+        secondaryColor: string;
     },
     validation: {
         required: string;

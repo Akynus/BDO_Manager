@@ -20,12 +20,14 @@ const values: ILang = {
         setting: 'Configurações',
         home: 'Página Inicial',
         theming: 'Tematização',
+        notification: 'Notificação'
     },
     title: {
         application: 'BDO Manager',
         welcome: 'Bem-Vindo',
         logout: 'Encerrar sessão',
-        accessibility: 'Acessibilidade'
+        accessibility: 'Acessibilidade',
+        colorLayout: 'Cor e Layout'
     },
     description: {
         loginWithDiscord: 'Entrar com Discord',
@@ -34,12 +36,15 @@ const values: ILang = {
         invalidAuthentication: "Autenticação inválida",
         logoutUser: 'Deseja encerrar a sessão do usuário atual?',
         drawerMenuHide: 'Compactar menu lateral',
-        drawerMenuShow: 'Expandir menu lateral'
+        drawerMenuShow: 'Expandir menu lateral',
+        darkModeVisibility: 'Habilitar modo escuro no layout do sistema'
     },
     field: {
         user: 'Usuário',
         password: 'Senha',
-        darkMode: 'Modo Escuro'
+        darkMode: 'Modo Escuro',
+        primaryColor:'Cor primária',
+        secondaryColor:'Cor secundária'
     },
     validation: {
         required: 'Campo obrigatório'
