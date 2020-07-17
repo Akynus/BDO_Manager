@@ -48,6 +48,13 @@ class ThemeController extends React.Component<IProps, any> {
             },
             secondary: {
                 main: setting.theming.secondary,
+            },
+            background: setting.theming.type == "dark" ? {
+                default: '#404040',
+                paper: '#575757'
+            } : {
+                default: '#EFEFEF',
+                paper: '#FFFFFF'
             }
         }
     }

@@ -18,7 +18,7 @@ const styles = (theme: Theme) => createStyles({
     },
     tabs: {
         borderRight: `1px solid ${theme.palette.divider}`,
-        background: theme.palette.background.paper
+        background: theme.palette.background.default
     },
     iconTab: {
         minWidth: "auto",

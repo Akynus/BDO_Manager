@@ -20,7 +20,8 @@ const values: ILang = {
         setting: 'Configurações',
         home: 'Página Inicial',
         theming: 'Tematização',
-        notification: 'Notificação'
+        notification: 'Notificação',
+        characters: 'Personagens'
     },
     title: {
         application: 'BDO Manager',
@@ -43,8 +44,8 @@ const values: ILang = {
         user: 'Usuário',
         password: 'Senha',
         darkMode: 'Modo Escuro',
-        primaryColor:'Cor primária',
-        secondaryColor:'Cor secundária'
+        primaryColor: 'Cor primária',
+        secondaryColor: 'Cor secundária'
     },
     validation: {
         required: 'Campo obrigatório'

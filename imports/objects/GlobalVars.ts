@@ -9,11 +9,12 @@ export enum RoutePage {
     HOME = '/home',
     PROFILE = '/profile',
     SETTING = '/setting',
-
+    CHARACTERS = '/characters',
 
     LOGIN = '/login'
 }
 
 export enum SessionKeys {
-    DRAWER_HANDLE = "DRAWER_HANDLE"
+    DRAWER_HANDLE = "DRAWER_HANDLE",
+    SETTING_READY = "SETTING_READY"
 }

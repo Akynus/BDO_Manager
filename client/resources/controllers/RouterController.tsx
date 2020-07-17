@@ -6,6 +6,7 @@ import LayoutPage from "/client/components/layout/LayoutPage";
 import HomePage from "/client/pages/Home";
 import ProfilePage from "/client/pages/Profile";
 import SettingPage from "/client/pages/Setting";
+import CharactersPage from "/client/pages/Characters";
 
 import LoginPage from "/client/pages/Login";
 import {RoutePage} from "/imports/objects/GlobalVars";
@@ -23,6 +24,7 @@ class RouterController extends React.Component<{ isAuth: string | null }> {
                 <Route exact={true} path={RoutePage.HOME} render={this.layout(HomePage)}/>
                 <Route exact={true} path={RoutePage.PROFILE} render={this.layout(ProfilePage)}/>
                 <Route exact={true} path={RoutePage.SETTING} render={this.layout(SettingPage)}/>
+                <Route exact={true} path={RoutePage.CHARACTERS} render={this.layout(CharactersPage)}/>
 
                 <Redirect exact={true} path={'/'} to={'/home'}/>
                 <Redirect exact={true} path={RoutePage.LOGIN} to={RoutePage.HOME}/>

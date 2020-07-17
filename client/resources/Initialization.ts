@@ -5,16 +5,18 @@ import EPublish from "/imports/objects/EPublish";
 
 Tracker.autorun(function () {
     Session.set(SessionKeys.DRAWER_HANDLE, true);
+    Session.set(SessionKeys.SETTING_READY, false)
 });
 
-let subSetting: Meteor.SubscriptionHandle;
+let handleSetting: Meteor.SubscriptionHandle;
 
 Accounts.onLogin(function () {
-    subSetting = Meteor.subscribe(EPublish.SETTING, {
-        onError: console.log,
+    handleSetting = Meteor.subscribe(EPublish.SETTING, {
+        onReady: () => Session.set(SessionKeys.SETTING_READY, true),
+        onError: console.error,
     });
 });
 
 Accounts.onLogout(function () {
-    if (subSetting) subSetting.stop();
+    if (handleSetting) handleSetting.stop();
 });

@@ -18,6 +18,7 @@ export default interface ILang {
         home: string;
         theming: string;
         notification: string;
+        characters: string;
     },
     title: {
         application: string;

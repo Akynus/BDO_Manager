@@ -23,6 +23,7 @@ import {
 } from "@material-ui/core";
 import style from "./style";
 import {TabContext, TabList, TabPanel} from "@material-ui/lab";
+import DataLoading from "/client/components/layout/DataLoading";
 import {withTracker} from "meteor/react-meteor-data";
 import IComponent from "/imports/interfaces/IComponent";
 import {ColorChangeHandler, SwatchesPicker} from 'react-color';
@@ -30,6 +31,7 @@ import clsx from "clsx";
 import Settings from "/imports/collections/SettingCollection";
 import Setting, {ITheming} from "/imports/models/Setting";
 import EMethod from "/imports/objects/EMethod";
+import {SessionKeys} from "/imports/objects/GlobalVars";
 
 interface ITabItem {
     icon: string;
@@ -98,8 +100,8 @@ class Body extends React.Component<IProps, IState> {
     }
 
     private onChangeThemingType(): void {
-        const {setting} = this.props;
-        this.saveValue("type", setting.theming.type == "dark" ? "light" : "dark");
+        const {data} = this.props;
+        this.saveValue("type", data.theming.type == "dark" ? "light" : "dark");
     }
 
     private changeTab(event: React.ChangeEvent<{}>, tab: string): void {
@@ -141,7 +143,7 @@ class Body extends React.Component<IProps, IState> {
     }
 
     private contentFormOne(): React.ReactElement {
-        const {t, setting} = this.props;
+        const {t, data} = this.props;
         return <Grid container={true} spacing={3}>
             <Grid item={true} xs={12}>
                 <Typography variant="button" color={"textSecondary"} display="block" gutterBottom={true}>
@@ -156,7 +158,7 @@ class Body extends React.Component<IProps, IState> {
                         <ListItemText primary={t('field.darkMode')} secondary={t('description.darkModeVisibility')}/>
                         <ListItemSecondaryAction>
                             <Switch color={"secondary"} onChange={this.onChangeThemingType}
-                                    checked={setting.theming.type == "dark"}/>
+                                    checked={data.theming.type == "dark"}/>
                         </ListItemSecondaryAction>
                     </ListItem>
                 </List>
@@ -201,14 +203,14 @@ class Body extends React.Component<IProps, IState> {
     }
 
     render() {
-        const {classes, setting} = this.props;
+        const {classes, ready} = this.props;
         const {tab} = this.state;
 
-        console.log(setting);
 
         return <Container maxWidth="lg" className={classes.root}>
             <Card elevation={10} className={classes.content}>
-                <TabContext value={tab}>
+                {!ready && <DataLoading.Setting/>}
+                {ready && <TabContext value={tab}>
                     <Hidden only={['md', 'lg', "xl"]}>
                         <AppBar position="static" variant={"outlined"}>
                             {this.tabs("horizontal")}
@@ -219,14 +221,15 @@ class Body extends React.Component<IProps, IState> {
                     </Hidden>
                     <TabPanel className={classes.form} value="1">{this.contentFormOne()}</TabPanel>
                     <TabPanel className={classes.form} value="2">{this.contentFormTwo()}</TabPanel>
-                </TabContext>
+                </TabContext>}
             </Card>
         </Container>;
     }
 }
 
 interface IProps extends IComponent, WithStyles<keyof ReturnType<typeof style>> {
-    setting: Setting;
+    ready: boolean;
+    data: Setting;
 }
 
 interface IState {
@@ -236,7 +239,15 @@ interface IState {
 }
 
 export default withTracker(() => {
+    const defaultSetting = new Setting();
+    defaultSetting.theming = {
+        type: "light",
+        primary: '#5c6bc0',
+        secondary: '#2196f3'
+    }
+
     return {
-        setting: Settings.findOne()
+        ready: Session.get(SessionKeys.SETTING_READY),
+        data: Settings.findOne() || defaultSetting
     }
 })(Body);
