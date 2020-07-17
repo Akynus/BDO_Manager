@@ -10,18 +10,12 @@ import Setting from "/imports/models/Setting";
 class ThemeController extends React.Component<IProps, any> {
 
     private override(): Overrides {
-        const {setting} = this.props;
         return {
             MuiIcon: {
                 root: {
                     fontSize: '1.2rem',
                     minWidth: '1em',
                     width: "auto"
-                }
-            },
-            MuiCardContent: {
-                root: {
-                    background: setting.theming.type == "dark" ? 'rgba(255, 255, 255, 0.15)' : '#FFFFFF'
                 }
             },
             MuiListItemIcon: {

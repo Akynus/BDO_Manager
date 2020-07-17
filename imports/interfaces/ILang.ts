@@ -5,6 +5,7 @@ export default interface ILang {
         close: string;
         back: string;
         open: string;
+        insert: string;
         edit: string;
         login: string;
         logout: string;
@@ -36,6 +37,7 @@ export default interface ILang {
         drawerMenuHide: string;
         drawerMenuShow: string;
         darkModeVisibility: string;
+        searchField:string;
     },
     field: {
         user: string;

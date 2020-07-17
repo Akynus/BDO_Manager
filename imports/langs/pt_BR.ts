@@ -9,6 +9,7 @@ const values: ILang = {
         edit: 'Editar',
         open: 'Abrir',
         save: 'Salvar',
+        insert: 'Adicionar',
         login: 'Entrar',
         logout: 'Sair',
         forgotPassword: 'Esqueci minha senha',
@@ -38,7 +39,8 @@ const values: ILang = {
         logoutUser: 'Deseja encerrar a sessão do usuário atual?',
         drawerMenuHide: 'Compactar menu lateral',
         drawerMenuShow: 'Expandir menu lateral',
-        darkModeVisibility: 'Habilitar modo escuro no layout do sistema'
+        darkModeVisibility: 'Habilitar modo escuro no layout do sistema',
+        searchField: 'Pesquisar'
     },
     field: {
         user: 'Usuário',
