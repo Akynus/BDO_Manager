@@ -7,7 +7,7 @@ interface IParams {
     style: (theme: Theme) => any;
 }
 
-export default function <T = any>(component: ComponentType<any>, params: IParams): ComponentClass<any, any> | FunctionComponent<any> {
+export default function <T = any>(component: ComponentType<any>, params: IParams): ComponentClass<T, any> | FunctionComponent<any> {
     let element: any = withRouter(component);
     element = withStyles(params.style, {classNamePrefix: 'jss-cls', name: 'jss-cls'})(element);
     element = withTranslation()(element);

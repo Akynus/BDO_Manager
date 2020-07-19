@@ -28,7 +28,7 @@ class ThemeController extends React.Component<IProps, any> {
 
     private typography(): TypographyOptions {
         return {
-            fontFamily: 'Poppins, Arial',
+            //fontFamily: 'Poppins, Arial',
         }
     }
 

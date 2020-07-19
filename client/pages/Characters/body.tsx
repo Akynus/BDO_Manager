@@ -1,16 +1,12 @@
 import * as React from "react";
 import {
-    Breadcrumbs, Button,
-    Card,
-    CardContent,
-    CardHeader,
-    Chip,
-    Container, Grid,
-    Icon,
+    Avatar, Badge, Box,
+    Button,
+    Card, Chip,
+    Container, Divider, Grid, List, ListItem, ListItemAvatar, ListItemText, Typography,
     WithStyles
 } from "@material-ui/core";
 import style from "./style";
-import SearchInput from "/client/components/layout/SearchInput";
 import BreadcrumbPage from "/client/components/layout/BreadcrumbPage";
 import IComponent from "/imports/interfaces/IComponent";
 
@@ -19,37 +15,62 @@ export default class extends React.Component<IProps, IState> {
         super(props);
     }
 
-    private header(): React.ReactElement {
-        const {t} = this.props;
-        return <CardHeader title={t('item.characters')} subheader={<Breadcrumbs>
-            <Chip size={"small"} icon={<Icon className={'fas fa-home'}/>} label={t('item.home')}/>
-            <Chip size={"small"} label={t('item.characters')}/>
-        </Breadcrumbs>}/>;
-    }
-
     private content(): React.ReactElement {
-        const {classes, t} = this.props;
-        return <CardContent className={classes.content}>
-            <Grid container={true} spacing={2} alignItems={"center"}>
-                <Grid item={true} md={6}>
-                    <SearchInput/>
-                </Grid>
-                <Grid item={true}>
-                    <Button startIcon={<Icon className={'far fa-plus-square'}/>} variant={"contained"}
-                            color={"primary"}>{t('action.insert')}</Button>
-                </Grid>
-            </Grid>
-        </CardContent>
+        const {classes} = this.props;
+        return <div className={classes.boxFlex}>
+            <div className={classes.boxList}>
+                <div className={classes.boxListActions}>
+                    <Grid container={true} spacing={1}>
+                        <Grid item={true} xs={12}>
+                            <Button fullWidth={true} variant={"contained"} color={"secondary"}>Novo personagem</Button>
+                        </Grid>
+                        <Grid item={true} xs={12}>
+                            <Typography variant={"body2"} color={"textSecondary"} align={"right"}>3/6
+                                Personagens</Typography>
+                        </Grid>
+                    </Grid>
+                </div>
+                <Divider/>
+                <List disablePadding={true}>
+                    <ListItem button={true}>
+                        <ListItemAvatar>
+                            <Badge overlap="circle" anchorOrigin={{vertical: 'bottom', horizontal: 'right'}}
+                                   badgeContent={<Avatar className={classes.smallAvatar}
+                                                         src={"https://oyster.ignimgs.com/mediawiki/apis.ign.com/black-desert-online/8/87/Wizardicon.jpg"}/>}>
+                                <Avatar>62</Avatar>
+                            </Badge>
+                        </ListItemAvatar>
+                        <ListItemText primary={<Box component={"span"}>
+                            {"Zart"} <Chip size={"small"} color={"primary"} label={'Principal'}/>
+                        </Box>} secondary={'Mago'}/>
+                    </ListItem>
+                    <ListItem button={true}>
+                        <ListItemAvatar>
+                            <Avatar>62</Avatar>
+                        </ListItemAvatar>
+                        <ListItemText primary={<Box component={"span"}>
+                            {"Doheyong"}
+                        </Box>} secondary={'Striker'}/>
+                    </ListItem>
+                    <ListItem button={true}>
+                        <ListItemAvatar>
+                            <Avatar>62</Avatar>
+                        </ListItemAvatar>
+                        <ListItemText primary={<Box component={"span"}>
+                            {"Frondarth"}
+                        </Box>} secondary={'Guardiã'}/>
+                    </ListItem>
+                </List>
+            </div>
+            <div className={classes.boxContent}>Test</div>
+        </div>
     }
 
     render() {
-        const {classes} = this.props;
+        const {classes, t} = this.props;
         return <Container maxWidth="lg" className={classes.root}>
-
-            <BreadcrumbPage/>
-
+            <BreadcrumbPage title={t('item.characters')}/>
             <Card elevation={10} className={classes.content}>
-                {this.header()}
                 {this.content()}
             </Card>
         </Container>;

@@ -6,24 +6,44 @@ import IComponent from "/imports/interfaces/IComponent";
 export default class extends React.Component<IProps, IState> {
     constructor(props: IProps) {
         super(props);
+
+        this.goRoute = this.goRoute.bind(this);
     }
 
+    private goRoute(path: string): void {
+        const {history} = this.props;
+        history.push({pathname: path});
+    }
+
+    private getPaths(): string[] {
+        const {location} = this.props;
+        return location.pathname.split('/').filter((x) => x);
+    }
 
     render() {
-        const {t} = this.props;
+        const {t, title,location} = this.props;
         return <Box component={"div"}>
             <Typography color={"textPrimary"} variant={"h5"}>
-                Personagens
+                {title}
             </Typography>
             <Breadcrumbs>
-                <Chip variant={"outlined"} size={"small"} icon={<Icon className={'fas fa-home'}/>} label={t('item.home')}/>
-                <Chip variant={"outlined"} size={"small"} label={t('item.characters')}/>
+                <Chip onClick={this.goRoute.bind(this, '/home')} variant={"outlined"} size={"small"}
+                      icon={<Icon className={'fas fa-home'}/>}
+                      label={t('item.home')}/>
+
+                {this.getPaths().map(value => {
+                    return <Chip variant={"outlined"} size={"small"} label={t(`item.${value}`)}/>
+                })}
             </Breadcrumbs>
         </Box>;
     }
 }
 
-interface IProps extends IComponent, WithStyles<keyof ReturnType<typeof style>> {
+export interface IBreadcrumbPage {
+    title: string;
+}
+
+interface IProps extends IBreadcrumbPage, IComponent, WithStyles<keyof ReturnType<typeof style>> {
 
 }
 

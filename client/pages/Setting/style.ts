@@ -3,11 +3,14 @@ import {createStyles, Theme} from '@material-ui/core/styles';
 const styles = (theme: Theme) => createStyles({
     root: {
         flexGrow: 1,
-        display: 'flex',
+        display: "flex",
+        flexDirection: "column",
         width: '100%',
         height: '100%'
     },
     content: {
+        marginTop: theme.spacing(2),
+        flexGrow: 1,
         display: 'flex',
         width: '100%',
         height: '100%',

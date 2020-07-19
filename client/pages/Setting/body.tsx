@@ -32,6 +32,7 @@ import Settings from "/imports/collections/SettingCollection";
 import Setting, {ITheming} from "/imports/models/Setting";
 import EMethod from "/imports/objects/EMethod";
 import {SessionKeys} from "/imports/objects/GlobalVars";
+import BreadcrumbPage from "/client/components/layout/BreadcrumbPage";
 
 interface ITabItem {
     icon: string;
@@ -203,11 +204,11 @@ class Body extends React.Component<IProps, IState> {
     }
 
     render() {
-        const {classes, ready} = this.props;
+        const {classes, ready, t} = this.props;
         const {tab} = this.state;
 
-
         return <Container maxWidth="lg" className={classes.root}>
+            <BreadcrumbPage title={t('item.setting')}/>
             <Card elevation={10} className={classes.content}>
                 {!ready && <DataLoading.Setting/>}
                 {ready && <TabContext value={tab}>
