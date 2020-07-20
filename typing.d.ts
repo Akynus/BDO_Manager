@@ -58,7 +58,7 @@ declare module "simpl-schema" {
         extendAutoValueContext?: boolean;
     }
 
-    interface SimpleSchemaStatic {
+    export interface SimpleSchemaStatic {
         new(schema: { [key: string]: SchemaDefinition } | any[]): SimpleSchemaStatic;
 
         namedContext(name?: string): SimpleSchemaValidationContextStatic;
@@ -225,10 +225,10 @@ declare module "meteor/mdg:validated-method" {
     // TODO
 }
 declare module "meteor/mongo" {
-    import SimpleSchema from "simpl-schema";
+    import SimpleSchema,{SimpleSchemaStatic} from "simpl-schema";
     namespace Mongo {
         interface Collection<T> {
-            attachSchema(schema: SimpleSchema): void;
+            attachSchema(schema: SimpleSchemaStatic): void;
 
             simpleSchema: () => SimpleSchema;
             schema: SimpleSchema;

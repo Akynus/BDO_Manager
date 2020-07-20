@@ -1,9 +1,22 @@
 import * as React from "react";
 import {
-    Avatar, Badge, Box,
+    Avatar,
+    Badge,
+    Box,
     Button,
-    Card, Chip,
-    Container, Divider, Grid, List, ListItem, ListItemAvatar, ListItemText, Typography,
+    Card,
+    Chip,
+    Container,
+    Dialog,
+    DialogContent,
+    DialogTitle,
+    Divider,
+    Grid,
+    List,
+    ListItem,
+    ListItemAvatar,
+    ListItemText,
+    Typography,
     WithStyles
 } from "@material-ui/core";
 import style from "./style";
@@ -13,6 +26,21 @@ import IComponent from "/imports/interfaces/IComponent";
 export default class extends React.Component<IProps, IState> {
     constructor(props: IProps) {
         super(props);
+
+        this.onOpenForm = this.onOpenForm.bind(this);
+        this.onCloseForm = this.onCloseForm.bind(this);
+
+        this.state = {
+            showForm: false
+        }
+    }
+
+    private onOpenForm(): void {
+        this.setState({showForm: true});
+    }
+
+    private onCloseForm(): void {
+        this.setState({showForm: false});
     }
 
     private content(): React.ReactElement {
@@ -22,7 +50,8 @@ export default class extends React.Component<IProps, IState> {
                 <div className={classes.boxListActions}>
                     <Grid container={true} spacing={1}>
                         <Grid item={true} xs={12}>
-                            <Button fullWidth={true} variant={"contained"} color={"secondary"}>Novo personagem</Button>
+                            <Button onClick={this.onOpenForm} fullWidth={true} variant={"contained"}
+                                    color={"secondary"}>Novo personagem</Button>
                         </Grid>
                         <Grid item={true} xs={12}>
                             <Typography variant={"body2"} color={"textSecondary"} align={"right"}>3/6
@@ -66,6 +95,15 @@ export default class extends React.Component<IProps, IState> {
         </div>
     }
 
+    private dialogForm(): React.ReactElement {
+        const {showForm} = this.state;
+
+        return <Dialog fullWidth={true} maxWidth={"md"} open={showForm} onClose={this.onCloseForm}>
+            <DialogTitle>Optional sizes</DialogTitle>
+            <DialogContent>Test</DialogContent>
+        </Dialog>
+    }
+
     render() {
         const {classes, t} = this.props;
         return <Container maxWidth="lg" className={classes.root}>
@@ -73,6 +111,7 @@ export default class extends React.Component<IProps, IState> {
             <Card elevation={10} className={classes.content}>
                 {this.content()}
             </Card>
+            {this.dialogForm()}
         </Container>;
     }
 }
@@ -82,5 +121,5 @@ interface IProps extends IComponent, WithStyles<keyof ReturnType<typeof style>> 
 }
 
 interface IState {
-
+    showForm: boolean;
 }

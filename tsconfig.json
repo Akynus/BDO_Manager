@@ -25,6 +25,7 @@
     "**/build/"
   ],
   "globalDependencies": {
-    "meteor": "github:meteor-typings/meteor/1.3#955b89a4e2af892d1736bc570b490a97e860d5b7"
+    "meteor": "github:meteor-typings/meteor/1.3#955b89a4e2af892d1736bc570b490a97e860d5b7",
+    "meteor-astronomy": "github:emilianosantucci/meteor-astronomy-ts/.types/astronomy.d.ts#0c2adad0ade366e23ceea6ac64ffd462e52cbab5"
   }
 }

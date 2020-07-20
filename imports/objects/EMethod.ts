@@ -1,5 +1,7 @@
 enum EMethod {
-    SET_THEME = "SET_THEME"
+    UPDATE_THEME = "UPDATE_THEME",
+    INSERT_CHARACTER = "INSERT_CHARACTER",
+    UPDATE_CHARACTER = "UPDATE_CHARACTER"
 }
 
 export default EMethod;

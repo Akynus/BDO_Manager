@@ -16,5 +16,6 @@ export enum RoutePage {
 
 export enum SessionKeys {
     DRAWER_HANDLE = "DRAWER_HANDLE",
-    SETTING_READY = "SETTING_READY"
+    SETTING_READY = "SETTING_READY",
+    CHARACTERS_READY = "CHARACTERS_READY"
 }

@@ -1,5 +1,6 @@
 enum EPublish {
-    SETTING = 'SETTING'
+    SETTING = 'SETTING',
+    CHARACTERS = 'CHARACTERS'
 }
 
 export default EPublish;

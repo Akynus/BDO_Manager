@@ -87,7 +87,7 @@ class Body extends React.Component<IProps, IState> {
     }
 
     private saveValue(key: keyof ITheming, value: any): void {
-        Meteor.call(EMethod.SET_THEME, key, value, (error: Meteor.Error) => {
+        Meteor.call(EMethod.UPDATE_THEME, key, value, (error: Meteor.Error) => {
             console.error(error);
         });
     }

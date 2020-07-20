@@ -1,7 +1,7 @@
 import {Mongo} from "meteor/mongo";
 import Setting from "/imports/models/Setting";
-import SettingSchema from "/imports/schemas/SettingSchema";
+import Schema from "/imports/schemas/SettingSchema";
 
 const Settings = new Mongo.Collection<Setting>("settings");
-Settings.attachSchema(SettingSchema);
+Settings.attachSchema(Schema);
 export default Settings;
