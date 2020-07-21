@@ -7,9 +7,6 @@ import {
     Card,
     Chip,
     Container,
-    Dialog,
-    DialogContent,
-    DialogTitle,
     Divider,
     Grid,
     List,
@@ -22,6 +19,8 @@ import {
 import style from "./style";
 import BreadcrumbPage from "/client/components/layout/BreadcrumbPage";
 import IComponent from "/imports/interfaces/IComponent";
+
+import CharacterForm from "/client/components/form/CharacterForm";
 
 export default class extends React.Component<IProps, IState> {
     constructor(props: IProps) {
@@ -95,15 +94,6 @@ export default class extends React.Component<IProps, IState> {
         </div>
     }
 
-    private dialogForm(): React.ReactElement {
-        const {showForm} = this.state;
-
-        return <Dialog fullWidth={true} maxWidth={"md"} open={showForm} onClose={this.onCloseForm}>
-            <DialogTitle>Optional sizes</DialogTitle>
-            <DialogContent>Test</DialogContent>
-        </Dialog>
-    }
-
     render() {
         const {classes, t} = this.props;
         return <Container maxWidth="lg" className={classes.root}>
@@ -111,7 +101,7 @@ export default class extends React.Component<IProps, IState> {
             <Card elevation={10} className={classes.content}>
                 {this.content()}
             </Card>
-            {this.dialogForm()}
+            <CharacterForm/>
         </Container>;
     }
 }
