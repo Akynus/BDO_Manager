@@ -7,10 +7,17 @@ export default class ValidationForm {
         required: true
     }
 
-    static MINIMUM_LENGTH: (length: number) => Rule = length => {
+    static MIN_LENGTH: (length: number) => Rule = length => {
         return {
             message: LanguageConfig.get().t('validation.required'),
             min: length
+        }
+    }
+
+    static MAX_LENGTH: (length: number) => Rule = length => {
+        return {
+            message: LanguageConfig.get().t('validation.required'),
+            max: length
         }
     }
 }

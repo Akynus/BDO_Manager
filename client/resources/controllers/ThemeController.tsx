@@ -18,6 +18,11 @@ class ThemeController extends React.Component<IProps, any> {
                     width: "auto"
                 }
             },
+            MuiListItem: {
+                container: {
+                    display: "block"
+                }
+            },
             MuiListItemIcon: {
                 root: {
                     marginLeft: 10
