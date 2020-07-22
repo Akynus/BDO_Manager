@@ -20,6 +20,31 @@ export default interface ILang {
         theming: string;
         notification: string;
         characters: string;
+        class: {
+            warrior: string;
+            sorceress: string;
+            ranger: string
+            berserker: string;
+            tamer: string;
+            valkyrie: string;
+            musa: string;
+            maehwa: string;
+            ninja: string;
+            kunoichi: string;
+            wizard: string;
+            witch: string;
+            striker: string;
+            mystic: string;
+            dark_knight: string;
+            lahn: string;
+            archer: string;
+            shai: string;
+            guardian: string;
+        };
+        combat_style: {
+            awakening: string;
+            succession: string;
+        }
     },
     title: {
         application: string;
@@ -37,7 +62,7 @@ export default interface ILang {
         drawerMenuHide: string;
         drawerMenuShow: string;
         darkModeVisibility: string;
-        searchField:string;
+        searchField: string;
     },
     field: {
         user: string;

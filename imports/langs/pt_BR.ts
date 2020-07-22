@@ -22,7 +22,32 @@ const values: ILang = {
         home: 'Página Inicial',
         theming: 'Tematização',
         notification: 'Notificação',
-        characters: 'Personagens'
+        characters: 'Personagens',
+        class: {
+            warrior: 'Guerreiro',
+            sorceress: 'Feiticeira',
+            ranger: 'Caçadora',
+            berserker: 'Berserker',
+            tamer: 'Domadora',
+            valkyrie: 'Valquiria',
+            musa: 'Musa',
+            maehwa: 'Maehwa',
+            ninja: 'Ninja',
+            kunoichi: 'Kunoichi',
+            wizard: 'Mago',
+            witch: 'Bruxa',
+            striker: 'Lutador',
+            mystic: 'Mistica',
+            dark_knight: 'Cavaleira Negra',
+            lahn: 'Lahn',
+            archer: 'Arqueiro',
+            shai: 'Shai',
+            guardian: 'Guardiã'
+        },
+        combat_style: {
+            awakening: 'Despertar',
+            succession: 'Sucessão'
+        }
     },
     title: {
         application: 'BDO Manager',

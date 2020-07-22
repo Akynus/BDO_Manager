@@ -2,6 +2,7 @@ import {ComponentClass, FunctionComponent, ComponentType} from "react";
 import {Theme, withStyles} from "@material-ui/core";
 import {withTranslation} from "react-i18next";
 import {withRouter} from "react-router-dom";
+import {} from "react-hook-form";
 
 interface IParams {
     style: (theme: Theme) => any;

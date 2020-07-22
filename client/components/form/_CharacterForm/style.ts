@@ -14,17 +14,18 @@ const styles = (theme: Theme) => createStyles({
     },
     classIcon: {
         width: 30,
-        height: 30,
+        height: "auto",
     },
     classImg: {
-        height: 300,
+        height: 270,
         objectFit: "cover"
     },
     classIconBrightness: {
         filter: 'contrast(100%) brightness(150%)'
     },
     toggleButton: {
-        padding: theme.spacing(0.5)
+        padding: theme.spacing(0.5),
+        width: '100%'
     },
     formPadding: {padding: theme.spacing(2)}
 });

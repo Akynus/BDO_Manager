@@ -9,9 +9,11 @@
     "visualize": "meteor --production --extra-packages bundle-visualizer"
   },
   "dependencies": {
+    "@hookform/resolvers": "0.0.6",
     "@material-ui/core": "^4.11.0",
     "@material-ui/lab": "^4.0.0-alpha.56",
     "@types/react-color": "^3.0.4",
+    "@types/yup": "^0.29.3",
     "bcrypt": "^5.0.0",
     "clsx": "^1.1.1",
     "i18next": "^19.5.6",
@@ -21,9 +23,11 @@
     "react-color": "^2.18.1",
     "react-dom": "^16.9.0",
     "react-form-validator-core": "^0.7.0",
+    "react-hook-form": "^6.0.8",
     "react-i18next": "^11.7.0",
     "react-router-dom": "^5.0.1",
-    "simpl-schema": "^1.8.0"
+    "simpl-schema": "^1.8.0",
+    "yup": "^0.29.1"
   },
   "meteor": {
     "mainModule": {
