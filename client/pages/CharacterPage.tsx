@@ -1,21 +1,15 @@
 import * as React from "react";
 import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
-import {
-    Avatar,
-    Badge, Box,
-    Button,
-    Card, Chip,
-    Container,
-    Divider,
-    Grid,
-    List,
-    ListItem,
-    ListItemAvatar, ListItemText,
-    Typography
-} from "@material-ui/core";
+import {Button, Card, Container, Divider, Fade, Grid, Typography} from "@material-ui/core";
 import BreadcrumbPage from "/client/components/layout/BreadcrumbPage";
 import CharacterForm, {CharacterFormRef} from "/client/components/form/CharacterForm";
 import {useTranslation} from "react-i18next";
+import CharacterCard from "/client/components/layout/CharacterCard";
+import DataLoading from "/client/components/layout/DataLoading";
+import BackgroundCharacter from "/client/components/layout/BackgroundCharacter";
+import EPublish from "/imports/enumerables/EPublish";
+import {useMongoFetch, useSubscription} from "react-meteor-hooks";
+import Characters from "/imports/collections/CharacterCollection";
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
     root: {
@@ -54,17 +48,15 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     },
     boxContent: {
         flexGrow: 1,
-    },
-    smallAvatar: {
-        width: 20,
-        height: 20,
-        border: `2px solid ${theme.palette.background.paper}`,
-    },
+    }
 }));
 
 export default function CharacterPage(): React.ReactElement {
     const classes = useStyles();
     const {t} = useTranslation();
+    const isLoading = useSubscription(EPublish.CHARACTERS);
+    const characters = useMongoFetch(Characters.find());
+
     const form = React.createRef<CharacterFormRef>();
 
     function onOpenForm() {
@@ -87,45 +79,21 @@ export default function CharacterPage(): React.ReactElement {
                     </Grid>
                 </div>
                 <Divider/>
-                <List disablePadding={true}>
-                    <ListItem button={true}>
-                        <ListItemAvatar>
-                            <Badge overlap="circle" anchorOrigin={{vertical: 'bottom', horizontal: 'right'}}
-                                   badgeContent={<Avatar className={classes.smallAvatar}
-                                                         src={"https://oyster.ignimgs.com/mediawiki/apis.ign.com/black-desert-online/8/87/Wizardicon.jpg"}/>}>
-                                <Avatar>62</Avatar>
-                            </Badge>
-                        </ListItemAvatar>
-                        <ListItemText primary={<Box component={"span"}>
-                            {"Zart"} <Chip size={"small"} color={"primary"} label={'Principal'}/>
-                        </Box>} secondary={'Mago'}/>
-                    </ListItem>
-                    <ListItem button={true}>
-                        <ListItemAvatar>
-                            <Avatar>62</Avatar>
-                        </ListItemAvatar>
-                        <ListItemText primary={<Box component={"span"}>
-                            {"Doheyong"}
-                        </Box>} secondary={'Striker'}/>
-                    </ListItem>
-                    <ListItem button={true}>
-                        <ListItemAvatar>
-                            <Avatar>62</Avatar>
-                        </ListItemAvatar>
-                        <ListItemText primary={<Box component={"span"}>
-                            {"Frondarth"}
-                        </Box>} secondary={'Guardiã'}/>
-                    </ListItem>
-                </List>
+                <CharacterCard data={characters}/>
             </div>
-            <div className={classes.boxContent}>Test</div>
+            <div className={classes.boxContent}>
+                <BackgroundCharacter/>
+            </div>
         </div>
     }
 
     return (<Container maxWidth="lg" className={classes.root}>
         <BreadcrumbPage title={t('item.characters')}/>
         <Card elevation={10} className={classes.content}>
-            {content()}
+            {isLoading && <DataLoading.Character/>}
+            <Fade timeout={500} in={!isLoading}>
+                {content()}
+            </Fade>
         </Card>
         <CharacterForm ref={form}/>
     </Container>)

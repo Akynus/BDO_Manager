@@ -6,7 +6,6 @@ import EHorse from "/imports/enumerables/EHorse";
 export default new SimpleSchema({
     user: {
         type: String,
-        unique: true,
         denyUpdate: true
     },
 

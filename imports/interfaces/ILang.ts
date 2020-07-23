@@ -7,6 +7,7 @@ export default interface ILang {
         open: string;
         insert: string;
         edit: string;
+        delete: string;
         login: string;
         logout: string;
         forgotPassword: string;

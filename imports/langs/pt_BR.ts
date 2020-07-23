@@ -8,6 +8,7 @@ const values: ILang = {
         close: 'Fechar',
         edit: 'Editar',
         open: 'Abrir',
+        delete: 'Excluir',
         save: 'Salvar',
         insert: 'Adicionar',
         login: 'Entrar',

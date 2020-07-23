@@ -225,7 +225,7 @@ declare module "meteor/mdg:validated-method" {
     // TODO
 }
 declare module "meteor/mongo" {
-    import SimpleSchema,{SimpleSchemaStatic} from "simpl-schema";
+    import SimpleSchema, {SimpleSchemaStatic} from "simpl-schema";
     namespace Mongo {
         interface Collection<T> {
             attachSchema(schema: SimpleSchemaStatic): void;
@@ -235,4 +235,23 @@ declare module "meteor/mongo" {
         }
     }
 }
-
+declare module "react-meteor-hooks"{
+    export interface ITrackerFun<Result> {
+        (): Result;
+    }
+    export function useTracker<Result extends any>(trackerFun: ITrackerFun<Result>, deps?: any[]): Result;
+    export function useSubscription(pubName: string, ...subOpts: any[]): boolean;
+    export interface IUseMethodOptions<Input extends any, Output extends Input> {
+        transform?: (result: Input) => Output;
+    }
+    export interface IMethodResult<Output, Args> {
+        isLoading: boolean;
+        data?: Output;
+        error?: any;
+        call: (...args: Args[]) => Promise<Output>;
+    }
+    export function useMethod<T,Y extends T>(methodName: string, options?: IUseMethodOptions<T,Y>): IMethodResult<T,Y>;
+    export function useMongoFetch(cursor: any, deps?: any[]): any;
+    export function useCurrentUser<User extends any>(): User | null;
+    export function useSession(sessionName: string): any;
+}
