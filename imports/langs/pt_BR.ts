@@ -14,7 +14,8 @@ const values: ILang = {
         logout: 'Sair',
         forgotPassword: 'Esqueci minha senha',
         yes: 'Sim',
-        no: 'Não'
+        no: 'Não',
+        none: 'Nenhum'
     },
     item: {
         profile: 'Perfil',
@@ -44,9 +45,15 @@ const values: ILang = {
             shai: 'Shai',
             guardian: 'Guardiã'
         },
-        combat_style: {
+        combat: {
             awakening: 'Despertar',
             succession: 'Sucessão'
+        },
+        horse: {
+            common: 'Comum até T8',
+            arduanatt: 'Arduanatt',
+            dine: 'Diné',
+            doom: 'Doom'
         }
     },
     title: {
@@ -54,7 +61,10 @@ const values: ILang = {
         welcome: 'Bem-Vindo',
         logout: 'Encerrar sessão',
         accessibility: 'Acessibilidade',
-        colorLayout: 'Cor e Layout'
+        colorLayout: 'Cor e Layout',
+        description: 'Descrição',
+        gearScore: 'Gear Score',
+        formCharacter: 'Cadastro de Personagem'
     },
     description: {
         loginWithDiscord: 'Entrar com Discord',
@@ -65,17 +75,34 @@ const values: ILang = {
         drawerMenuHide: 'Compactar menu lateral',
         drawerMenuShow: 'Expandir menu lateral',
         darkModeVisibility: 'Habilitar modo escuro no layout do sistema',
-        searchField: 'Pesquisar'
+        searchField: 'Pesquisar',
+        choseYourClass: 'Escolha sua classe',
+        formCharacter: 'Selecione sua classe e preencha as descrições do personagem'
     },
     field: {
         user: 'Usuário',
         password: 'Senha',
         darkMode: 'Modo Escuro',
         primaryColor: 'Cor primária',
-        secondaryColor: 'Cor secundária'
+        secondaryColor: 'Cor secundária',
+        name: 'Nome',
+        character: 'Personagem',
+        level: 'Nivel',
+        combat: 'Tipo de Combate',
+        horse: 'Montaria',
+        atkPre: 'AP',
+        atkAwk: 'AP Desperto',
+        defense: 'Defesa'
     },
     validation: {
-        required: 'Campo obrigatório'
+        required: 'Campo obrigatório',
+        length: 'Quantidade de caracteres deve ser ${length}',
+        denied: 'Valor não permitido',
+        integer: 'Somente números inteiros',
+        max: 'Valor menor ou igual à ${max}',
+        min: 'Valor maior ou igual à ${min}',
+        max_length: 'Tamanho maior que ${max} caracteres',
+        min_length: 'Tamanho menor que ${min} caracteres'
     }
 }
 

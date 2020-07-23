@@ -1,8 +1,8 @@
-import ECharacterClass from "/imports/objects/ECharacterClass";
-import ECharacterCombatStyle from "/imports/objects/ECharacterCombatStyle";
+import ECharacterClass from "/imports/enumerables/ECharacterClass";
+import ECharacterCombat from "/imports/enumerables/ECharacterCombat";
 
 type Image = {
-    [x in ECharacterCombatStyle]: string;
+    [x in ECharacterCombat]: string;
 }
 
 interface ICharacterClass {

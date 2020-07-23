@@ -1,5 +1,5 @@
 import {Meteor} from "meteor/meteor";
-import EMethod from "/imports/objects/EMethod";
+import EMethod from "/imports/enumerables/EMethod";
 import {ITheming} from "/imports/models/Setting";
 import SettingDao from "/server/dao/SettingDao";
 import Character from "/imports/models/Character";

@@ -30,7 +30,7 @@ import {ColorChangeHandler, SwatchesPicker} from 'react-color';
 import clsx from "clsx";
 import Settings from "/imports/collections/SettingCollection";
 import Setting, {ITheming} from "/imports/models/Setting";
-import EMethod from "/imports/objects/EMethod";
+import EMethod from "/imports/enumerables/EMethod";
 import {SessionKeys} from "/imports/objects/GlobalVars";
 import BreadcrumbPage from "/client/components/layout/BreadcrumbPage";
 

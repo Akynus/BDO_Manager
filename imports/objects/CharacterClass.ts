@@ -1,6 +1,6 @@
-import ECharacterClass from "/imports/objects/ECharacterClass";
+import ECharacterClass from "/imports/enumerables/ECharacterClass";
 import ICharacterClass from "/imports/interfaces/ICharacterClass";
-import ECharacterCombatStyle from "/imports/objects/ECharacterCombatStyle";
+import ECharacterCombat from "/imports/enumerables/ECharacterCombat";
 
 type ObjectType = {
     [x in ECharacterClass]: ICharacterClass
@@ -62,8 +62,8 @@ const CharacterClass: ObjectType = {
         name: 'item.class.wizard',
         value: ECharacterClass.WIZARD,
         image: {
-            [ECharacterCombatStyle.AWAKENING]: "https://s1.pearlcdn.com/SEA/contents/img/portal/gameinfo/class28_awaken_thumb_img_1.jpg",
-            [ECharacterCombatStyle.SUCCESSION]: "https://s1.pearlcdn.com/SEA/contents/img/portal/gameinfo/class28_succession_thumb_img_1.jpg"
+            [ECharacterCombat.AWAKENING]: "https://s1.pearlcdn.com/SEA/contents/img/portal/gameinfo/class28_awaken_thumb_img_1.jpg",
+            [ECharacterCombat.SUCCESSION]: "https://s1.pearlcdn.com/SEA/contents/img/portal/gameinfo/class28_succession_thumb_img_1.jpg"
         }
     },
     [ECharacterClass.WITCH]: {

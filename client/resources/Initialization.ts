@@ -1,7 +1,7 @@
 import {Session} from "meteor/session";
 import {Accounts} from "meteor/accounts-base";
 import {SessionKeys} from "/imports/objects/GlobalVars";
-import EPublish from "/imports/objects/EPublish";
+import EPublish from "/imports/enumerables/EPublish";
 
 Tracker.autorun(function () {
     Session.set(SessionKeys.DRAWER_HANDLE, true);

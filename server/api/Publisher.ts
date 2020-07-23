@@ -1,6 +1,6 @@
 import {Meteor} from "meteor/meteor";
 import Settings from "/imports/collections/SettingCollection";
-import EPublish from "/imports/objects/EPublish";
+import EPublish from "/imports/enumerables/EPublish";
 import Characters from "/imports/collections/CharacterCollection";
 
 Meteor.publish(EPublish.SETTING, function () {

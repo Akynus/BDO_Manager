@@ -1,6 +1,6 @@
 import {Mongo} from "meteor/mongo";
-import ECharacterClass from "/imports/objects/ECharacterClass";
-import ECharacterCombatStyle from "/imports/objects/ECharacterCombatStyle";
+import ECharacterClass from "/imports/enumerables/ECharacterClass";
+import ECharacterCombat from "/imports/enumerables/ECharacterCombat";
 
 export default class Character {
     _id: Mongo.ObjectID;
@@ -9,7 +9,7 @@ export default class Character {
     name: string;
     class: ECharacterClass;
     level: number;
-    combatStyle:ECharacterCombatStyle;
+    combat: ECharacterCombat;
 
     atkPre: number;
     atkAwk: number;

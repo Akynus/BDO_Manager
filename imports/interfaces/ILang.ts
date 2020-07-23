@@ -12,6 +12,7 @@ export default interface ILang {
         forgotPassword: string;
         yes: string;
         no: string;
+        none: string;
     },
     item: {
         setting: string;
@@ -41,9 +42,15 @@ export default interface ILang {
             shai: string;
             guardian: string;
         };
-        combat_style: {
+        combat: {
             awakening: string;
             succession: string;
+        },
+        horse: {
+            common: string;
+            arduanatt: string;
+            dine: string;
+            doom: string;
         }
     },
     title: {
@@ -52,6 +59,9 @@ export default interface ILang {
         logout: string;
         accessibility: string;
         colorLayout: string;
+        gearScore: string;
+        description: string;
+        formCharacter: string
     },
     description: {
         loginWithFacebook: string;
@@ -63,6 +73,8 @@ export default interface ILang {
         drawerMenuShow: string;
         darkModeVisibility: string;
         searchField: string;
+        choseYourClass: string;
+        formCharacter: string;
     },
     field: {
         user: string;
@@ -70,8 +82,23 @@ export default interface ILang {
         darkMode: string;
         primaryColor: string;
         secondaryColor: string;
+        name: string;
+        character: string;
+        level: string;
+        combat: string;
+        horse: string;
+        atkPre: string;
+        atkAwk: string;
+        defense: string;
     },
     validation: {
         required: string;
+        length: string;
+        denied: string;
+        integer: string;
+        min: string;
+        max: string;
+        min_length: string;
+        max_length: string;
     }
 }

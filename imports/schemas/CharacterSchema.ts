@@ -1,6 +1,7 @@
 import SimpleSchema from 'simpl-schema';
-import ECharacterClass from "/imports/objects/ECharacterClass";
-import ECharacterCombatStyle from "/imports/objects/ECharacterCombatStyle";
+import ECharacterClass from "/imports/enumerables/ECharacterClass";
+import ECharacterCombat from "/imports/enumerables/ECharacterCombat";
+import EHorse from "/imports/enumerables/EHorse";
 
 export default new SimpleSchema({
     user: {
@@ -28,25 +29,31 @@ export default new SimpleSchema({
         max: 68,
         min: 1
     },
-    combatStyle: {
+    combat: {
         type: String,
         optional: false,
-        label: 'Character combat style',
-        allowedValues: Object.values(ECharacterCombatStyle)
+        label: 'Character combat',
+        allowedValues: Object.values(ECharacterCombat)
     },
-    atkPre:{
+    horse: {
+        type: String,
+        optional: true,
+        label: 'Horse',
+        allowedValues: Object.values(EHorse)
+    },
+    atkPre: {
         type: Number,
         optional: false,
         label: 'Character pre attack power',
         min: 0
     },
-    atkAwk:{
+    atkAwk: {
         type: Number,
         optional: true,
         label: 'Character awakening attack power',
         min: 0
     },
-    defense:{
+    defense: {
         type: Number,
         optional: false,
         label: 'Character defense',

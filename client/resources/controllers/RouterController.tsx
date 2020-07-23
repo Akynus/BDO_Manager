@@ -6,7 +6,7 @@ import LayoutPage from "/client/components/layout/LayoutPage";
 import HomePage from "/client/pages/Home";
 import ProfilePage from "/client/pages/Profile";
 import SettingPage from "/client/pages/Setting";
-import CharactersPage from "/client/pages/Characters";
+import CharactersPage from "/client/pages/CharacterPage";
 
 import LoginPage from "/client/pages/Login";
 import {RoutePage} from "/imports/objects/GlobalVars";

@@ -1,13 +1,26 @@
 import * as React from "react";
-import {FormControl, FormHelperText, InputLabel, Select} from "@material-ui/core";
+import {FormControl, FormHelperText, InputLabel, MenuItem, Select, Typography} from "@material-ui/core";
 import {Controller} from "react-hook-form";
 import {Control, FieldErrors} from "react-hook-form/dist/types/form";
+import {useTranslation} from "react-i18next";
 
 export default function SelectField<T = Object>(props: IProps<T>): React.ReactElement<IProps<T>> {
+    const {t} = useTranslation();
 
-    function buildItems(): React.ReactNode {
+    function emptyItem(): React.ReactElement {
+        return <MenuItem>
+            <Typography color={"textSecondary"}>{t('action.none')}</Typography>
+        </MenuItem>;
+    }
+
+    function buildItems(): React.ReactNode[] | React.ReactNode {
         if (props.dataSource && props.renderItem) {
-            return props.dataSource.map(props.renderItem);
+            const items = props.dataSource.map(props.renderItem);
+            if (props.allowEmpty) {
+                return Array().concat([emptyItem()], items);
+            } else {
+                return items;
+            }
         } else {
             return props.children;
         }
@@ -28,5 +41,6 @@ interface IProps<T> {
     errors: FieldErrors;
     dataSource?: T[];
     renderItem?: (item: T, index: number) => React.ReactNode;
+    allowEmpty?: boolean;
     children: React.ReactNode;
 }
