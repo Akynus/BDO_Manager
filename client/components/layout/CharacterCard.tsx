@@ -18,10 +18,24 @@ export default function CharacterCard(props: IProps): React.ReactElement<IProps>
     const classes = useStyles();
     const {t} = useTranslation();
 
+    function isSelected(obj: Character): boolean {
+
+        if (props.selected) {
+            return obj._id == props.selected._id;
+        } else {
+            return false;
+        }
+
+    }
+
+    function onClick(obj: Character) {
+        if (props.onSelect) props.onSelect(obj);
+    }
+
     function buildItems() {
         return props.data.map(value => {
             const characterClass = CharacterClass[value.class];
-            return <ListItem button={true}>
+            return <ListItem onClick={() => onClick(value)} button={true} selected={isSelected(value)}>
                 <ListItemAvatar>
                     <Badge overlap="circle" anchorOrigin={{vertical: 'bottom', horizontal: 'right'}}
                            badgeContent={<Avatar className={classes.smallAvatar} src={characterClass.icon}/>}>
@@ -45,4 +59,5 @@ export default function CharacterCard(props: IProps): React.ReactElement<IProps>
 interface IProps {
     data: Character[];
     onSelect?: (object: Character) => void;
+    selected?: Character;
 }

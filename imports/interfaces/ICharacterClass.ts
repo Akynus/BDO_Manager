@@ -9,7 +9,8 @@ interface ICharacterClass {
     icon: string;
     name: string;
     value: ECharacterClass;
-    image?: Image;
+    smallImg: Image;
+    largeImg: Image;
 }
 
 export default ICharacterClass;

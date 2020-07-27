@@ -91,6 +91,7 @@ export default interface ILang {
         atkPre: string;
         atkAwk: string;
         defense: string;
+        gearScore: string;
     },
     validation: {
         required: string;

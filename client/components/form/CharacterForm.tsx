@@ -39,6 +39,7 @@ import ECharacterCombat from "/imports/enumerables/ECharacterCombat";
 import EHorse from "/imports/enumerables/EHorse";
 import HorseContext from "/imports/objects/HorseContext";
 import EMethod from "/imports/enumerables/EMethod";
+import {countGS} from "/client/utils/Helpers";
 
 const TransitionDialog = React.forwardRef(function Transition(props: TransitionProps & { children?: React.ReactElement }, ref: React.Ref<unknown>) {
     return <Fade timeout={1000} ref={ref} {...props} />;
@@ -136,9 +137,7 @@ const CharacterForm = React.forwardRef<CharacterFormRef>((props, ref) => {
 
     function gearScore(): number {
         const {atkPre, atkAwk, defense} = watch();
-        const medium = Math.floor((Number(atkPre || 0) + Number(atkAwk || 0)) / 2);
-        const gs = Number(medium) + Number(defense || 0);
-        return gs;
+        return countGS({atkAwk, atkPre, defense});
     }
 
     function combatDescription(): string {
@@ -149,8 +148,8 @@ const CharacterForm = React.forwardRef<CharacterFormRef>((props, ref) => {
     function imgClass(): string {
         const {combat} = watch();
 
-        if (CharacterClass[characterClass].image) {
-            return CharacterClass[characterClass].image![combat];
+        if (CharacterClass[characterClass].smallImg) {
+            return CharacterClass[characterClass].smallImg![combat];
         } else {
             return String();
         }
@@ -259,7 +258,7 @@ const CharacterForm = React.forwardRef<CharacterFormRef>((props, ref) => {
     }
 
     return (<Dialog open={opened} fullScreen={true} TransitionComponent={TransitionDialog}>
-        <AbsoluteLoading loading={loading} />
+        <AbsoluteLoading loading={loading}/>
         <Container maxWidth={"md"}>
             <ListItem>
                 <ListItemText primaryTypographyProps={{variant: "h6"}} primary={t('title.formCharacter')}

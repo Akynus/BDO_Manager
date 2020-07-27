@@ -93,7 +93,8 @@ const values: ILang = {
         horse: 'Montaria',
         atkPre: 'AP',
         atkAwk: 'AP Desperto',
-        defense: 'Defesa'
+        defense: 'Defesa',
+        gearScore: 'Gear Score'
     },
     validation: {
         required: 'Campo obrigatório',

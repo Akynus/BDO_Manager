@@ -10,6 +10,7 @@ import BackgroundCharacter from "/client/components/layout/BackgroundCharacter";
 import EPublish from "/imports/enumerables/EPublish";
 import {useMongoFetch, useSubscription} from "react-meteor-hooks";
 import Characters from "/imports/collections/CharacterCollection";
+import Character from "/imports/models/Character";
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
     root: {
@@ -48,6 +49,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     },
     boxContent: {
         flexGrow: 1,
+        maxWidth: 'calc(100% - 300px)'
     }
 }));
 
@@ -56,6 +58,7 @@ export default function CharacterPage(): React.ReactElement {
     const {t} = useTranslation();
     const isLoading = useSubscription(EPublish.CHARACTERS);
     const characters = useMongoFetch(Characters.find());
+    const [selected, setSelected] = React.useState<Character>();
 
     const form = React.createRef<CharacterFormRef>();
 
@@ -79,10 +82,10 @@ export default function CharacterPage(): React.ReactElement {
                     </Grid>
                 </div>
                 <Divider/>
-                <CharacterCard data={characters}/>
+                <CharacterCard selected={selected} onSelect={setSelected} data={characters}/>
             </div>
             <div className={classes.boxContent}>
-                <BackgroundCharacter/>
+                <BackgroundCharacter current={selected}/>
             </div>
         </div>
     }
