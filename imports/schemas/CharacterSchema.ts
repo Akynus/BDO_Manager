@@ -1,7 +1,6 @@
 import SimpleSchema from 'simpl-schema';
-import ECharacterClass from "/imports/enumerables/ECharacterClass";
+import EClasses from "/imports/enumerables/EClasses";
 import ECharacterCombat from "/imports/enumerables/ECharacterCombat";
-import EHorse from "/imports/enumerables/EHorse";
 
 export default new SimpleSchema({
     user: {
@@ -19,10 +18,10 @@ export default new SimpleSchema({
         type: String,
         optional: false,
         label: 'Character class',
-        allowedValues: Object.values(ECharacterClass)
+        allowedValues: Object.values(EClasses)
     },
     level: {
-        type: Number,
+        type: SimpleSchema.Integer,
         optional: false,
         label: 'Character level',
         max: 68,
@@ -37,25 +36,27 @@ export default new SimpleSchema({
     horse: {
         type: String,
         optional: true,
-        label: 'Horse',
-        allowedValues: Object.values(EHorse)
+        label: 'Character horse',
     },
     atkPre: {
-        type: Number,
+        type: SimpleSchema.Integer,
         optional: false,
         label: 'Character pre attack power',
+        max: 999,
         min: 0
     },
     atkAwk: {
-        type: Number,
+        type: SimpleSchema.Integer,
         optional: true,
         label: 'Character awakening attack power',
+        max: 999,
         min: 0
     },
     defense: {
-        type: Number,
+        type: SimpleSchema.Integer,
         optional: false,
         label: 'Character defense',
+        max: 999,
         min: 0
     }
 });

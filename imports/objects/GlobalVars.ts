@@ -10,6 +10,7 @@ export enum RoutePage {
     PROFILE = '/profile',
     SETTING = '/setting',
     CHARACTERS = '/characters',
+    HORSES = "/horses",
 
     LOGIN = '/login'
 }

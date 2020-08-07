@@ -7,6 +7,7 @@ import HomePage from "/client/pages/Home";
 import ProfilePage from "/client/pages/Profile";
 import SettingPage from "/client/pages/Setting";
 import CharactersPage from "/client/pages/CharacterPage";
+import HorsePage from "/client/pages/HorsePage";
 
 import LoginPage from "/client/pages/Login";
 import {RoutePage} from "/imports/objects/GlobalVars";
@@ -25,6 +26,7 @@ class RouterController extends React.Component<{ isAuth: string | null }> {
                 <Route exact={true} path={RoutePage.PROFILE} render={this.layout(ProfilePage)}/>
                 <Route exact={true} path={RoutePage.SETTING} render={this.layout(SettingPage)}/>
                 <Route exact={true} path={RoutePage.CHARACTERS} render={this.layout(CharactersPage)}/>
+                <Route exact={true} path={RoutePage.HORSES} render={this.layout(HorsePage)}/>
 
                 <Redirect exact={true} path={'/'} to={'/home'}/>
                 <Redirect exact={true} path={RoutePage.LOGIN} to={RoutePage.HOME}/>

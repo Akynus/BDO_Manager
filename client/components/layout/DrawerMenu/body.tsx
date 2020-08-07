@@ -47,6 +47,7 @@ class DrawerComponent extends React.Component<IProps, IState> {
         const routes: IRouteItem[] = [
             {key: RoutePage.HOME, icon: 'fas fa-home', title: 'item.home'},
             {key: RoutePage.CHARACTERS, icon: 'fas fa-users', title: 'item.characters'},
+            {key: RoutePage.HORSES, icon: 'fas fa-horse-head', title: 'item.horse'},
             {key: RoutePage.SETTING, icon: 'fas fa-cogs', title: 'item.setting'},
         ];
 

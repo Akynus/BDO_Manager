@@ -27,7 +27,7 @@ import CharacterClass from "/imports/objects/CharacterClass";
 import {ToggleButton} from "@material-ui/lab";
 import clsx from "clsx";
 import {TransitionProps} from "@material-ui/core/transitions";
-import ECharacterClass from "/imports/enumerables/ECharacterClass";
+import EClasses from "/imports/enumerables/EClasses";
 import {useForm} from "react-hook-form";
 import {yupResolver} from '@hookform/resolvers';
 import * as yup from "yup";
@@ -36,8 +36,6 @@ import TextField from "/client/components/fields/TextField";
 import SelectField from "/client/components/fields/SelectField";
 import AbsoluteLoading from "/client/components/layout/AbsoluteLoading";
 import ECharacterCombat from "/imports/enumerables/ECharacterCombat";
-import EHorse from "/imports/enumerables/EHorse";
-import HorseContext from "/imports/objects/HorseContext";
 import EMethod from "/imports/enumerables/EMethod";
 import {countGS} from "/client/utils/Helpers";
 
@@ -90,7 +88,7 @@ const CharacterForm = React.forwardRef<CharacterFormRef>((props, ref) => {
         name: yup.string().max(30).required(),
         level: yup.number().min(1).integer().required(),
         combat: yup.string().oneOf(Object.keys(ECharacterCombat)).required(),
-        horse: yup.string().oneOf(Object.keys(EHorse)),
+        horse: yup.string(),
         atkPre: yup.number().min(1).integer().required(),
         atkAwk: yup.number().min(1).integer().required(),
         defense: yup.number().min(1).integer().required(),
@@ -99,7 +97,7 @@ const CharacterForm = React.forwardRef<CharacterFormRef>((props, ref) => {
     const {t} = useTranslation();
     const [loading, setLoading] = React.useState<boolean>(false);
     const [opened, setOpened] = React.useState<boolean>(false);
-    const [characterClass, setCharacterClass] = React.useState<ECharacterClass>(ECharacterClass.WARRIOR);
+    const [characterClass, setCharacterClass] = React.useState<EClasses>(EClasses.WARRIOR);
     const {control, handleSubmit, errors, watch, reset} = useForm<Character>({
         resolver: yupResolver(schema), defaultValues: {
             level: 1,
@@ -116,7 +114,7 @@ const CharacterForm = React.forwardRef<CharacterFormRef>((props, ref) => {
         if (object) {
 
         } else {
-            setCharacterClass(ECharacterClass.WARRIOR);
+            setCharacterClass(EClasses.WARRIOR);
             reset();
         }
 
@@ -213,14 +211,6 @@ const CharacterForm = React.forwardRef<CharacterFormRef>((props, ref) => {
                                                  errors={errors}>
                                 <MenuItem value={"AWAKENING"}>{t('item.combat.awakening')}</MenuItem>
                                 <MenuItem value={"SUCCESSION"}>{t('item.combat.succession')}</MenuItem>
-                            </SelectField>
-                        </Grid>
-                        <Grid item={true} xs={6}>
-                            <SelectField<string> allowEmpty={true} label={String(t('field.horse'))} name={'horse'}
-                                                 control={control}
-                                                 errors={errors} dataSource={Object.keys(EHorse)}
-                                                 renderItem={(item: EHorse) => <MenuItem
-                                                     value={item}>{t(HorseContext[item].name)}</MenuItem>}>
                             </SelectField>
                         </Grid>
                         <Grid item={true} xs={12}>

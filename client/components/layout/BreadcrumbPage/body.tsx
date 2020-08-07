@@ -2,6 +2,7 @@ import * as React from "react";
 import {Box, Breadcrumbs, Chip, Icon, Typography, WithStyles} from "@material-ui/core";
 import style from "./style";
 import IComponent from "/imports/interfaces/IComponent";
+import clsx from "clsx";
 
 export default class extends React.Component<IProps, IState> {
     constructor(props: IProps) {
@@ -21,14 +22,14 @@ export default class extends React.Component<IProps, IState> {
     }
 
     render() {
-        const {t, title,location} = this.props;
+        const {t, title, classes} = this.props;
         return <Box component={"div"}>
             <Typography color={"textPrimary"} variant={"h5"}>
                 {title}
             </Typography>
             <Breadcrumbs>
                 <Chip onClick={this.goRoute.bind(this, '/home')} variant={"outlined"} size={"small"}
-                      icon={<Icon className={'fas fa-home'}/>}
+                      icon={<Icon className={clsx(['fas fa-home fa-sm', classes.iconHome])}/>}
                       label={t('item.home')}/>
 
                 {this.getPaths().map(value => {

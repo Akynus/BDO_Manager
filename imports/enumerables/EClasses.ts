@@ -1,4 +1,4 @@
-enum ECharacterClass {
+enum EClasses {
     WARRIOR = "WARRIOR",
     RANGER = "RANGER",
     SORCERESS = "SORCERESS",
@@ -20,4 +20,4 @@ enum ECharacterClass {
     GUARDIAN = "GUARDIAN"
 }
 
-export default ECharacterClass;
+export default EClasses;

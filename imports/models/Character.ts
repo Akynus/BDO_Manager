@@ -1,5 +1,5 @@
 import {Mongo} from "meteor/mongo";
-import ECharacterClass from "/imports/enumerables/ECharacterClass";
+import EClasses from "/imports/enumerables/EClasses";
 import ECharacterCombat from "/imports/enumerables/ECharacterCombat";
 
 export default class Character {
@@ -7,11 +7,13 @@ export default class Character {
     user: string;
 
     name: string;
-    class: ECharacterClass;
+    class: EClasses;
     level: number;
     combat: ECharacterCombat;
 
     atkPre: number;
     atkAwk: number;
     defense: number;
+
+    horse?: Mongo.ObjectID;
 }
