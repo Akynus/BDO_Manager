@@ -25,6 +25,7 @@ const values: ILang = {
         theming: 'Tematização',
         notification: 'Notificação',
         characters: 'Personagens',
+        horses: 'Montarias',
         class: {
             warrior: 'Guerreiro',
             sorceress: 'Feiticeira',
@@ -65,7 +66,8 @@ const values: ILang = {
         colorLayout: 'Cor e Layout',
         description: 'Descrição',
         gearScore: 'Gear Score',
-        formCharacter: 'Cadastro de Personagem'
+        formCharacter: 'Cadastro de Personagem',
+        confirmExclusion: 'Excluir registro'
     },
     description: {
         loginWithDiscord: 'Entrar com Discord',
@@ -78,7 +80,8 @@ const values: ILang = {
         darkModeVisibility: 'Habilitar modo escuro no layout do sistema',
         searchField: 'Pesquisar',
         choseYourClass: 'Escolha sua classe',
-        formCharacter: 'Selecione sua classe e preencha as descrições do personagem'
+        formCharacter: 'Selecione sua classe e preencha as descrições do personagem',
+        confirmExclusion: 'Se você realmente deseja  excluir esse registro, digite <1>{{text}}</1> no campo de texto abaixo'
     },
     field: {
         user: 'Usuário',
@@ -105,6 +108,13 @@ const values: ILang = {
         min: 'Valor maior ou igual à ${min}',
         max_length: 'Tamanho maior que ${max} caracteres',
         min_length: 'Tamanho menor que ${min} caracteres'
+    },
+    message: {
+        not_found: 'Registro não encontrado',
+        success_save_character: 'Personagem salvo com sucesso',
+        error_save_character: 'Erro ao salvar personagem',
+        success_remove_character: 'Personagem excluido com sucesso',
+        error_remove_character: 'Erro ao excluir personagem'
     }
 }
 

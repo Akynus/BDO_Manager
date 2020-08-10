@@ -82,7 +82,7 @@ export default function HorsePage(): React.ReactElement {
     }
 
     return (<Container maxWidth="lg" className={classes.root}>
-        <BreadcrumbPage title={t('item.characters')}/>
+        <BreadcrumbPage title={t('item.horses')}/>
         <Card elevation={10} className={classes.content}>
             {isLoading && <DataLoading.Character/>}
             <Fade timeout={500} in={!isLoading}>

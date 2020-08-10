@@ -23,9 +23,10 @@ import {
     Tooltip,
     Typography
 } from "@material-ui/core";
-import CharacterClass from "/imports/objects/CharacterClass";
+import ClassContext from "/imports/objects/ClassContext";
 import {ToggleButton} from "@material-ui/lab";
 import clsx from "clsx";
+import {Mongo} from "meteor/mongo";
 import {TransitionProps} from "@material-ui/core/transitions";
 import EClasses from "/imports/enumerables/EClasses";
 import {useForm} from "react-hook-form";
@@ -37,12 +38,14 @@ import SelectField from "/client/components/fields/SelectField";
 import AbsoluteLoading from "/client/components/layout/AbsoluteLoading";
 import ECharacterCombat from "/imports/enumerables/ECharacterCombat";
 import EMethod from "/imports/enumerables/EMethod";
-import {countGS} from "/client/utils/Helpers";
+import {useSnackbar} from 'notistack';
+import {countGS, timingCall} from "/imports/utils/Helpers";
 
 const TransitionDialog = React.forwardRef(function Transition(props: TransitionProps & { children?: React.ReactElement }, ref: React.Ref<unknown>) {
     return <Fade timeout={1000} ref={ref} {...props} />;
 });
 
+//<editor-folder defaultstate="collapsed" desc="Styles">
 const useStyles = makeStyles((theme: Theme) => createStyles({
     root: {},
     content: {
@@ -72,11 +75,15 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     },
     formPadding: {padding: theme.spacing(2)}
 }));
+//</editor-folder>
 
+//<editor-folder defaultstate="collapsed" desc="Types">
+type OptionalId = Mongo.ObjectID | undefined;
 export type CharacterFormRef = {
-    open: (object?: Character) => void;
+    open: (id: OptionalId) => void;
     close: () => void;
 }
+//</editor-folder>
 
 const CharacterForm = React.forwardRef<CharacterFormRef>((props, ref) => {
     React.useImperativeHandle(ref, () => ({
@@ -84,6 +91,7 @@ const CharacterForm = React.forwardRef<CharacterFormRef>((props, ref) => {
         close: () => setOpened(false)
     }));
 
+    //<editor-folder defaultstate="collapsed" desc="Variables">
     const schema = yup.object().shape({
         name: yup.string().max(30).required(),
         level: yup.number().min(1).integer().required(),
@@ -95,47 +103,101 @@ const CharacterForm = React.forwardRef<CharacterFormRef>((props, ref) => {
     });
     const classes = useStyles();
     const {t} = useTranslation();
+    const {enqueueSnackbar} = useSnackbar();
     const [loading, setLoading] = React.useState<boolean>(false);
     const [opened, setOpened] = React.useState<boolean>(false);
     const [characterClass, setCharacterClass] = React.useState<EClasses>(EClasses.WARRIOR);
-    const {control, handleSubmit, errors, watch, reset} = useForm<Character>({
+    const [current, setCurrent] = React.useState<OptionalId>();
+    const [disableCombat, setDisableCombat] = React.useState<boolean>(false);
+    const [disableAwk, setDisableAwk] = React.useState<boolean>(false);
+    const {control, handleSubmit, errors, watch, reset, setValue} = useForm<Character>({
         resolver: yupResolver(schema), defaultValues: {
+            name: '',
             level: 1,
             atkAwk: 1,
             defense: 1,
             atkPre: 1,
             combat: ECharacterCombat.AWAKENING
-        }
+        },
     });
 
-    function onOpen(object?: Character) {
-        setOpened(true);
+    //</editor-folder>
 
-        if (object) {
-
-        } else {
-            setCharacterClass(EClasses.WARRIOR);
-            reset();
+    React.useLayoutEffect(() => {
+        switch (characterClass) {
+            case EClasses.ARCHER: {
+                setValue('combat', ECharacterCombat.AWAKENING);
+                setDisableAwk(false);
+                setDisableCombat(true);
+                break;
+            }
+            case EClasses.SHAI: {
+                setValue('combat', ECharacterCombat.AWAKENING);
+                setValue('atkAwk', 1);
+                setDisableAwk(true);
+                setDisableCombat(true);
+                break;
+            }
+            default: {
+                setDisableAwk(false);
+                setDisableCombat(false);
+                break;
+            }
         }
+    }, [characterClass]);
 
+    function onOpen(id: OptionalId): void {
+        reset();
+        setOpened(true);
+        setCharacterClass(EClasses.WARRIOR);
+        setCurrent(id);
+
+        if (id) {
+            setLoading(true);
+            const timing = timingCall(EMethod.GET_CHARACTER);
+            Meteor.call(EMethod.GET_CHARACTER, id, (error: any, data: Character) => {
+                setLoading(false);
+                timing();
+                if (error) {
+                    enqueueSnackbar(t('message.not_found'));
+                    return;
+                }
+                setCharacterClass(data.class);
+                if (schema.isValidSync(data)) {
+                    Object.entries(data).map(([key, value]) => setValue(key, value));
+                }
+            });
+        }
     }
 
     function onSubmit(data: Character) {
         data.class = characterClass;
         setLoading(true);
-        Meteor.call(EMethod.INSERT_CHARACTER, data, (error: Meteor.Error) => {
+
+        let method = (current) ? EMethod.UPDATE_CHARACTER : EMethod.INSERT_CHARACTER;
+        if (current) {
+            data._id = current;
+        }
+
+        const timing = timingCall(method);
+        Meteor.call(method, data, (error: any, data: any) => {
             setLoading(false);
+            timing();
             if (error) {
-                console.error(error)
-            } else {
-                setOpened(false);
+                enqueueSnackbar(t('message.error_save_character'), {variant: "error"});
+                return;
             }
+            enqueueSnackbar(t('message.success_save_character'), {variant: "success"});
+            setOpened(false);
         });
+
     }
 
     function gearScore(): number {
         const {atkPre, atkAwk, defense} = watch();
-        return countGS({atkAwk, atkPre, defense});
+        return countGS({
+            atkPre, atkAwk, defense
+        });
     }
 
     function combatDescription(): string {
@@ -146,8 +208,8 @@ const CharacterForm = React.forwardRef<CharacterFormRef>((props, ref) => {
     function imgClass(): string {
         const {combat} = watch();
 
-        if (CharacterClass[characterClass].smallImg) {
-            return CharacterClass[characterClass].smallImg![combat];
+        if (ClassContext[characterClass].smallImg) {
+            return ClassContext[characterClass].smallImg![combat];
         } else {
             return String();
         }
@@ -156,7 +218,7 @@ const CharacterForm = React.forwardRef<CharacterFormRef>((props, ref) => {
     function selectClass(): React.ReactElement {
         return <Card className={classes.classForm}>
             <CardMedia className={classes.classImg} image={imgClass()}
-                       title={String(t(CharacterClass[characterClass].name))}/>
+                       title={String(t(ClassContext[characterClass].name))}/>
             <CardContent>
                 <Grid container={true} spacing={1}>
                     <Grid item={true} xs={12}>
@@ -164,14 +226,14 @@ const CharacterForm = React.forwardRef<CharacterFormRef>((props, ref) => {
                         <Divider/>
                     </Grid>
                     <Grid item={true} container={true} spacing={1} xs={12} justify={"space-between"}>
-                        {Object.keys(CharacterClass).map(value => {
-                            return <Grid key={CharacterClass[value].value} item={true} xs={2}>
-                                <Tooltip title={String(t(CharacterClass[value].name))} placement={"top"}>
-                                    <ToggleButton onClick={() => setCharacterClass(CharacterClass[value].value)}
+                        {Object.keys(ClassContext).map(value => {
+                            return <Grid key={ClassContext[value].value} item={true} xs={2}>
+                                <Tooltip title={String(t(ClassContext[value].name))} placement={"top"}>
+                                    <ToggleButton onClick={() => setCharacterClass(ClassContext[value].value)}
                                                   className={classes.toggleButton}
-                                                  selected={characterClass == CharacterClass[value].value}>
+                                                  selected={characterClass == ClassContext[value].value}>
                                         <img className={clsx([classes.classIcon, classes.classIconBrightness])}
-                                             src={CharacterClass[value].icon}/>
+                                             src={ClassContext[value].icon}/>
                                     </ToggleButton>
                                 </Tooltip>
                             </Grid>
@@ -186,9 +248,9 @@ const CharacterForm = React.forwardRef<CharacterFormRef>((props, ref) => {
         return <Card className={classes.classForm}>
             <ListItem>
                 <ListItemAvatar>
-                    <Avatar className={classes.classIconBrightness} src={CharacterClass[characterClass].icon}/>
+                    <Avatar className={classes.classIconBrightness} src={ClassContext[characterClass].icon}/>
                 </ListItemAvatar>
-                <ListItemText primary={String(t(CharacterClass[characterClass].name))} secondary={combatDescription()}/>
+                <ListItemText primary={String(t(ClassContext[characterClass].name))} secondary={combatDescription()}/>
             </ListItem>
             <Divider/>
             <Box className={classes.formPadding}>
@@ -207,7 +269,8 @@ const CharacterForm = React.forwardRef<CharacterFormRef>((props, ref) => {
                                        control={control} errors={errors}/>
                         </Grid>
                         <Grid item={true} xs={6}>
-                            <SelectField<string> label={String(t('field.combat'))} name={'combat'} control={control}
+                            <SelectField<string> disabled={disableCombat} label={String(t('field.combat'))}
+                                                 name={'combat'} control={control}
                                                  errors={errors}>
                                 <MenuItem value={"AWAKENING"}>{t('item.combat.awakening')}</MenuItem>
                                 <MenuItem value={"SUCCESSION"}>{t('item.combat.succession')}</MenuItem>
@@ -222,7 +285,8 @@ const CharacterForm = React.forwardRef<CharacterFormRef>((props, ref) => {
                                        control={control} errors={errors}/>
                         </Grid>
                         <Grid item={true} xs={4}>
-                            <TextField type={'number'} label={String(t('field.atkAwk'))} name={'atkAwk'}
+                            <TextField disabled={disableAwk} type={'number'} label={String(t('field.atkAwk'))}
+                                       name={'atkAwk'}
                                        control={control} errors={errors}/>
                         </Grid>
                         <Grid item={true} xs={4}>

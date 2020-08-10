@@ -22,6 +22,7 @@ export default interface ILang {
         theming: string;
         notification: string;
         characters: string;
+        horses: string;
         class: {
             warrior: string;
             sorceress: string;
@@ -62,7 +63,8 @@ export default interface ILang {
         colorLayout: string;
         gearScore: string;
         description: string;
-        formCharacter: string
+        formCharacter: string;
+        confirmExclusion:string;
     },
     description: {
         loginWithFacebook: string;
@@ -76,6 +78,7 @@ export default interface ILang {
         searchField: string;
         choseYourClass: string;
         formCharacter: string;
+        confirmExclusion:string;
     },
     field: {
         user: string;
@@ -102,5 +105,12 @@ export default interface ILang {
         max: string;
         min_length: string;
         max_length: string;
+    },
+    message: {
+        not_found: string;
+        success_save_character: string;
+        error_save_character: string;
+        success_remove_character:string;
+        error_remove_character: string;
     }
 }

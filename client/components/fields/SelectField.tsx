@@ -26,7 +26,8 @@ export default function SelectField<T = Object>(props: IProps<T>): React.ReactEl
         }
     }
 
-    return (<FormControl fullWidth={true} variant={"outlined"} size={"small"} error={Boolean(props.errors[props.name])}>
+    return (<FormControl disabled={props.disabled} fullWidth={true} variant={"outlined"} size={"small"}
+                         error={Boolean(props.errors[props.name])}>
         <InputLabel htmlFor={props.name}>{props.label}</InputLabel>
         <Controller id={props.name} control={props.control} name={props.name}
                     render={(_props) => <Select label={props.label} {..._props}>{buildItems()}</Select>}/>
@@ -43,4 +44,5 @@ interface IProps<T> {
     renderItem?: (item: T, index: number) => React.ReactNode;
     allowEmpty?: boolean;
     children: React.ReactNode;
+    disabled?: boolean;
 }

@@ -11,7 +11,12 @@ import EPublish from "/imports/enumerables/EPublish";
 import {useMongoFetch, useSubscription} from "react-meteor-hooks";
 import Characters from "/imports/collections/CharacterCollection";
 import Character from "/imports/models/Character";
+import {Mongo} from "meteor/mongo";
+import ConfirmExclusionForm, {ConfirmExclusionFormRef} from "/client/components/form/ConfirmExclusionForm";
+import EMethod from "/imports/enumerables/EMethod";
+import {useSnackbar} from "notistack";
 
+//<editor-folder defaultstate="collapsed" desc="Styles">
 const useStyles = makeStyles((theme: Theme) => createStyles({
     root: {
         display: "flex",
@@ -32,6 +37,8 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
         display: "flex"
     },
     boxList: {
+        display: 'flex',
+        flexDirection: 'column',
         width: 300,
         height: '100%',
         borderRight: `1px solid ${theme.palette.divider}`,
@@ -52,18 +59,35 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
         maxWidth: 'calc(100% - 300px)'
     }
 }));
+//</editor-folder>
 
 export default function CharacterPage(): React.ReactElement {
+    //<editor-folder defaultstate="collapsed" desc="Variables">
     const classes = useStyles();
     const {t} = useTranslation();
+    const {enqueueSnackbar} = useSnackbar();
     const isLoading = useSubscription(EPublish.CHARACTERS);
     const characters = useMongoFetch(Characters.find());
-    const [selected, setSelected] = React.useState<Character>();
-
+    const [selected, setSelected] = React.useState<Mongo.ObjectID>();
     const form = React.createRef<CharacterFormRef>();
+    const confirmExclusion = React.createRef<ConfirmExclusionFormRef>();
 
-    function onOpenForm() {
-        form.current!.open();
+    //</editor-folder>
+
+    function onOpenForm(id?: Mongo.ObjectID) {
+        form.current!.open(id);
+    }
+
+    function onDelete(object: Character) {
+        confirmExclusion.current!.open({id: object._id, text: object.name});
+    }
+
+    function onConfirmDelete(id: Mongo.ObjectID): void {
+        Meteor.call(EMethod.REMOVE_CHARACTER, id, function (error: Error) {
+            if (error) return enqueueSnackbar(t('message.error_remove_character'), {variant: "error"});
+            setSelected(undefined);
+            return enqueueSnackbar(t('message.success_remove_character'), {variant: "success"});
+        });
     }
 
     function content(): React.ReactElement {
@@ -72,20 +96,22 @@ export default function CharacterPage(): React.ReactElement {
                 <div className={classes.boxListActions}>
                     <Grid container={true} spacing={1}>
                         <Grid item={true} xs={12}>
-                            <Button onClick={onOpenForm} fullWidth={true} variant={"contained"}
+                            <Button onClick={() => onOpenForm()} fullWidth={true} variant={"contained"}
                                     color={"secondary"}>Novo personagem</Button>
                         </Grid>
                         <Grid item={true} xs={12}>
-                            <Typography variant={"body2"} color={"textSecondary"} align={"right"}>3/6
-                                Personagens</Typography>
+                            <Typography variant={"body2"} color={"textSecondary"} align={"right"}>
+                                {characters.length}/3 Personagens</Typography>
                         </Grid>
                     </Grid>
                 </div>
                 <Divider/>
-                <CharacterCard selected={selected} onSelect={setSelected} data={characters}/>
+                <CharacterCard selected={characters.find((obj: Character) => obj._id == selected)}
+                               onSelect={(object => setSelected(object._id))} data={characters}/>
             </div>
             <div className={classes.boxContent}>
-                <BackgroundCharacter current={selected}/>
+                <BackgroundCharacter onDelete={onDelete} onEdit={(obj) => onOpenForm(obj._id)}
+                                     current={characters.find((obj: Character) => obj._id == selected)}/>
             </div>
         </div>
     }
@@ -98,6 +124,7 @@ export default function CharacterPage(): React.ReactElement {
                 {content()}
             </Fade>
         </Card>
+        <ConfirmExclusionForm onConfirm={onConfirmDelete} ref={confirmExclusion}/>
         <CharacterForm ref={form}/>
     </Container>)
 }

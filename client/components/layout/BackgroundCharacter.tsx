@@ -14,8 +14,9 @@ import {
 import {useTranslation} from "react-i18next";
 import Character from "/imports/models/Character";
 import ICharacterClass from "/imports/interfaces/ICharacterClass";
-import CharacterClass from "/imports/objects/CharacterClass";
-import {countGS} from "/client/utils/Helpers";
+import ClassContext from "/imports/objects/ClassContext";
+import {countGS} from "/imports/utils/Helpers";
+import EClasses from "/imports/enumerables/EClasses";
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
     root: {
@@ -61,7 +62,19 @@ export default function BackgroundCharacter(props: IProps): React.ReactElement<I
     const [speedOpen, setSpeedOpen] = React.useState<boolean>(false);
 
     function classCharacter(): ICharacterClass {
-        return CharacterClass[props.current!.class];
+        return ClassContext[props.current!.class];
+    }
+
+    function onEdit(): void {
+        if (props.current && props.onEdit) {
+            props.onEdit(props.current);
+        }
+    }
+
+    function onDelete(): void {
+        if (props.current && props.onDelete) {
+            props.onDelete(props.current);
+        }
     }
 
     function contentBody(): React.ReactElement {
@@ -70,9 +83,10 @@ export default function BackgroundCharacter(props: IProps): React.ReactElement<I
                        onOpen={() => setSpeedOpen(true)}
                        icon={<SpeedDialIcon/>}
                        className={classes.speedDial}>
-                <SpeedDialAction icon={<Icon color={"error"} className={'fas fa-trash-alt'}/>}
+                <SpeedDialAction onClick={onDelete} icon={<Icon color={"error"} className={'fas fa-trash-alt'}/>}
                                  title={String(t('action.delete'))}/>
-                <SpeedDialAction icon={<Icon className={'fas fa-edit'}/>} title={String(t('action.edit'))}/>
+                <SpeedDialAction onClick={onEdit} icon={<Icon className={'fas fa-edit'}/>}
+                                 title={String(t('action.edit'))}/>
             </SpeedDial>
             <Fade in={true} timeout={400}>
                 <img width={'70%'} height={'100%'} className={classes.img}
@@ -109,10 +123,10 @@ export default function BackgroundCharacter(props: IProps): React.ReactElement<I
                                             <Chip color={"secondary"} size={"small"}
                                                   label={props.current!.atkPre}/> {t('field.atkPre')}
                                         </Grid>
-                                        <Grid item={true} xs={12}>
+                                        {classCharacter().value != EClasses.SHAI && <Grid item={true} xs={12}>
                                             <Chip color={"secondary"} size={"small"}
                                                   label={props.current!.atkAwk}/> {t('field.atkAwk')}
-                                        </Grid>
+                                        </Grid>}
                                         <Grid item={true} xs={12}>
                                             <Chip color={"secondary"} size={"small"}
                                                   label={props.current!.defense}/> {t('field.defense')}
