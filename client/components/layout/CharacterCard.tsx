@@ -37,7 +37,7 @@ export default function CharacterCard(props: IProps): React.ReactElement<IProps>
     function buildItems() {
         return props.data.map(value => {
             const characterClass = ClassContext[value.class];
-            return <ListItem onClick={() => onClick(value)} button={true} selected={isSelected(value)}>
+            return <ListItem key={String(value._id)} onClick={() => onClick(value)} button={true} selected={isSelected(value)}>
                 <ListItemAvatar>
                     <Badge overlap="circle" anchorOrigin={{vertical: 'bottom', horizontal: 'right'}}
                            badgeContent={<Avatar className={classes.smallAvatar} src={characterClass.icon}/>}>

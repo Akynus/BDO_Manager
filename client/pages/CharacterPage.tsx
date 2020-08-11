@@ -26,6 +26,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
         height: '100%'
     },
     content: {
+        position: 'relative',
         marginTop: theme.spacing(2),
         flexGrow: 1,
         width: '100%',
@@ -67,7 +68,7 @@ export default function CharacterPage(): React.ReactElement {
     const {t} = useTranslation();
     const {enqueueSnackbar} = useSnackbar();
     const isLoading = useSubscription(EPublish.CHARACTERS);
-    const characters = useMongoFetch(Characters.find());
+    const characters: Character[] = useMongoFetch(Characters.find());
     const [selected, setSelected] = React.useState<Mongo.ObjectID>();
     const form = React.createRef<CharacterFormRef>();
     const confirmExclusion = React.createRef<ConfirmExclusionFormRef>();
@@ -97,11 +98,11 @@ export default function CharacterPage(): React.ReactElement {
                     <Grid container={true} spacing={1}>
                         <Grid item={true} xs={12}>
                             <Button onClick={() => onOpenForm()} fullWidth={true} variant={"contained"}
-                                    color={"secondary"}>Novo personagem</Button>
+                                    color={"secondary"}>{t('action.insert_character')}</Button>
                         </Grid>
                         <Grid item={true} xs={12}>
                             <Typography variant={"body2"} color={"textSecondary"} align={"right"}>
-                                {characters.length}/3 Personagens</Typography>
+                                {characters.length}/3 {t('item.characters')}</Typography>
                         </Grid>
                     </Grid>
                 </div>
@@ -119,7 +120,7 @@ export default function CharacterPage(): React.ReactElement {
     return (<Container maxWidth="lg" className={classes.root}>
         <BreadcrumbPage title={t('item.characters')}/>
         <Card elevation={10} className={classes.content}>
-            {isLoading && <DataLoading.Character/>}
+            <DataLoading.Character show={isLoading}/>
             <Fade timeout={500} in={!isLoading}>
                 {content()}
             </Fade>

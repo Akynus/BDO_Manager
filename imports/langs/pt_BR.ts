@@ -11,6 +11,8 @@ const values: ILang = {
         delete: 'Excluir',
         save: 'Salvar',
         insert: 'Adicionar',
+        insert_character: 'Adicionar Personagem',
+        insert_horse: 'Adicionar Montaria',
         login: 'Entrar',
         logout: 'Sair',
         forgotPassword: 'Esqueci minha senha',
@@ -24,6 +26,7 @@ const values: ILang = {
         home: 'Página Inicial',
         theming: 'Tematização',
         notification: 'Notificação',
+        form: 'Formulário',
         characters: 'Personagens',
         horses: 'Montarias',
         class: {
@@ -52,7 +55,8 @@ const values: ILang = {
             succession: 'Sucessão'
         },
         horse: {
-            common: 'Comum até T8',
+            common: 'Cavalo',
+            donkey: 'Burro',
             arduanatt: 'Arduanatt',
             dine: 'Diné',
             doom: 'Doom'
@@ -66,7 +70,9 @@ const values: ILang = {
         colorLayout: 'Cor e Layout',
         description: 'Descrição',
         gearScore: 'Gear Score',
+        values: 'Valores',
         formCharacter: 'Cadastro de Personagem',
+        formHorse: 'Cadastro de Montarias',
         confirmExclusion: 'Excluir registro'
     },
     description: {
@@ -81,7 +87,10 @@ const values: ILang = {
         searchField: 'Pesquisar',
         choseYourClass: 'Escolha sua classe',
         formCharacter: 'Selecione sua classe e preencha as descrições do personagem',
-        confirmExclusion: 'Se você realmente deseja  excluir esse registro, digite <1>{{text}}</1> no campo de texto abaixo'
+        formHorse: 'Preencha as descrições da montaria',
+        confirmExclusion: 'Se você realmente deseja  excluir esse registro, digite <1>{{text}}</1> no campo de texto abaixo',
+        dreamHorse: 'Dream Horse',
+        commonHorse: 'Montaria'
     },
     field: {
         user: 'Usuário',
@@ -92,12 +101,18 @@ const values: ILang = {
         name: 'Nome',
         character: 'Personagem',
         level: 'Nivel',
+        type: 'Tipo',
         combat: 'Tipo de Combate',
         horse: 'Montaria',
         atkPre: 'AP',
         atkAwk: 'AP Desperto',
         defense: 'Defesa',
-        gearScore: 'Gear Score'
+        gearScore: 'Gear Score',
+        hasKrogdalo: 'Usa equipamento Krogdalo?',
+        accel: 'Aceleração',
+        speed: 'Velocidade',
+        brake: 'Freio',
+        turn: 'Torque'
     },
     validation: {
         required: 'Campo obrigatório',
@@ -114,7 +129,11 @@ const values: ILang = {
         success_save_character: 'Personagem salvo com sucesso',
         error_save_character: 'Erro ao salvar personagem',
         success_remove_character: 'Personagem excluido com sucesso',
-        error_remove_character: 'Erro ao excluir personagem'
+        error_remove_character: 'Erro ao excluir personagem',
+        success_save_horse:'Montaria salva com sucesso',
+        error_save_horse:'Erro ao salvar montaria',
+        success_remove_horse:'Montaria excluido com sucesso',
+        error_remove_horse:'Erro ao excluir montaria',
     }
 }
 

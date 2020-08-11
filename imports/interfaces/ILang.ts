@@ -6,6 +6,8 @@ export default interface ILang {
         back: string;
         open: string;
         insert: string;
+        insert_character: string;
+        insert_horse: string;
         edit: string;
         delete: string;
         login: string;
@@ -20,6 +22,7 @@ export default interface ILang {
         profile: string;
         home: string;
         theming: string;
+        form: string;
         notification: string;
         characters: string;
         horses: string;
@@ -50,6 +53,7 @@ export default interface ILang {
         },
         horse: {
             common: string;
+            donkey: string;
             arduanatt: string;
             dine: string;
             doom: string;
@@ -62,9 +66,11 @@ export default interface ILang {
         accessibility: string;
         colorLayout: string;
         gearScore: string;
+        values:string;
         description: string;
         formCharacter: string;
-        confirmExclusion:string;
+        formHorse: string;
+        confirmExclusion: string;
     },
     description: {
         loginWithFacebook: string;
@@ -78,7 +84,10 @@ export default interface ILang {
         searchField: string;
         choseYourClass: string;
         formCharacter: string;
-        confirmExclusion:string;
+        formHorse: string;
+        dreamHorse: string;
+        commonHorse: string;
+        confirmExclusion: string;
     },
     field: {
         user: string;
@@ -91,10 +100,16 @@ export default interface ILang {
         level: string;
         combat: string;
         horse: string;
+        type: string;
         atkPre: string;
         atkAwk: string;
         defense: string;
         gearScore: string;
+        hasKrogdalo: string;
+        accel: string;
+        speed: string;
+        brake: string;
+        turn: string;
     },
     validation: {
         required: string;
@@ -110,7 +125,11 @@ export default interface ILang {
         not_found: string;
         success_save_character: string;
         error_save_character: string;
-        success_remove_character:string;
+        success_remove_character: string;
         error_remove_character: string;
+        success_save_horse: string;
+        error_save_horse: string;
+        success_remove_horse: string;
+        error_remove_horse: string;
     }
 }

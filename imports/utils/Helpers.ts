@@ -1,10 +1,10 @@
 import {Meteor} from "meteor/meteor";
 import EMethod from "/imports/enumerables/EMethod";
 
-export function countGS(gear: { atkPre: number; atkAwk?: number; defense: number; }) {
-    let medium
+export function countGS(gear: { atkPre: number; atkAwk?: number; defense: number; }, onlyPre: boolean = false) {
+    let medium;
 
-    if (!gear.atkAwk) {
+    if (!onlyPre) {
         medium = Math.floor((Number(gear.atkPre || 0) + Number(gear.atkAwk || 0)) / 2);
     } else {
         medium = Math.floor((Number(gear.atkPre || 0)));

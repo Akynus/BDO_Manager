@@ -1,15 +1,27 @@
 import * as React from "react";
 import {createMuiTheme, Theme, ThemeProvider} from '@material-ui/core/styles';
-import {withTracker} from "meteor/react-meteor-data";
 import {Overrides} from "@material-ui/core/styles/overrides";
 import {TypographyOptions} from "@material-ui/core/styles/createTypography";
 import {PaletteOptions} from "@material-ui/core/styles/createPalette";
 import Settings from "/imports/collections/SettingCollection";
 import Setting from "/imports/models/Setting";
+import {useMongoFetch} from "react-meteor-hooks";
 
-class ThemeController extends React.Component<IProps, any> {
+const Theming: React.FunctionComponent = function (props) {
+    const settings: Setting[] = useMongoFetch(Settings.find());
 
-    private override(): Overrides {
+    function getSetting(): Setting {
+        const setting = new Setting();
+        setting.theming = {
+            type: "light",
+            primary: '#5c6bc0',
+            secondary: '#2196f3'
+        }
+
+        return settings[0] || setting;
+    }
+
+    function override(): Overrides {
         return {
             MuiIcon: {
                 root: {
@@ -31,24 +43,22 @@ class ThemeController extends React.Component<IProps, any> {
         }
     }
 
-    private typography(): TypographyOptions {
+    function typography(): TypographyOptions {
         return {
             //fontFamily: 'Poppins, Arial',
         }
     }
 
-    private palette(): PaletteOptions {
-        const {setting} = this.props;
-
+    function palette(): PaletteOptions {
         return {
-            type: setting.theming.type,
+            type: getSetting().theming.type,
             primary: {
-                main: setting.theming.primary,
+                main: getSetting().theming.primary,
             },
             secondary: {
-                main: setting.theming.secondary,
+                main: getSetting().theming.secondary,
             },
-            background: setting.theming.type == "dark" ? {
+            background: getSetting().theming.type == "dark" ? {
                 default: '#404040',
                 paper: '#575757'
             } : {
@@ -58,37 +68,20 @@ class ThemeController extends React.Component<IProps, any> {
         }
     }
 
-    private get(): Theme {
+    function get(): Theme {
         return createMuiTheme({
-            palette: this.palette(),
+            palette: palette(),
             shape: {
                 borderRadius: 6
             },
-            typography: this.typography(),
-            overrides: this.override()
+            typography: typography(),
+            overrides: override()
         });
     }
 
-    render() {
-        return <ThemeProvider theme={this.get()}>
-            {this.props.children}
-        </ThemeProvider>;
-    }
+    return <ThemeProvider theme={get()}>
+        {props.children}
+    </ThemeProvider>
 }
 
-export default withTracker<any, IProps>(() => {
-    const defaultSetting = new Setting();
-    defaultSetting.theming = {
-        type: "light",
-        primary: '#5c6bc0',
-        secondary: '#2196f3'
-    }
-
-    return {
-        setting: Settings.findOne() || defaultSetting
-    }
-})(ThemeController);
-
-interface IProps {
-    setting: Setting;
-}
+export default Theming;

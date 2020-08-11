@@ -4,9 +4,14 @@ import {useTranslation} from "react-i18next";
 import {Button, Card, Container, Divider, Fade, Grid, Typography} from "@material-ui/core";
 import BreadcrumbPage from "/client/components/layout/BreadcrumbPage";
 import DataLoading from "/client/components/layout/DataLoading";
-import {useSubscription} from "react-meteor-hooks";
+import {useMongoFetch, useSubscription} from "react-meteor-hooks";
 import EPublish from "/imports/enumerables/EPublish";
+import Horses from "/imports/collections/HorseCollection";
+import Horse from "/imports/models/Horse";
+import HorseForm, {HorseFormFormRef} from "/client/components/form/HorseForm";
+import {Mongo} from "meteor/mongo";
 
+//<editor-folder defaultstate="collapsed" desc="Styles">
 const useStyles = makeStyles((theme: Theme) => createStyles({
     root: {
         display: "flex",
@@ -16,6 +21,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
         height: '100%'
     },
     content: {
+        position: 'relative',
         marginTop: theme.spacing(2),
         flexGrow: 1,
         width: '100%',
@@ -47,16 +53,21 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
         maxWidth: 'calc(100% - 300px)'
     }
 }));
+//</editor-folder>
 
 export default function HorsePage(): React.ReactElement {
+    //<editor-folder defaultstate="collapsed" desc="Variables">
     const classes = useStyles();
     const {t} = useTranslation();
+    const form = React.createRef<HorseFormFormRef>();
     const isLoading = useSubscription(EPublish.HORSES);
+    const horses: Horse[] = useMongoFetch(Horses.find());
 
-    function onOpenForm() {
+    //</editor-folder>
 
+    function onOpenForm(id?: Mongo.ObjectID) {
+        form.current!.open(id);
     }
-
 
     function content(): React.ReactElement {
         return <div className={classes.boxFlex}>
@@ -64,12 +75,12 @@ export default function HorsePage(): React.ReactElement {
                 <div className={classes.boxListActions}>
                     <Grid container={true} spacing={1}>
                         <Grid item={true} xs={12}>
-                            <Button onClick={onOpenForm} fullWidth={true} variant={"contained"}
-                                    color={"secondary"}>{t('actions.insert')}</Button>
+                            <Button onClick={() => onOpenForm()} fullWidth={true} variant={"contained"}
+                                    color={"secondary"}>{t('action.insert_horse')}</Button>
                         </Grid>
                         <Grid item={true} xs={12}>
-                            <Typography variant={"body2"} color={"textSecondary"} align={"right"}>3/6
-                                Montarias</Typography>
+                            <Typography variant={"body2"} color={"textSecondary"} align={"right"}>
+                                {horses.length}/3 {t('item.horses')}</Typography>
                         </Grid>
                     </Grid>
                 </div>
@@ -84,10 +95,11 @@ export default function HorsePage(): React.ReactElement {
     return (<Container maxWidth="lg" className={classes.root}>
         <BreadcrumbPage title={t('item.horses')}/>
         <Card elevation={10} className={classes.content}>
-            {isLoading && <DataLoading.Character/>}
+            <DataLoading.Character show={isLoading}/>
             <Fade timeout={500} in={!isLoading}>
                 {content()}
             </Fade>
         </Card>
+        <HorseForm ref={form}/>
     </Container>)
 }

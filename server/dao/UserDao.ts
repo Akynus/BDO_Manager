@@ -17,7 +17,6 @@ const UserDao = {
 
             return true;
         } catch (e) {
-            console.error(e);
             return false;
         }
     }

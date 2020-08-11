@@ -7,11 +7,14 @@ import Character from "/imports/models/Character";
 import CharacterDao from "/server/dao/CharacterDao";
 
 Meteor.methods({
+    //<editor-folder defaultstate="collapsed" desc="Setting">
     [EMethod.UPDATE_THEME]: (key: keyof ITheming, value: any) => {
         if (!Meteor.userId()) throw new Meteor.Error(403);
         SettingDao.setTheme(key, value);
     },
+    //</editor-folder>
 
+    //<editor-folder defaultstate="collapsed" desc="Character">
     [EMethod.INSERT_CHARACTER]: (object: Character) => {
         if (!Meteor.userId()) throw new Meteor.Error(403);
         return CharacterDao.insert(object);
@@ -28,4 +31,9 @@ Meteor.methods({
         if (!Meteor.userId()) throw new Meteor.Error(403);
         CharacterDao.remove(id);
     },
+    //</editor-folder>
+
+    //<editor-folder defaultstate="collapsed" desc="Horse">
+
+    //</editor-folder>
 });

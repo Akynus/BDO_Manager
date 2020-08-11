@@ -1,19 +1,19 @@
-/*import {Meteor} from "meteor/meteor";
+import {Meteor} from "meteor/meteor";
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {I18nextProvider} from "react-i18next";
 import CssBaseline from '@material-ui/core/CssBaseline';
 import RouterController from "/client/resources/controllers/RouterController";
-import ThemeController from "/client/resources/controllers/ThemeController";
+import ThemeController from "theming.tsx";
 import {SnackbarProvider} from 'notistack';
 
-import "initialization.ts";
+import "/client/resources/initialization.js";
 import "moment/locale/pt-br";
 
 import LanguageConfig from "/client/resources/config/LanguageConfig";
 
 Meteor.startup(() => {
-    ReactDOM.render(
+    /*ReactDOM.render(
         <React.Fragment>
             <CssBaseline/>
             <I18nextProvider i18n={LanguageConfig.get()}>
@@ -24,12 +24,8 @@ Meteor.startup(() => {
                 </ThemeController>
             </I18nextProvider>
         </React.Fragment>,
-        document.getElementById('application'));
-});*/
-
-import "/client/resources/router";
-import "/client/resources/initialization";
-
+        document.getElementById('application'));*/
+});
 
 
 

@@ -197,7 +197,7 @@ const CharacterForm = React.forwardRef<CharacterFormRef>((props, ref) => {
         const {atkPre, atkAwk, defense} = watch();
         return countGS({
             atkPre, atkAwk, defense
-        });
+        }, characterClass == EClasses.SHAI);
     }
 
     function combatDescription(): string {

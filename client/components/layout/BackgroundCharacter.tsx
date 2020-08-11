@@ -1,16 +1,7 @@
 import * as React from "react";
 import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
 import {SpeedDial, SpeedDialAction, SpeedDialIcon} from "@material-ui/lab";
-import {
-    Card,
-    Divider,
-    Grid,
-    Icon,
-    ListItem,
-    ListItemText,
-    Slide,
-    Chip, CardContent, Fade
-} from "@material-ui/core";
+import {Card, CardContent, Chip, Divider, Fade, Grid, Icon, ListItem, ListItemText, Slide} from "@material-ui/core";
 import {useTranslation} from "react-i18next";
 import Character from "/imports/models/Character";
 import ICharacterClass from "/imports/interfaces/ICharacterClass";
@@ -114,7 +105,7 @@ export default function BackgroundCharacter(props: IProps): React.ReactElement<I
                                                 atkPre: props.current!.atkPre,
                                                 atkAwk: props.current!.atkAwk,
                                                 defense: props.current!.defense
-                                            })}/> {t('field.gearScore')}
+                                            }, props.current!.class == EClasses.SHAI)}/> {t('field.gearScore')}
                                         </Grid>
                                         <Grid item={true} xs={12}>
                                             <Divider/>

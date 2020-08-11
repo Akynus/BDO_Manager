@@ -99,10 +99,10 @@ class AppBarComponent extends React.Component<IProps, IState> {
                 </DialogContentText>
             </DialogContent>
             <DialogActions>
-                <Button autoFocus onClick={this.handleConfirmLogout.bind(this, false)} color="secondary">
+                <Button autoFocus onClick={this.handleConfirmLogout.bind(this, false)} color="primary">
                     {t('action.no')}
                 </Button>
-                <Button onClick={this.logout} color="secondary">
+                <Button onClick={this.logout} color="primary">
                     {t('action.yes')}
                 </Button>
             </DialogActions>
