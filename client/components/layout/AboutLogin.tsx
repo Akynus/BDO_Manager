@@ -1,7 +1,9 @@
-import {createStyles, Theme} from '@material-ui/core/styles';
+import * as React from "react";
+import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
 import {URLBackground} from "/imports/objects/GlobalVars";
+import {Card} from "@material-ui/core";
 
-const styles = (theme: Theme) => createStyles({
+const useStyles = makeStyles((theme: Theme) => createStyles({
     root: {
         zIndex: 0,
         width: 500,
@@ -14,6 +16,11 @@ const styles = (theme: Theme) => createStyles({
         backgroundImage: `url(${URLBackground.ABOUT_LOGIN})`,
         backgroundPosition: "center"
     },
-});
+}));
 
-export default styles;
+const AboutLogin: React.FunctionComponent = function (props) {
+    const classes = useStyles();
+    return <Card className={classes.root}/>;
+}
+
+export default AboutLogin;

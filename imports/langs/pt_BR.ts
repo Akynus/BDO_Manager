@@ -126,14 +126,15 @@ const values: ILang = {
     },
     message: {
         not_found: 'Registro não encontrado',
+        login_failed: 'Autenticação do usuário inválida',
         success_save_character: 'Personagem salvo com sucesso',
         error_save_character: 'Erro ao salvar personagem',
         success_remove_character: 'Personagem excluido com sucesso',
         error_remove_character: 'Erro ao excluir personagem',
-        success_save_horse:'Montaria salva com sucesso',
-        error_save_horse:'Erro ao salvar montaria',
-        success_remove_horse:'Montaria excluido com sucesso',
-        error_remove_horse:'Erro ao excluir montaria',
+        success_save_horse: 'Montaria salva com sucesso',
+        error_save_horse: 'Erro ao salvar montaria',
+        success_remove_horse: 'Montaria excluido com sucesso',
+        error_remove_horse: 'Erro ao excluir montaria',
     }
 }
 

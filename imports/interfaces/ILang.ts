@@ -66,7 +66,7 @@ export default interface ILang {
         accessibility: string;
         colorLayout: string;
         gearScore: string;
-        values:string;
+        values: string;
         description: string;
         formCharacter: string;
         formHorse: string;
@@ -123,6 +123,7 @@ export default interface ILang {
     },
     message: {
         not_found: string;
+        login_failed: string;
         success_save_character: string;
         error_save_character: string;
         success_remove_character: string;
