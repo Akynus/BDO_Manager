@@ -123,7 +123,10 @@ export default interface ILang {
     },
     message: {
         not_found: string;
+        login_successful: string;
         login_failed: string;
+        logout_successful: string;
+        logout_failed: string;
         success_save_character: string;
         error_save_character: string;
         success_remove_character: string;

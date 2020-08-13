@@ -155,18 +155,28 @@ const CharacterForm = React.forwardRef<CharacterFormRef>((props, ref) => {
         if (id) {
             setLoading(true);
             const timing = timingCall(EMethod.GET_CHARACTER);
-            Meteor.call(EMethod.GET_CHARACTER, id, (error: any, data: Character) => {
-                setLoading(false);
-                timing();
-                if (error) {
-                    enqueueSnackbar(t('message.not_found'));
-                    return;
-                }
+            new Promise<Character>((resolve, reject) => {
+                Meteor.call(EMethod.GET_CHARACTER, id, (error: any, data: Character) => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        resolve(data);
+                    }
+
+                });
+            }).then((data) => {
                 setCharacterClass(data.class);
                 if (schema.isValidSync(data)) {
                     Object.entries(data).map(([key, value]) => setValue(key, value));
                 }
+            }).catch((error: any) => {
+                enqueueSnackbar(t('message.not_found'));
+                return;
+            }).finally(() => {
+                timing();
+                setLoading(false);
             });
+
         }
     }
 
@@ -230,7 +240,7 @@ const CharacterForm = React.forwardRef<CharacterFormRef>((props, ref) => {
                             return <Grid key={ClassContext[value].value} item={true} xs={2}>
                                 <Tooltip title={String(t(ClassContext[value].name))} placement={"top"}>
                                     <ToggleButton onClick={() => setCharacterClass(ClassContext[value].value)}
-                                                  className={classes.toggleButton}
+                                                  className={classes.toggleButton} value={ClassContext[value].value}
                                                   selected={characterClass == ClassContext[value].value}>
                                         <img className={clsx([classes.classIcon, classes.classIconBrightness])}
                                              src={ClassContext[value].icon}/>

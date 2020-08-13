@@ -5,10 +5,8 @@ import BreadcrumbPage from "/client/components/layout/BreadcrumbPage";
 import CharacterForm, {CharacterFormRef} from "/client/components/form/CharacterForm";
 import {useTranslation} from "react-i18next";
 import CharacterCard from "/client/components/layout/CharacterCard";
-import DataLoading from "/client/components/layout/DataLoading";
 import BackgroundCharacter from "/client/components/layout/BackgroundCharacter";
-import EPublish from "/imports/enumerables/EPublish";
-import {useMongoFetch, useSubscription} from "react-meteor-hooks";
+import {useMongoFetch} from "react-meteor-hooks";
 import Characters from "/imports/collections/CharacterCollection";
 import Character from "/imports/models/Character";
 import {Mongo} from "meteor/mongo";
@@ -67,7 +65,7 @@ export default function CharacterPage(): React.ReactElement {
     const classes = useStyles();
     const {t} = useTranslation();
     const {enqueueSnackbar} = useSnackbar();
-    const isLoading = useSubscription(EPublish.CHARACTERS);
+    //const isLoading = useSubscription(EPublish.CHARACTERS);
     const characters: Character[] = useMongoFetch(Characters.find());
     const [selected, setSelected] = React.useState<Mongo.ObjectID>();
     const form = React.createRef<CharacterFormRef>();
@@ -120,8 +118,7 @@ export default function CharacterPage(): React.ReactElement {
     return (<Container maxWidth="lg" className={classes.root}>
         <BreadcrumbPage title={t('item.characters')}/>
         <Card elevation={10} className={classes.content}>
-            <DataLoading.Character show={isLoading}/>
-            <Fade timeout={500} in={!isLoading}>
+            <Fade timeout={500} in={true}>
                 {content()}
             </Fade>
         </Card>

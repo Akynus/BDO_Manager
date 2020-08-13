@@ -126,7 +126,10 @@ const values: ILang = {
     },
     message: {
         not_found: 'Registro não encontrado',
+        login_successful: 'Bem-vindo <1>{use}</1>',
         login_failed: 'Autenticação do usuário inválida',
+        logout_successful: 'Sessão do usuário encerrada',
+        logout_failed: 'Erro ao encerrar a sessão do usuário',
         success_save_character: 'Personagem salvo com sucesso',
         error_save_character: 'Erro ao salvar personagem',
         success_remove_character: 'Personagem excluido com sucesso',

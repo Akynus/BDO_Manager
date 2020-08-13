@@ -8,7 +8,8 @@ export default function TextField(props: IProps): React.ReactElement<IProps> {
                          error={Boolean(props.errors[props.name])}>
         <InputLabel htmlFor={props.name}>{props.label}</InputLabel>
         <Controller id={props.name} control={props.control} name={props.name}
-                    render={(_props) => <OutlinedInput label={props.label} type={props.type}  {..._props}/>}/>
+                    render={(_props) => <OutlinedInput label={props.label} type={props.type} onChange={_props.onChange}
+                                                       value={_props.value} onBlur={_props.onBlur}/>}/>
         {props.errors[props.name] && <FormHelperText>{props.errors[props.name].message}</FormHelperText>}
     </FormControl>)
 }

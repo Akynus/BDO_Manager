@@ -7,7 +7,9 @@ import LoginForm from "/client/components/form/LoginForm";
 export default function LoginPage(): React.ReactElement {
     const [show, setShow] = React.useState<boolean>(false);
 
-    React.useLayoutEffect(() => setTimeout(()=>setShow(true), 500), []);
+    React.useLayoutEffect(() => {
+        setTimeout(() => setShow(true), 500);
+    }, []);
 
     return <BackgroundLogin>
         <Grid container={true} spacing={2} justify={"space-between"} alignItems={"center"}>

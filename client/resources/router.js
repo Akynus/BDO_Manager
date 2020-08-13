@@ -1,41 +1,88 @@
 import React from "react";
 import {mount} from 'react-mounter';
+import {Session} from "meteor/session";
 import {FlowRouter} from 'meteor/ostrio:flow-router-extra';
 import EPublish from "/imports/enumerables/EPublish";
 import {URLBackground} from "/imports/objects/GlobalVars";
 import FixedLoading from "/client/components/layout/FixedLoading";
-import Core from "/client/components/Core";
+import Core from "/client/components/main/Core";
+import ERoutes from "/imports/enumerables/ERoutes";
+import ClassContext from "/imports/objects/ClassContext";
+import HorseContext from "/imports/objects/HorseContext";
+import ECharacterCombat from "/imports/enumerables/ECharacterCombat";
+import ESession from "/imports/enumerables/ESession";
 
 import LoginPage from "/client/pages/LoginPage";
-import {delay} from "/imports/utils/Helpers";
-
-const WelcomeComponent = ({name}) => (<p>{name}</p>);
+import HomePage from "/client/pages/HomePage";
+import CharacterPage from "/client/pages/CharacterPage";
+import HorsePage from "/client/pages/HorsePage";
 
 //<editor-folder defaultstate="collapsed" desc="Authenticated Routes">
 const authenticatedRoute = FlowRouter.group({
-    subscriptions() {
-        this.register(EPublish.SETTING, Meteor.subscribe(EPublish.SETTING));
-    },
     whileWaiting() {
-        mount(FixedLoading);
+        Session.set(ESession.LOADING_PAGE, true);
+    },
+    endWaiting() {
+        Session.set(ESession.LOADING_PAGE, false);
     },
     triggersEnter: [(context, redirect) => {
         if (!Meteor.userId()) redirect('/login');
     }]
 });
-authenticatedRoute.route('/', {
+authenticatedRoute.route(ERoutes.INDEX, {
     name: 'index',
     triggersEnter: [(context, redirect) => {
         redirect('/home');
     }]
 });
-authenticatedRoute.route('/home', {
+authenticatedRoute.route(ERoutes.HOME, {
     name: 'home',
-    waitOn() {
-        return new Promise(resolve => setTimeout(resolve, 5000));
+    action() {
+        mount(Core, {layout: true, children: <HomePage/>});
+    }
+});
+authenticatedRoute.route(ERoutes.CHARACTERS, {
+    name: 'characters',
+    subscriptions() {
+        this.register(EPublish.CHARACTERS, Meteor.subscribe(EPublish.CHARACTERS));
+    },
+    waitOnResources() {
+        const images = Object.keys(ClassContext).flatMap(value => {
+            return [
+                ClassContext[value].icon,
+                ClassContext[value].smallImg[ECharacterCombat.AWAKENING],
+                ClassContext[value].smallImg[ECharacterCombat.SUCCESSION],
+                ClassContext[value].largeImg[ECharacterCombat.AWAKENING],
+                ClassContext[value].largeImg[ECharacterCombat.SUCCESSION],
+            ]
+        });
+
+        return {
+            images: images
+        }
     },
     action() {
-        mount(WelcomeComponent, {name: 'Home'});
+        mount(Core, {layout: true, children: <CharacterPage/>});
+    }
+});
+authenticatedRoute.route(ERoutes.HORSES, {
+    name: 'horses',
+    subscriptions() {
+        this.register(EPublish.HORSES, Meteor.subscribe(EPublish.HORSES));
+    },
+    waitOnResources() {
+        const images = Object.keys(HorseContext).flatMap(value => {
+            return [
+                HorseContext[value].img
+            ]
+        });
+
+        return {
+            images: images
+        }
+    },
+    action() {
+        mount(Core, {layout: true, children: <HorsePage/>});
     }
 });
 //</editor-folder>
@@ -49,24 +96,25 @@ const unauthenticatedRoute = FlowRouter.group({
         if (Meteor.userId()) redirect('/home');
     }]
 });
-unauthenticatedRoute.route('/', {
+unauthenticatedRoute.route(ERoutes.INDEX, {
     name: 'index',
     triggersEnter: [(context, redirect) => {
         redirect('/login');
     }]
 });
-unauthenticatedRoute.route('/login', {
+unauthenticatedRoute.route(ERoutes.LOGIN, {
     name: 'login',
     waitOnResources() {
         return {
-            images: [URLBackground.ABOUT_LOGIN, URLBackground.BG01, URLBackground.BG02, URLBackground.BG03]
+            images: [URLBackground.ABOUT_LOGIN,
+                URLBackground.BG01,
+                URLBackground.BG02,
+                URLBackground.BG03
+            ]
         }
     },
-    waitOn() {
-        return [delay(1000)]
-    },
     action() {
-        mount(Core, {children: <LoginPage/>});
+        mount(Core, {layout: false, children: <LoginPage/>});
     }
 });
 //</editor-folder>

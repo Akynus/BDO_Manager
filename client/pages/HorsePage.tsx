@@ -3,9 +3,7 @@ import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
 import {useTranslation} from "react-i18next";
 import {Button, Card, Container, Divider, Fade, Grid, Typography} from "@material-ui/core";
 import BreadcrumbPage from "/client/components/layout/BreadcrumbPage";
-import DataLoading from "/client/components/layout/DataLoading";
-import {useMongoFetch, useSubscription} from "react-meteor-hooks";
-import EPublish from "/imports/enumerables/EPublish";
+import {useMongoFetch} from "react-meteor-hooks";
 import Horses from "/imports/collections/HorseCollection";
 import Horse from "/imports/models/Horse";
 import HorseForm, {HorseFormFormRef} from "/client/components/form/HorseForm";
@@ -60,7 +58,6 @@ export default function HorsePage(): React.ReactElement {
     const classes = useStyles();
     const {t} = useTranslation();
     const form = React.createRef<HorseFormFormRef>();
-    const isLoading = useSubscription(EPublish.HORSES);
     const horses: Horse[] = useMongoFetch(Horses.find());
 
     //</editor-folder>
@@ -95,8 +92,7 @@ export default function HorsePage(): React.ReactElement {
     return (<Container maxWidth="lg" className={classes.root}>
         <BreadcrumbPage title={t('item.horses')}/>
         <Card elevation={10} className={classes.content}>
-            <DataLoading.Character show={isLoading}/>
-            <Fade timeout={500} in={!isLoading}>
+            <Fade timeout={500} in={true}>
                 {content()}
             </Fade>
         </Card>

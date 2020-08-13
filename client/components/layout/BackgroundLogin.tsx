@@ -32,7 +32,8 @@ const BackgroundLogin: React.FunctionComponent = function (props) {
     const [background, setBackground] = React.useState<string>("bg01");
 
     React.useLayoutEffect(() => {
-        setInterval(loopBG, 3000);
+        const interval = setInterval(loopBG, 3000);
+        return clearInterval(interval);
     }, [])
 
     function loopBG(): void {
