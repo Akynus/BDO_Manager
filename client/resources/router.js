@@ -7,18 +7,21 @@ import {URLBackground} from "/imports/objects/GlobalVars";
 import FixedLoading from "/client/components/layout/FixedLoading";
 import Core from "/client/components/main/Core";
 import ERoutes from "/imports/enumerables/ERoutes";
-import ClassContext from "/imports/objects/ClassContext";
-import HorseContext from "/imports/objects/HorseContext";
-import ECharacterCombat from "/imports/enumerables/ECharacterCombat";
 import ESession from "/imports/enumerables/ESession";
 
 import LoginPage from "/client/pages/LoginPage";
 import HomePage from "/client/pages/HomePage";
 import CharacterPage from "/client/pages/CharacterPage";
 import HorsePage from "/client/pages/HorsePage";
+import SettingPage from "/client/pages/SettingPage";
 
 //<editor-folder defaultstate="collapsed" desc="Authenticated Routes">
 const authenticatedRoute = FlowRouter.group({
+    title: 'BDO Manager',
+    titlePrefix: 'BDO Manager - ',
+    subscriptions() {
+        this.register(EPublish.SETTING, Meteor.subscribe(EPublish.SETTING));
+    },
     whileWaiting() {
         Session.set(ESession.LOADING_PAGE, true);
     },
@@ -37,29 +40,17 @@ authenticatedRoute.route(ERoutes.INDEX, {
 });
 authenticatedRoute.route(ERoutes.HOME, {
     name: 'home',
+    title:'Test',
     action() {
         mount(Core, {layout: true, children: <HomePage/>});
     }
 });
 authenticatedRoute.route(ERoutes.CHARACTERS, {
     name: 'characters',
+    title:'Test',
     subscriptions() {
         this.register(EPublish.CHARACTERS, Meteor.subscribe(EPublish.CHARACTERS));
-    },
-    waitOnResources() {
-        const images = Object.keys(ClassContext).flatMap(value => {
-            return [
-                ClassContext[value].icon,
-                ClassContext[value].smallImg[ECharacterCombat.AWAKENING],
-                ClassContext[value].smallImg[ECharacterCombat.SUCCESSION],
-                ClassContext[value].largeImg[ECharacterCombat.AWAKENING],
-                ClassContext[value].largeImg[ECharacterCombat.SUCCESSION],
-            ]
-        });
-
-        return {
-            images: images
-        }
+        this.register(EPublish.HORSES, Meteor.subscribe(EPublish.HORSES));
     },
     action() {
         mount(Core, {layout: true, children: <CharacterPage/>});
@@ -70,19 +61,14 @@ authenticatedRoute.route(ERoutes.HORSES, {
     subscriptions() {
         this.register(EPublish.HORSES, Meteor.subscribe(EPublish.HORSES));
     },
-    waitOnResources() {
-        const images = Object.keys(HorseContext).flatMap(value => {
-            return [
-                HorseContext[value].img
-            ]
-        });
-
-        return {
-            images: images
-        }
-    },
     action() {
         mount(Core, {layout: true, children: <HorsePage/>});
+    }
+});
+authenticatedRoute.route(ERoutes.SETTING, {
+    name: 'setting',
+    action() {
+        mount(Core, {layout: true, children: <SettingPage/>});
     }
 });
 //</editor-folder>

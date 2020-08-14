@@ -42,7 +42,7 @@ const AboutLogin: React.FunctionComponent<IProps> = function (props) {
 }
 
 interface IProps {
-    title: string;
+    title: any;
 }
 
 export default AboutLogin;

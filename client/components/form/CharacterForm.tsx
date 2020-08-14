@@ -40,6 +40,9 @@ import ECharacterCombat from "/imports/enumerables/ECharacterCombat";
 import EMethod from "/imports/enumerables/EMethod";
 import {useSnackbar} from 'notistack';
 import {countGS, timingCall} from "/imports/utils/Helpers";
+import Horse from "/imports/models/Horse";
+import {useMongoFetch} from "react-meteor-hooks";
+import Horses from "/imports/collections/HorseCollection";
 
 const TransitionDialog = React.forwardRef(function Transition(props: TransitionProps & { children?: React.ReactElement }, ref: React.Ref<unknown>) {
     return <Fade timeout={1000} ref={ref} {...props} />;
@@ -110,6 +113,7 @@ const CharacterForm = React.forwardRef<CharacterFormRef>((props, ref) => {
     const [current, setCurrent] = React.useState<OptionalId>();
     const [disableCombat, setDisableCombat] = React.useState<boolean>(false);
     const [disableAwk, setDisableAwk] = React.useState<boolean>(false);
+    const horses:Horse[] = useMongoFetch(Horses.find());
     const {control, handleSubmit, errors, watch, reset, setValue} = useForm<Character>({
         resolver: yupResolver(schema), defaultValues: {
             name: '',
@@ -188,6 +192,8 @@ const CharacterForm = React.forwardRef<CharacterFormRef>((props, ref) => {
         if (current) {
             data._id = current;
         }
+
+        console.log(data);
 
         const timing = timingCall(method);
         Meteor.call(method, data, (error: any, data: any) => {
@@ -284,6 +290,15 @@ const CharacterForm = React.forwardRef<CharacterFormRef>((props, ref) => {
                                                  errors={errors}>
                                 <MenuItem value={"AWAKENING"}>{t('item.combat.awakening')}</MenuItem>
                                 <MenuItem value={"SUCCESSION"}>{t('item.combat.succession')}</MenuItem>
+                            </SelectField>
+                        </Grid>
+                        <Grid item={true} xs={6}>
+                            <SelectField<string> label={String(t('field.horse'))}
+                                                 name={'horse'} control={control}
+                                                 errors={errors}>
+                                {horses.map(value => {
+                                    return <MenuItem value={String(value._id)}>{value.name}</MenuItem>
+                                })}
                             </SelectField>
                         </Grid>
                         <Grid item={true} xs={12}>

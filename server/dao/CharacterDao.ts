@@ -29,7 +29,8 @@ const CharacterDao = {
                 combatStyle: object.combat,
                 atkPre: object.atkPre,
                 atkAwk: object.atkAwk,
-                defense: object.defense
+                defense: object.defense,
+                horse: object.horse
             }
         }, {multi: false}, function (error: Error) {
             if (error) return future.throw(error);

@@ -51,6 +51,10 @@ export default interface ILang {
             awakening: string;
             succession: string;
         },
+        gender: {
+            male: string;
+            female: string;
+        },
         horse: {
             common: string;
             donkey: string;
@@ -88,6 +92,7 @@ export default interface ILang {
         dreamHorse: string;
         commonHorse: string;
         confirmExclusion: string;
+        hasKrodale: string;
     },
     field: {
         user: string;
@@ -110,6 +115,7 @@ export default interface ILang {
         speed: string;
         brake: string;
         turn: string;
+        gender: string;
     },
     validation: {
         required: string;
@@ -135,5 +141,6 @@ export default interface ILang {
         error_save_horse: string;
         success_remove_horse: string;
         error_remove_horse: string;
+        error_update_setting: string;
     }
 }

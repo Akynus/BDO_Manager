@@ -20,15 +20,12 @@ import {TransitionProps} from "@material-ui/core/transitions";
 import {useForm} from "react-hook-form";
 import {yupResolver} from '@hookform/resolvers';
 import * as yup from "yup";
-import Character from "/imports/models/Character";
 import AbsoluteLoading from "/client/components/layout/AbsoluteLoading";
 import EMethod from "/imports/enumerables/EMethod";
 import {useSnackbar} from 'notistack';
 import {timingCall} from "/imports/utils/Helpers";
 import Horse from "/imports/models/Horse";
-import ClassContext from "/imports/objects/ClassContext";
 import EHorse from "/imports/enumerables/EHorse";
-import ECharacterCombat from "/imports/enumerables/ECharacterCombat";
 import HorseContext from "/imports/objects/HorseContext";
 import TextField from "/client/components/fields/TextField";
 import SelectField from "/client/components/fields/SelectField";
@@ -81,6 +78,7 @@ const HorseForm = React.forwardRef<HorseFormFormRef>((props, ref) => {
         brake: yup.number().min(1).integer().required(),
         speed: yup.number().min(1).integer().required(),
         turn: yup.number().min(1).integer().required(),
+        gender: yup.string().oneOf(['male', 'female']).required(),
         krogdalo: yup.boolean().default(false)
     });
     const classes = useStyles();
@@ -93,11 +91,12 @@ const HorseForm = React.forwardRef<HorseFormFormRef>((props, ref) => {
         resolver: yupResolver(schema), defaultValues: {
             name: '',
             level: 1,
-            type: EHorse.DINE,
+            type: EHorse.COMMON,
             accel: 100,
             brake: 100,
             speed: 100,
             turn: 100,
+            gender: "male",
             krogdalo: false
         },
     });
@@ -141,7 +140,6 @@ const HorseForm = React.forwardRef<HorseFormFormRef>((props, ref) => {
             <CardMedia className={classes.imgHorse} image={currentHorse().img}/>
         </Card>
     }
-
 
     function formContent(): React.ReactNode {
         return <Card className={classes.form}>
@@ -189,6 +187,14 @@ const HorseForm = React.forwardRef<HorseFormFormRef>((props, ref) => {
                                 <MenuItem value={false}>{t('action.no')}</MenuItem>
                                 {/* @ts-ignore*/}
                                 <MenuItem value={true}>{t('action.yes')}</MenuItem>
+                            </SelectField>
+                        </Grid>
+                        <Grid item={true} xs={6}>
+                            <SelectField<string> label={String(t('field.gender'))}
+                                                 name={'gender'} control={control}
+                                                 errors={errors}>
+                                <MenuItem value={"male"}>{t('item.gender.male')}</MenuItem>
+                                <MenuItem value={"female"}>{t('item.gender.female')}</MenuItem>
                             </SelectField>
                         </Grid>
                         <Grid item={true} xs={12}>

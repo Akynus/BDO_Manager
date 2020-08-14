@@ -8,6 +8,8 @@ import Horses from "/imports/collections/HorseCollection";
 import Horse from "/imports/models/Horse";
 import HorseForm, {HorseFormFormRef} from "/client/components/form/HorseForm";
 import {Mongo} from "meteor/mongo";
+import HorseCard from "/client/components/layout/HorseCard";
+import HorseView from "/client/components/layout/HorseView";
 
 //<editor-folder defaultstate="collapsed" desc="Styles">
 const useStyles = makeStyles((theme: Theme) => createStyles({
@@ -58,6 +60,7 @@ export default function HorsePage(): React.ReactElement {
     const classes = useStyles();
     const {t} = useTranslation();
     const form = React.createRef<HorseFormFormRef>();
+    const [selected, setSelected] = React.useState<Mongo.ObjectID>();
     const horses: Horse[] = useMongoFetch(Horses.find());
 
     //</editor-folder>
@@ -82,9 +85,10 @@ export default function HorsePage(): React.ReactElement {
                     </Grid>
                 </div>
                 <Divider/>
+                <HorseCard data={horses} selected={selected} onSelect={setSelected}/>
             </div>
             <div className={classes.boxContent}>
-                Test
+                <HorseView current={horses.find(value => value._id == selected)}/>
             </div>
         </div>
     }

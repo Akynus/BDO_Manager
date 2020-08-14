@@ -54,6 +54,10 @@ const values: ILang = {
             awakening: 'Despertar',
             succession: 'Sucessão'
         },
+        gender: {
+            male: 'Macho',
+            female: 'Fêmea'
+        },
         horse: {
             common: 'Cavalo',
             donkey: 'Burro',
@@ -90,7 +94,8 @@ const values: ILang = {
         formHorse: 'Preencha as descrições da montaria',
         confirmExclusion: 'Se você realmente deseja  excluir esse registro, digite <1>{{text}}</1> no campo de texto abaixo',
         dreamHorse: 'Dream Horse',
-        commonHorse: 'Montaria'
+        commonHorse: 'Montaria',
+        hasKrodale: 'Set Krodale equipado'
     },
     field: {
         user: 'Usuário',
@@ -112,7 +117,8 @@ const values: ILang = {
         accel: 'Aceleração',
         speed: 'Velocidade',
         brake: 'Freio',
-        turn: 'Torque'
+        turn: 'Torque',
+        gender: 'Gênero'
     },
     validation: {
         required: 'Campo obrigatório',
@@ -138,6 +144,7 @@ const values: ILang = {
         error_save_horse: 'Erro ao salvar montaria',
         success_remove_horse: 'Montaria excluido com sucesso',
         error_remove_horse: 'Erro ao excluir montaria',
+        error_update_setting: 'Erro ao alterar configurações do usuário'
     }
 }
 

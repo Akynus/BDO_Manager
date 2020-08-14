@@ -1,3 +1,4 @@
+import {Meteor} from "meteor/meteor";
 import i18n, {Resource, TFunction} from "i18next";
 import {initReactI18next} from "react-i18next";
 import {setLocale} from 'yup';
@@ -8,7 +9,7 @@ const resources: Resource = {
     pt_BR
 }
 
-export default class LanguageConfig {
+export default class Language {
     public static setLocale(t: TFunction): void {
         setLocale({
             mixed: {
@@ -47,12 +48,12 @@ i18n.use(initReactI18next).init({
     ns: ['translation'],
     defaultNS: 'translation',
     fallbackNS: [],
-    debug: true,
+    debug: Meteor.isDevelopment,
 }, (error, t) => {
-    LanguageConfig.setLocale(t);
+    Language.setLocale(t);
 });
 
 i18n.on('languageChanged', function (lng) {
-    LanguageConfig.setLocale(i18n.t);
+    Language.setLocale(i18n.t);
 });
 

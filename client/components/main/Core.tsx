@@ -1,7 +1,7 @@
 import * as React from "react";
 import {CssBaseline} from "@material-ui/core";
 import {I18nextProvider} from "react-i18next";
-import LanguageConfig from "/client/resources/config/LanguageConfig";
+import Language from "/client/resources/language";
 import Theme from "/client/resources/theming";
 import {SnackbarProvider} from "notistack";
 import AppLayout from "/client/components/main/AppLayout";
@@ -20,7 +20,7 @@ const Core: React.FunctionComponent<IProps> = function (props) {
 
     return <React.Fragment>
         <CssBaseline/>
-        <I18nextProvider i18n={LanguageConfig.get()}>
+        <I18nextProvider i18n={Language.get()}>
             <Theme>
                 <SnackbarProvider maxSnack={3}>
                     {body()}
