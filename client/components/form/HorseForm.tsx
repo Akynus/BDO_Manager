@@ -29,6 +29,7 @@ import EHorse from "/imports/enumerables/EHorse";
 import HorseContext from "/imports/objects/HorseContext";
 import TextField from "/client/components/fields/TextField";
 import SelectField from "/client/components/fields/SelectField";
+import {useMethod} from "react-meteor-hooks";
 
 const TransitionDialog = React.forwardRef(function Transition(props: TransitionProps & { children?: React.ReactElement }, ref: React.Ref<unknown>) {
     return <Fade timeout={1000} ref={ref} {...props} />;
@@ -72,12 +73,12 @@ const HorseForm = React.forwardRef<HorseFormFormRef>((props, ref) => {
     //<editor-folder defaultstate="collapsed" desc="Variables">
     const schema = yup.object().shape({
         name: yup.string().max(30).required(),
-        level: yup.number().min(1).max(30).integer().required(),
+        level: yup.number().min(1).max(30).integer().positive().required(),
         type: yup.string().oneOf(Object.keys(EHorse)).required(),
-        accel: yup.number().min(1).integer().required(),
-        brake: yup.number().min(1).integer().required(),
-        speed: yup.number().min(1).integer().required(),
-        turn: yup.number().min(1).integer().required(),
+        accel: yup.number().min(1).positive().required(),
+        brake: yup.number().min(1).positive().required(),
+        speed: yup.number().min(1).positive().required(),
+        turn: yup.number().min(1).positive().required(),
         gender: yup.string().oneOf(['male', 'female']).required(),
         krogdalo: yup.boolean().default(false)
     });
@@ -87,7 +88,8 @@ const HorseForm = React.forwardRef<HorseFormFormRef>((props, ref) => {
     const [loading, setLoading] = React.useState<boolean>(false);
     const [opened, setOpened] = React.useState<boolean>(false);
     const [current, setCurrent] = React.useState<OptionalId>();
-    const {control, handleSubmit, errors, watch, reset} = useForm<Horse>({
+    const {call} = useMethod<Horse, any>(EMethod.GET_HORSE, {});
+    const {control, handleSubmit, errors, watch, reset,setValue} = useForm<Horse>({
         resolver: yupResolver(schema), defaultValues: {
             name: '',
             level: 1,
@@ -107,6 +109,22 @@ const HorseForm = React.forwardRef<HorseFormFormRef>((props, ref) => {
         reset();
         setOpened(true);
         setCurrent(id);
+
+        if (id) {
+            const timing = timingCall(EMethod.GET_CHARACTER);
+            setLoading(true);
+            call(id).then(data => {
+                Object.entries(data).map(([key, value]) => setValue(key, value));
+            }).catch((error: any) => {
+                console.error(error);
+                enqueueSnackbar(t('message.not_found'));
+                return;
+            }).finally(() => {
+                timing();
+                setLoading(false);
+            });
+        }
+
     }
 
     function onSubmit(data: Horse) {

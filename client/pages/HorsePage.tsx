@@ -10,11 +10,15 @@ import HorseForm, {HorseFormFormRef} from "/client/components/form/HorseForm";
 import {Mongo} from "meteor/mongo";
 import HorseCard from "/client/components/layout/HorseCard";
 import HorseView from "/client/components/layout/HorseView";
+import ConfirmExclusionForm, {ConfirmExclusionFormRef} from "/client/components/form/ConfirmExclusionForm";
+import EMethod from "/imports/enumerables/EMethod";
+import {useSnackbar} from "notistack";
 
 //<editor-folder defaultstate="collapsed" desc="Styles">
 const useStyles = makeStyles((theme: Theme) => createStyles({
     root: {
         display: "flex",
+        maxHeight: 800,
         flexDirection: "column",
         flexGrow: 1,
         width: '100%',
@@ -25,7 +29,8 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
         marginTop: theme.spacing(2),
         flexGrow: 1,
         width: '100%',
-        height: '100%'
+        height: '100%',
+        minHeight:520,
     },
     boxFlex: {
         width: '100%',
@@ -59,14 +64,27 @@ export default function HorsePage(): React.ReactElement {
     //<editor-folder defaultstate="collapsed" desc="Variables">
     const classes = useStyles();
     const {t} = useTranslation();
+    const {enqueueSnackbar} = useSnackbar();
     const form = React.createRef<HorseFormFormRef>();
     const [selected, setSelected] = React.useState<Mongo.ObjectID>();
     const horses: Horse[] = useMongoFetch(Horses.find());
-
+    const confirmExclusion = React.createRef<ConfirmExclusionFormRef>();
     //</editor-folder>
 
     function onOpenForm(id?: Mongo.ObjectID) {
         form.current!.open(id);
+    }
+
+    function onDelete(object: Horse) {
+        confirmExclusion.current!.open({id: object._id, text: object.name});
+    }
+
+    function onConfirmDelete(id: Mongo.ObjectID): void {
+        Meteor.call(EMethod.REMOVE_HORSE, id, function (error: Error) {
+            if (error) return enqueueSnackbar(t('message.error_remove_horse'), {variant: "error"});
+            setSelected(undefined);
+            return enqueueSnackbar(t('message.success_remove_horse'), {variant: "success"});
+        });
     }
 
     function content(): React.ReactElement {
@@ -88,7 +106,7 @@ export default function HorsePage(): React.ReactElement {
                 <HorseCard data={horses} selected={selected} onSelect={setSelected}/>
             </div>
             <div className={classes.boxContent}>
-                <HorseView current={horses.find(value => value._id == selected)}/>
+                <HorseView onEdit={onOpenForm} onDelete={onDelete} current={horses.find(value => value._id == selected)}/>
             </div>
         </div>
     }
@@ -101,5 +119,6 @@ export default function HorsePage(): React.ReactElement {
             </Fade>
         </Card>
         <HorseForm ref={form}/>
+        <ConfirmExclusionForm onConfirm={onConfirmDelete} ref={confirmExclusion}/>
     </Container>)
 }

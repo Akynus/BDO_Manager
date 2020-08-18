@@ -15,5 +15,6 @@ export default class Character {
     atkAwk: number;
     defense: number;
 
+    link?: string;
     horse?: Mongo.ObjectID;
 }

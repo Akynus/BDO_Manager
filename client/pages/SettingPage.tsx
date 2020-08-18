@@ -31,6 +31,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     root: {
         flexGrow: 1,
         display: "flex",
+        maxHeight: 800,
         flexDirection: "column",
         width: '100%',
         height: '100%'

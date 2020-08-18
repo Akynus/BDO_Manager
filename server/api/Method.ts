@@ -43,6 +43,10 @@ Meteor.methods({
         if (!Meteor.userId()) throw new Meteor.Error(403);
         HorseDao.update(object);
     },
+    [EMethod.GET_HORSE](id: Mongo.ObjectID) {
+        if (!Meteor.userId()) throw new Meteor.Error(403);
+        return HorseDao.get(id);
+    },
     [EMethod.REMOVE_HORSE](id: Mongo.ObjectID) {
         if (!Meteor.userId()) throw new Meteor.Error(403);
         HorseDao.remove(id);

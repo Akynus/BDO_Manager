@@ -67,7 +67,7 @@ export default function HorseView(props: IProps): React.ReactElement<IProps> {
 
     function onEdit(): void {
         if (props.current && props.onEdit) {
-            props.onEdit(props.current);
+            props.onEdit(props.current._id);
         }
     }
 
@@ -172,6 +172,6 @@ export default function HorseView(props: IProps): React.ReactElement<IProps> {
 
 interface IProps {
     current?: Horse;
-    onEdit?: (obj: Horse) => void;
+    onEdit?: (obj: Mongo.ObjectID) => void;
     onDelete?: (obj: Horse) => void;
 }

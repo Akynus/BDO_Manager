@@ -5,7 +5,7 @@ import BreadcrumbPage from "/client/components/layout/BreadcrumbPage";
 import CharacterForm, {CharacterFormRef} from "/client/components/form/CharacterForm";
 import {useTranslation} from "react-i18next";
 import CharacterCard from "/client/components/layout/CharacterCard";
-import BackgroundCharacter from "/client/components/layout/BackgroundCharacter";
+import CharacterView from "/client/components/layout/CharacterView";
 import {useMongoFetch} from "react-meteor-hooks";
 import Characters from "/imports/collections/CharacterCollection";
 import Character from "/imports/models/Character";
@@ -18,6 +18,7 @@ import {useSnackbar} from "notistack";
 const useStyles = makeStyles((theme: Theme) => createStyles({
     root: {
         display: "flex",
+        maxHeight: 800,
         flexDirection: "column",
         flexGrow: 1,
         width: '100%',
@@ -28,7 +29,8 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
         marginTop: theme.spacing(2),
         flexGrow: 1,
         width: '100%',
-        height: '100%'
+        height: '100%',
+        minHeight:520,
     },
     boxFlex: {
         width: '100%',
@@ -109,8 +111,8 @@ export default function CharacterPage(): React.ReactElement {
                                onSelect={(object => setSelected(object._id))} data={characters}/>
             </div>
             <div className={classes.boxContent}>
-                <BackgroundCharacter onDelete={onDelete} onEdit={(obj) => onOpenForm(obj._id)}
-                                     current={characters.find((obj: Character) => obj._id == selected)}/>
+                <CharacterView onDelete={onDelete} onEdit={(obj) => onOpenForm(obj._id)}
+                               current={characters.find((obj: Character) => obj._id == selected)}/>
             </div>
         </div>
     }

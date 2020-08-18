@@ -11,6 +11,7 @@ import ESession from "/imports/enumerables/ESession";
 
 import LoginPage from "/client/pages/LoginPage";
 import HomePage from "/client/pages/HomePage";
+import ProfilePage from "/client/pages/ProfilePage";
 import CharacterPage from "/client/pages/CharacterPage";
 import HorsePage from "/client/pages/HorsePage";
 import SettingPage from "/client/pages/SettingPage";
@@ -43,6 +44,12 @@ authenticatedRoute.route(ERoutes.HOME, {
     title:'Test',
     action() {
         mount(Core, {layout: true, children: <HomePage/>});
+    }
+});
+authenticatedRoute.route(ERoutes.PROFILE, {
+    name: 'profile',
+    action() {
+        mount(Core, {layout: true, children: <ProfilePage/>});
     }
 });
 authenticatedRoute.route(ERoutes.CHARACTERS, {

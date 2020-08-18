@@ -8,6 +8,10 @@ import ICharacterClass from "/imports/interfaces/ICharacterClass";
 import ClassContext from "/imports/objects/ClassContext";
 import {countGS} from "/imports/utils/Helpers";
 import EClasses from "/imports/enumerables/EClasses";
+import {useTracker} from "react-meteor-hooks";
+import Horses from "/imports/collections/HorseCollection";
+import Horse from "/imports/models/Horse";
+import HorseMiniCard from "/client/components/layout/HorseMiniCard";
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
     root: {
@@ -47,10 +51,14 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     }
 }));
 
-export default function BackgroundCharacter(props: IProps): React.ReactElement<IProps> {
+export default function CharacterView(props: IProps): React.ReactElement<IProps> {
     const classes = useStyles();
     const {t} = useTranslation();
     const [speedOpen, setSpeedOpen] = React.useState<boolean>(false);
+    const horse = useTracker<Horse | undefined>(() => {
+        if (!props.current) return;
+        return Horses.findOne({_id: props.current.horse});
+    }, [props.current]);
 
     function classCharacter(): ICharacterClass {
         return ClassContext[props.current!.class];
@@ -96,7 +104,7 @@ export default function BackgroundCharacter(props: IProps): React.ReactElement<I
                         </Slide>
                     </Grid>
                     <Grid item={true} xs={12}>
-                        <Slide direction={"right"} timeout={{enter: 600}} in={true}>
+                        <Slide direction={"right"} timeout={600} in={true}>
                             <Card>
                                 <CardContent>
                                     <Grid container={true} spacing={1}>
@@ -125,6 +133,13 @@ export default function BackgroundCharacter(props: IProps): React.ReactElement<I
                                     </Grid>
                                 </CardContent>
                             </Card>
+                        </Slide>
+                    </Grid>
+                    <Grid item={true} xs={12}>
+                        <Slide direction={"right"} timeout={800} in={Boolean(horse)}>
+                            <div>
+                                <HorseMiniCard horse={horse}/>
+                            </div>
                         </Slide>
                     </Grid>
                 </Grid>

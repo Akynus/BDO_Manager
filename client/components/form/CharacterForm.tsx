@@ -41,7 +41,7 @@ import EMethod from "/imports/enumerables/EMethod";
 import {useSnackbar} from 'notistack';
 import {countGS, timingCall} from "/imports/utils/Helpers";
 import Horse from "/imports/models/Horse";
-import {useMongoFetch} from "react-meteor-hooks";
+import {useMethod, useMongoFetch} from "react-meteor-hooks";
 import Horses from "/imports/collections/HorseCollection";
 
 const TransitionDialog = React.forwardRef(function Transition(props: TransitionProps & { children?: React.ReactElement }, ref: React.Ref<unknown>) {
@@ -103,6 +103,7 @@ const CharacterForm = React.forwardRef<CharacterFormRef>((props, ref) => {
         atkPre: yup.number().min(1).integer().required(),
         atkAwk: yup.number().min(1).integer().required(),
         defense: yup.number().min(1).integer().required(),
+        link: yup.string().url().max(100)
     });
     const classes = useStyles();
     const {t} = useTranslation();
@@ -113,7 +114,8 @@ const CharacterForm = React.forwardRef<CharacterFormRef>((props, ref) => {
     const [current, setCurrent] = React.useState<OptionalId>();
     const [disableCombat, setDisableCombat] = React.useState<boolean>(false);
     const [disableAwk, setDisableAwk] = React.useState<boolean>(false);
-    const horses:Horse[] = useMongoFetch(Horses.find());
+    const horses: Horse[] = useMongoFetch(Horses.find());
+    const {call} = useMethod<Character, any>(EMethod.GET_CHARACTER, {});
     const {control, handleSubmit, errors, watch, reset, setValue} = useForm<Character>({
         resolver: yupResolver(schema), defaultValues: {
             name: '',
@@ -121,7 +123,9 @@ const CharacterForm = React.forwardRef<CharacterFormRef>((props, ref) => {
             atkAwk: 1,
             defense: 1,
             atkPre: 1,
-            combat: ECharacterCombat.AWAKENING
+            combat: ECharacterCombat.AWAKENING,
+            // @ts-ignore
+            horse: ''
         },
     });
 
@@ -157,30 +161,19 @@ const CharacterForm = React.forwardRef<CharacterFormRef>((props, ref) => {
         setCurrent(id);
 
         if (id) {
-            setLoading(true);
             const timing = timingCall(EMethod.GET_CHARACTER);
-            new Promise<Character>((resolve, reject) => {
-                Meteor.call(EMethod.GET_CHARACTER, id, (error: any, data: Character) => {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        resolve(data);
-                    }
-
-                });
-            }).then((data) => {
+            setLoading(true);
+            call(id).then(data => {
                 setCharacterClass(data.class);
-                if (schema.isValidSync(data)) {
-                    Object.entries(data).map(([key, value]) => setValue(key, value));
-                }
+                Object.entries(data).map(([key, value]) => setValue(key, value));
             }).catch((error: any) => {
+                console.error(error);
                 enqueueSnackbar(t('message.not_found'));
                 return;
             }).finally(() => {
                 timing();
                 setLoading(false);
             });
-
         }
     }
 
@@ -192,8 +185,6 @@ const CharacterForm = React.forwardRef<CharacterFormRef>((props, ref) => {
         if (current) {
             data._id = current;
         }
-
-        console.log(data);
 
         const timing = timingCall(method);
         Meteor.call(method, data, (error: any, data: any) => {
@@ -293,13 +284,12 @@ const CharacterForm = React.forwardRef<CharacterFormRef>((props, ref) => {
                             </SelectField>
                         </Grid>
                         <Grid item={true} xs={6}>
-                            <SelectField<string> label={String(t('field.horse'))}
-                                                 name={'horse'} control={control}
-                                                 errors={errors}>
-                                {horses.map(value => {
-                                    return <MenuItem value={String(value._id)}>{value.name}</MenuItem>
-                                })}
-                            </SelectField>
+                            <SelectField<Horse> label={String(t('field.horse'))} name={'horse'} control={control}
+                                                errors={errors} allowEmpty={true} dataSource={horses}
+                                                renderItem={(item, index) => {
+                                                    return <MenuItem key={String(item._id)}
+                                                                     value={String(item._id)}>{item.name}</MenuItem>
+                                                }}/>
                         </Grid>
                         <Grid item={true} xs={12}>
                             <Typography variant={"subtitle2"}>{t('title.gearScore')} ({gearScore()})</Typography>

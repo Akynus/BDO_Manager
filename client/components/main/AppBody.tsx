@@ -5,20 +5,21 @@ import {useSession} from "react-meteor-hooks";
 import ESession from "/imports/enumerables/ESession";
 
 const drawerWidth = 240;
+const marginTop = 64;
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
     root: {
         position: 'relative',
         background: theme.palette.type == "dark" ? '#656666' : '#EEEEEE',
-        marginTop: 64,
-        padding: theme.spacing(2),
+        marginTop: marginTop,
+        height: `calc(100% - ${marginTop}px)`,
         transition: theme.transitions.create('width', {
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.enteringScreen,
         }),
-        width: `calc(100vw - ${drawerWidth}px)`,
-        height: 'calc(100vh - 64px)',
-        overflowY: 'hidden',
+        display: 'block',
+        padding: theme.spacing(2),
+        overflowY: 'auto',
         marginLeft: drawerWidth
     },
     expanded: {

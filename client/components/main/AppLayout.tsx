@@ -9,10 +9,11 @@ import ESession from "/imports/enumerables/ESession";
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
     root: {
+        position: 'relative',
         background: theme.palette.type == "dark" ? '#656666' : '#EEEEEE',
+        overflow: "hidden",
         width: '100vw',
-        height: '100vh',
-        overflow: "hidden"
+        height: '100vh'
     }
 }));
 

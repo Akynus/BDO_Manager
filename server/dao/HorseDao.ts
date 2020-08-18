@@ -40,6 +40,13 @@ const HorseDao = {
         });
         return future.wait();
     },
+    get(id: Mongo.ObjectID): Horse | undefined {
+        return Horses.findOne({_id: id, user: Meteor.userId()!}, {
+            fields: {
+                user: 0
+            }
+        });
+    },
     remove(id: Mongo.ObjectID): void {
         const future = new Future<void>();
 
@@ -52,7 +59,7 @@ const HorseDao = {
                     $eq: id
                 }
             }, {
-                $unset: ["horse"]
+                $unset: {horse: 0}
             }, {multi: true}, function (error: any) {
                 if (error) return reject(error);
                 return resolve();

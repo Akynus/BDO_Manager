@@ -8,7 +8,7 @@ export default function SelectField<T = Object>(props: IProps<T>): React.ReactEl
     const {t} = useTranslation();
 
     function emptyItem(): React.ReactElement {
-        return <MenuItem>
+        return <MenuItem key={''} value={''}>
             <Typography color={"textSecondary"}>{t('action.none')}</Typography>
         </MenuItem>;
     }
@@ -30,7 +30,7 @@ export default function SelectField<T = Object>(props: IProps<T>): React.ReactEl
                          error={Boolean(props.errors[props.name])}>
         <InputLabel htmlFor={props.name}>{props.label}</InputLabel>
         <Controller id={props.name} control={props.control} name={props.name}
-                    render={(_props) => <Select label={props.label} {..._props}>{buildItems()}</Select>}/>
+                    render={(_props) => <Select label={props.label} value={_props.value} onChange={_props.onChange} onBlur={_props.onBlur}>{buildItems()}</Select>}/>
         {props.errors[props.name] && <FormHelperText>{props.errors[props.name].message}</FormHelperText>}
     </FormControl>)
 }
@@ -43,6 +43,6 @@ interface IProps<T> {
     dataSource?: T[];
     renderItem?: (item: T, index: number) => React.ReactNode;
     allowEmpty?: boolean;
-    children: React.ReactNode;
+    children?: React.ReactNode;
     disabled?: boolean;
 }
