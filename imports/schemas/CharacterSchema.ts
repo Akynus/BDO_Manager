@@ -35,8 +35,15 @@ export default new SimpleSchema({
     },
     horse: {
         type: String,
+        regEx: SimpleSchema.RegEx.Id,
         optional: true,
         label: 'Character horse',
+    },
+    link: {
+        type: String,
+        regEx: SimpleSchema.RegEx.Url,
+        optional: true,
+        label: 'Character build link',
     },
     atkPre: {
         type: SimpleSchema.Integer,

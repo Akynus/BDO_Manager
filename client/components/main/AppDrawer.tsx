@@ -82,6 +82,7 @@ const AppDrawer: React.FunctionComponent = function (props) {
     function items(): React.ReactNode {
         const routes: IRouteItem[] = [
             {key: ERoutes.HOME, icon: 'fas fa-home', title: 'item.home'},
+            {key: ERoutes.PROFILE, icon: 'fas fa-id-card', title: 'item.profile'},
             {key: ERoutes.CHARACTERS, icon: 'fas fa-users', title: 'item.characters'},
             {key: ERoutes.HORSES, icon: 'fas fa-horse-head', title: 'item.horses'},
             {key: ERoutes.SETTING, icon: 'fas fa-cogs', title: 'item.setting'},

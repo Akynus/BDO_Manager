@@ -113,6 +113,7 @@ const values: ILang = {
         atkAwk: 'AP Desperto',
         defense: 'Defesa',
         gearScore: 'Gear Score',
+        gearScoreLink: 'Link/Foto da Build',
         hasKrogdalo: 'Usa equipamento Krogdalo?',
         accel: 'Aceleração',
         speed: 'Velocidade',

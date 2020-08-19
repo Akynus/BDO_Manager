@@ -1,5 +1,5 @@
 import React from "react";
-import {mount} from 'react-mounter';
+import {mount,withOptions} from 'react-mounter';
 import {Session} from "meteor/session";
 import {FlowRouter} from 'meteor/ostrio:flow-router-extra';
 import EPublish from "/imports/enumerables/EPublish";
@@ -15,6 +15,10 @@ import ProfilePage from "/client/pages/ProfilePage";
 import CharacterPage from "/client/pages/CharacterPage";
 import HorsePage from "/client/pages/HorsePage";
 import SettingPage from "/client/pages/SettingPage";
+
+const ReactBuild = withOptions({
+    rootId: 'application',
+}, mount);
 
 //<editor-folder defaultstate="collapsed" desc="Authenticated Routes">
 const authenticatedRoute = FlowRouter.group({
@@ -41,26 +45,29 @@ authenticatedRoute.route(ERoutes.INDEX, {
 });
 authenticatedRoute.route(ERoutes.HOME, {
     name: 'home',
-    title:'Test',
+    title: 'Test',
     action() {
-        mount(Core, {layout: true, children: <HomePage/>});
+        ReactBuild(Core, {layout: true, children: <HomePage/>});
     }
 });
 authenticatedRoute.route(ERoutes.PROFILE, {
     name: 'profile',
+    subscriptions() {
+        this.register(EPublish.CHARACTERS, Meteor.subscribe(EPublish.CHARACTERS));
+    },
     action() {
-        mount(Core, {layout: true, children: <ProfilePage/>});
+        ReactBuild(Core, {layout: true, children: <ProfilePage/>});
     }
 });
 authenticatedRoute.route(ERoutes.CHARACTERS, {
     name: 'characters',
-    title:'Test',
+    title: 'Test',
     subscriptions() {
         this.register(EPublish.CHARACTERS, Meteor.subscribe(EPublish.CHARACTERS));
         this.register(EPublish.HORSES, Meteor.subscribe(EPublish.HORSES));
     },
     action() {
-        mount(Core, {layout: true, children: <CharacterPage/>});
+        ReactBuild(Core, {layout: true, children: <CharacterPage/>});
     }
 });
 authenticatedRoute.route(ERoutes.HORSES, {
@@ -69,13 +76,13 @@ authenticatedRoute.route(ERoutes.HORSES, {
         this.register(EPublish.HORSES, Meteor.subscribe(EPublish.HORSES));
     },
     action() {
-        mount(Core, {layout: true, children: <HorsePage/>});
+        ReactBuild(Core, {layout: true, children: <HorsePage/>});
     }
 });
 authenticatedRoute.route(ERoutes.SETTING, {
     name: 'setting',
     action() {
-        mount(Core, {layout: true, children: <SettingPage/>});
+        ReactBuild(Core, {layout: true, children: <SettingPage/>});
     }
 });
 //</editor-folder>
@@ -83,7 +90,7 @@ authenticatedRoute.route(ERoutes.SETTING, {
 //<editor-folder defaultstate="collapsed" desc="Unauthenticated Routes">
 const unauthenticatedRoute = FlowRouter.group({
     whileWaiting() {
-        mount(FixedLoading);
+        ReactBuild(FixedLoading);
     },
     triggersEnter: [(context, redirect) => {
         if (Meteor.userId()) redirect('/home');
@@ -107,7 +114,7 @@ unauthenticatedRoute.route(ERoutes.LOGIN, {
         }
     },
     action() {
-        mount(Core, {layout: false, children: <LoginPage/>});
+        ReactBuild(Core, {layout: false, children: <LoginPage/>});
     }
 });
 //</editor-folder>

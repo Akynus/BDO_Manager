@@ -30,7 +30,8 @@ const CharacterDao = {
                 atkPre: object.atkPre,
                 atkAwk: object.atkAwk,
                 defense: object.defense,
-                horse: object.horse
+                horse: object.horse,
+                link: object.link
             }
         }, {multi: false}, function (error: Error) {
             if (error) return future.throw(error);

@@ -110,6 +110,7 @@ export default interface ILang {
         atkAwk: string;
         defense: string;
         gearScore: string;
+        gearScoreLink:string;
         hasKrogdalo: string;
         accel: string;
         speed: string;

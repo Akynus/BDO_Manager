@@ -103,7 +103,7 @@ const CharacterForm = React.forwardRef<CharacterFormRef>((props, ref) => {
         atkPre: yup.number().min(1).integer().required(),
         atkAwk: yup.number().min(1).integer().required(),
         defense: yup.number().min(1).integer().required(),
-        link: yup.string().url().max(100)
+        link: yup.string().url().max(200)
     });
     const classes = useStyles();
     const {t} = useTranslation();
@@ -290,6 +290,9 @@ const CharacterForm = React.forwardRef<CharacterFormRef>((props, ref) => {
                                                     return <MenuItem key={String(item._id)}
                                                                      value={String(item._id)}>{item.name}</MenuItem>
                                                 }}/>
+                        </Grid>
+                        <Grid item={true} xs={12}>
+                            <TextField type={'url'} label={String(t('field.gearScoreLink'))} name={'link'} control={control} errors={errors}/>
                         </Grid>
                         <Grid item={true} xs={12}>
                             <Typography variant={"subtitle2"}>{t('title.gearScore')} ({gearScore()})</Typography>
