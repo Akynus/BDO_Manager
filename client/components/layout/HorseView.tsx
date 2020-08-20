@@ -80,14 +80,14 @@ export default function HorseView(props: IProps): React.ReactElement<IProps> {
     function isDreamHorse(): React.ReactNode {
         return <Grid container={true} item={true} xs={12} alignItems={"center"}>
             <Icon
-                className={clsx(['fas fa-crown', classes.iconSize, classes.yellowIcon])}/> {t('description.dreamHorse')}
+                className={clsx(['mdi mdi-star', classes.iconSize, classes.yellowIcon])}/> {t('description.dreamHorse')}
         </Grid>
     }
 
     function hasKrogdale(): React.ReactNode {
         return <Grid container={true} item={true} xs={12} alignItems={"center"}>
             <Icon
-                className={clsx(['fas fa-shield-alt', classes.iconSize, classes.greenIcon])}/> {t('description.hasKrodale')}
+                className={clsx(['mdi mdi-shield', classes.iconSize, classes.greenIcon])}/> {t('description.hasKrodale')}
         </Grid>
     }
 
@@ -97,9 +97,9 @@ export default function HorseView(props: IProps): React.ReactElement<IProps> {
                        onOpen={() => setSpeedOpen(true)}
                        icon={<SpeedDialIcon/>}
                        className={classes.speedDial}>
-                <SpeedDialAction onClick={onDelete} icon={<Icon color={"error"} className={'fas fa-trash-alt'}/>}
+                <SpeedDialAction onClick={onDelete} icon={<Icon color={"error"} className={'mdi mdi-delete'}/>}
                                  title={String(t('action.delete'))}/>
-                <SpeedDialAction onClick={onEdit} icon={<Icon className={'fas fa-edit'}/>}
+                <SpeedDialAction onClick={onEdit} icon={<Icon className={'mdi mdi-pencil'}/>}
                                  title={String(t('action.edit'))}/>
             </SpeedDial>
             <Fade in={true} timeout={400}>

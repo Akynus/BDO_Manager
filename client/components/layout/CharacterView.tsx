@@ -82,9 +82,9 @@ export default function CharacterView(props: IProps): React.ReactElement<IProps>
                        onOpen={() => setSpeedOpen(true)}
                        icon={<SpeedDialIcon/>}
                        className={classes.speedDial}>
-                <SpeedDialAction onClick={onDelete} icon={<Icon color={"error"} className={'fas fa-trash-alt'}/>}
+                <SpeedDialAction onClick={onDelete} icon={<Icon color={"error"} className={'mdi mdi-delete'}/>}
                                  title={String(t('action.delete'))}/>
-                <SpeedDialAction onClick={onEdit} icon={<Icon className={'fas fa-edit'}/>}
+                <SpeedDialAction onClick={onEdit} icon={<Icon className={'mdi mdi-pencil'}/>}
                                  title={String(t('action.edit'))}/>
             </SpeedDial>
             <Fade in={true} timeout={400}>

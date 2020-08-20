@@ -26,10 +26,10 @@ export default function ProfileCharacterCard(props: IProps): React.ReactElement<
         <CardActionArea className={classes.root} onClick={props.onChose}>
             <Grid spacing={3} container={true} direction="column" justify="center" alignItems="center">
                 <Grid item={true}>
-                    <Icon className={clsx(['fas fa-male', classes.iconSelect])}/>
+                    <Icon className={clsx(['mdi mdi-sword-cross', classes.iconSelect])}/>
                 </Grid>
                 <Grid item={true}>
-                    <Typography variant="subtitle2" color={"secondary"}>
+                    <Typography variant="subtitle2" color={"secondary"} align={"center"}>
                         {'Clique para selecionar seu personagem principal'}
                     </Typography>
                 </Grid>

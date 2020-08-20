@@ -27,10 +27,11 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
         width: drawerWidth,
         flexShrink: 0,
         whiteSpace: 'nowrap',
+        overflowX: 'hidden',
     },
     opened: {
         width: drawerWidth,
-
+        overflowX: 'hidden',
         transition: theme.transitions.create('width', {
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.enteringScreen,
@@ -81,11 +82,11 @@ const AppDrawer: React.FunctionComponent = function (props) {
 
     function items(): React.ReactNode {
         const routes: IRouteItem[] = [
-            {key: ERoutes.HOME, icon: 'fas fa-home', title: 'item.home'},
-            {key: ERoutes.PROFILE, icon: 'fas fa-id-card', title: 'item.profile'},
-            {key: ERoutes.CHARACTERS, icon: 'fas fa-users', title: 'item.characters'},
-            {key: ERoutes.HORSES, icon: 'fas fa-horse-head', title: 'item.horses'},
-            {key: ERoutes.SETTING, icon: 'fas fa-cogs', title: 'item.setting'},
+            {key: ERoutes.HOME, icon: 'mdi mdi-home', title: 'item.home'},
+            {key: ERoutes.PROFILE, icon: 'mdi mdi-card-account-details', title: 'item.profile'},
+            {key: ERoutes.CHARACTERS, icon: 'mdi mdi-account-multiple', title: 'item.characters'},
+            {key: ERoutes.HORSES, icon: 'mdi mdi-horseshoe', title: 'item.horses'},
+            {key: ERoutes.SETTING, icon: 'mdi mdi-cogs', title: 'item.setting'},
         ];
 
         return <List>
@@ -112,7 +113,7 @@ const AppDrawer: React.FunctionComponent = function (props) {
         <div className={classes.contentTop}>
             <Tooltip title={String(t('description.drawerMenuHide'))} placement="bottom-end">
                 <IconButton edge="end" onClick={closeDrawer}>
-                    <Icon className={'fas fa-chevron-left'}/>
+                    <Icon className={'mdi mdi-backburger'}/>
                 </IconButton>
             </Tooltip>
         </div>

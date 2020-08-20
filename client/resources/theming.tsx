@@ -25,9 +25,7 @@ const Theming: React.FunctionComponent = function (props) {
         return {
             MuiIcon: {
                 root: {
-                    fontSize: '1.2rem',
-                    minWidth: '1em',
-                    width: "auto"
+                    height: 'auto'
                 }
             },
             MuiListItem: {

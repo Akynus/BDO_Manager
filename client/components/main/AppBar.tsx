@@ -101,28 +101,28 @@ const AppBar: React.FunctionComponent = function (props) {
 
     function useMenu(): React.ReactNode {
         return <Menu
-            anchorEl={target}
             anchorOrigin={{vertical: 'top', horizontal: 'right'}}
+            transformOrigin={{vertical: 'top', horizontal: 'right'}}
             id={"user-menu"}
             keepMounted
-            transformOrigin={{vertical: 'top', horizontal: 'right'}}
+            anchorEl={target}
             open={Boolean(target)}
             onClose={() => setTarget(null)}>
             <MenuItem onClick={() => goPath(RoutePage.PROFILE)}>
                 <ListItemIcon>
-                    <Icon fontSize={"small"} className={'fas fa-id-card'}/>
+                    <Icon fontSize={"small"} className={'mdi mdi-card-account-details'}/>
                 </ListItemIcon>
                 <Typography variant={"inherit"} noWrap={true}>{t('item.profile')}</Typography>
             </MenuItem>
             <MenuItem onClick={() => goPath(RoutePage.SETTING)}>
                 <ListItemIcon>
-                    <Icon fontSize={"small"} className={'fas fa-user-cog'}/>
+                    <Icon fontSize={"small"} className={'mdi mdi-cogs'}/>
                 </ListItemIcon>
                 <Typography variant={"inherit"} noWrap={true}>{t('item.setting')}</Typography>
             </MenuItem>
             <MenuItem onClick={onLogout}>
                 <ListItemIcon>
-                    <Icon fontSize={"small"} className={'fas fa-door-open'}/>
+                    <Icon fontSize={"small"} className={'mdi mdi-logout-variant'}/>
                 </ListItemIcon>
                 <Typography variant={"inherit"} noWrap={true}>{t('action.logout')}</Typography>
             </MenuItem>
@@ -139,10 +139,10 @@ const AppBar: React.FunctionComponent = function (props) {
                 </DialogContentText>
             </DialogContent>
             <DialogActions>
-                <Button autoFocus onClick={() => setShowLogout(false)} color="primary">
+                <Button autoFocus onClick={() => setShowLogout(false)} color="secondary">
                     {t('action.no')}
                 </Button>
-                <Button onClick={doLogout} color="primary">
+                <Button onClick={doLogout} color="secondary">
                     {t('action.yes')}
                 </Button>
             </DialogActions>
@@ -159,13 +159,13 @@ const AppBar: React.FunctionComponent = function (props) {
             <Tooltip title={String(t('description.drawerMenuShow'))} placement="bottom-end"
                      className={clsx({[classes.hideMenuIcon]: opened})}>
                 <IconButton color="inherit" edge="start" onClick={openDrawer}>
-                    <Icon className={'fas fa-bars'}/>
+                    <Icon className={'mdi mdi-menu'}/>
                 </IconButton>
             </Tooltip>
             <Typography className={classes.title} variant={"h6"} noWrap={true}>{t('title.application')}</Typography>
             <div className={classes.sectionMobile}>
                 <IconButton color="inherit" onClick={openUserMenu} edge="end" aria-controls={"use-menu"}>
-                    <Icon className={'fas fa-user'}/>
+                    <Icon className={'mdi mdi-account'}/>
                 </IconButton>
             </div>
         </Toolbar>

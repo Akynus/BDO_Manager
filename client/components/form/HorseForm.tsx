@@ -164,7 +164,7 @@ const HorseForm = React.forwardRef<HorseFormFormRef>((props, ref) => {
             <ListItem>
                 <ListItemAvatar>
                     <Avatar className={classes.avatarColor}>
-                        <Icon className={'fas fa-horse-head'}/>
+                        <Icon className={'mdi mdi-horseshoe'}/>
                     </Avatar>
                 </ListItemAvatar>
                 <ListItemText primary={t(currentHorse().name)}

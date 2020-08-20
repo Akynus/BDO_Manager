@@ -36,10 +36,10 @@ export default function HorseCard(props: IProps<Horse>): React.ReactElement<IPro
     function iconGender(gender: "male" | "female"): React.ReactNode {
         switch (gender) {
             case "male": {
-                return <Icon className={clsx(['fas fa-mars', classes.maleIcon])}/>
+                return <Icon className={clsx(['mdi mdi-gender-male', classes.maleIcon])}/>
             }
             case "female": {
-                return <Icon className={clsx(['fas fa-venus', classes.femaleIcon])}/>
+                return <Icon className={clsx(['mdi mdi-gender-female', classes.femaleIcon])}/>
             }
         }
     }

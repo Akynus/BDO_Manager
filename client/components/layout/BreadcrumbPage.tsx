@@ -10,7 +10,8 @@ import ERoutes from "/imports/enumerables/ERoutes";
 const useStyles = makeStyles((theme: Theme) => createStyles({
     root: {},
     iconHome: {
-        fontSize: '0.9rem',
+        width: theme.typography.pxToRem(22),
+        fontSize: theme.typography.pxToRem(18),
         paddingLeft: theme.spacing(0.5)
     }
 }));
@@ -34,7 +35,7 @@ const AboutLogin: React.FunctionComponent<IProps> = function (props) {
         </Typography>
         <Breadcrumbs>
             <Chip onClick={() => goPath(ERoutes.HOME)} variant={"outlined"} size={"small"}
-                  icon={<Icon className={clsx(['fas fa-home fa-sm', classes.iconHome])}/>}
+                  icon={<Icon className={clsx(['mdi mdi-home', classes.iconHome])}/>}
                   label={t('item.home')}/>
             <Chip variant={"outlined"} size={"small"} label={t(`item.${currentPath()}`)}/>
         </Breadcrumbs>

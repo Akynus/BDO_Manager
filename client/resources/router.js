@@ -4,7 +4,6 @@ import {Session} from "meteor/session";
 import {FlowRouter} from 'meteor/ostrio:flow-router-extra';
 import EPublish from "/imports/enumerables/EPublish";
 import {URLBackground} from "/imports/objects/GlobalVars";
-import FixedLoading from "/client/components/layout/FixedLoading";
 import Core from "/client/components/main/Core";
 import ERoutes from "/imports/enumerables/ERoutes";
 import ESession from "/imports/enumerables/ESession";
@@ -89,9 +88,6 @@ authenticatedRoute.route(ERoutes.SETTING, {
 
 //<editor-folder defaultstate="collapsed" desc="Unauthenticated Routes">
 const unauthenticatedRoute = FlowRouter.group({
-    whileWaiting() {
-        ReactBuild(FixedLoading);
-    },
     triggersEnter: [(context, redirect) => {
         if (Meteor.userId()) redirect('/home');
     }]

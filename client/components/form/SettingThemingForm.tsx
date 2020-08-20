@@ -74,7 +74,7 @@ export default function SettingThemingForm(props: IProps): React.ReactElement<IP
             <List>
                 <ListItem button={true} onClick={handleThemeStyle}>
                     <ListItemIcon>
-                        <Icon className={'fas fa-moon'}/>
+                        <Icon className={'mdi mdi-theme-light-dark'}/>
                     </ListItemIcon>
                     <ListItemText primary={t('field.darkMode')} secondary={t('description.darkModeVisibility')}/>
                     <ListItemSecondaryAction>
@@ -92,23 +92,23 @@ export default function SettingThemingForm(props: IProps): React.ReactElement<IP
             <List>
                 <ListItem button={true} onClick={() => setShowPalletPrimary(true)}>
                     <ListItemIcon>
-                        <Icon className={'fas fa-tint'}/>
+                        <Icon className={'mdi mdi-format-color-fill'}/>
                     </ListItemIcon>
                     <ListItemText primary={t('field.primaryColor')}/>
                     <ListItemSecondaryAction>
                         <IconButton onClick={() => setShowPalletPrimary(true)}>
-                            <Icon color={"primary"} className={'fas fa-circle'}/>
+                            <Icon color={"primary"} className={'mdi mdi-checkbox-blank-circle'}/>
                         </IconButton>
                     </ListItemSecondaryAction>
                 </ListItem>
                 <ListItem button={true} onClick={() => setShowPalletSecondary(true)}>
                     <ListItemIcon>
-                        <Icon className={'fas fa-tint'}/>
+                        <Icon className={'mdi mdi-format-color-fill'}/>
                     </ListItemIcon>
                     <ListItemText primary={t('field.secondaryColor')}/>
                     <ListItemSecondaryAction>
                         <IconButton onClick={() => setShowPalletSecondary(true)}>
-                            <Icon color={"secondary"} className={'fas fa-circle'}/>
+                            <Icon color={"secondary"} className={'mdi mdi-checkbox-blank-circle'}/>
                         </IconButton>
                     </ListItemSecondaryAction>
                 </ListItem>

@@ -69,10 +69,10 @@ const ConfirmExclusionForm = React.forwardRef<ConfirmExclusionFormRef, IProps>((
             <TextField name={'text'} control={control} errors={errors}/>
         </DialogContent>
         <DialogActions>
-            <Button onClick={onClose} color="primary">
+            <Button onClick={onClose} color="secondary">
                 {t('action.close')}
             </Button>
-            <Button onClick={onConfirm} color="primary" disabled={!isEqualValues()}>
+            <Button onClick={onConfirm} color="secondary" disabled={!isEqualValues()}>
                 {t('action.delete')}
             </Button>
         </DialogActions>

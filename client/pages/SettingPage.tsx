@@ -68,8 +68,8 @@ export default function SettingPage(): React.ReactElement {
     const settings: Setting[] = useMongoFetch(Settings.find());
     const {enqueueSnackbar} = useSnackbar();
     const tabs = [
-        {key: "1", icon: 'fas fa-palette', label: 'item.theming'},
-        {key: "2", icon: 'fas fa-bell', label: 'item.notification'}
+        {key: "1", icon: 'mdi mdi-palette', label: 'item.theming'},
+        {key: "2", icon: 'mdi mdi-bell', label: 'item.notification'}
     ]
 
     function setting(): Setting {
