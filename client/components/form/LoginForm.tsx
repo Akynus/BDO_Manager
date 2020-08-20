@@ -112,21 +112,14 @@ export default function LoginForm(): React.ReactElement {
                             <Grid item={true}>
                                 <Tooltip title={String(t('description.loginWithFacebook'))} placement="top">
                                     <IconButton color={"primary"}>
-                                        <Icon className={'fab fa-facebook'}/>
-                                    </IconButton>
-                                </Tooltip>
-                            </Grid>
-                            <Grid item={true}>
-                                <Tooltip title={String(t('description.loginWithGoogle'))} placement="top">
-                                    <IconButton color={"primary"}>
-                                        <Icon className={'fab fa-google'}/>
+                                        <Icon className={'mdi mdi-facebook'}/>
                                     </IconButton>
                                 </Tooltip>
                             </Grid>
                             <Grid item={true}>
                                 <Tooltip title={String(t('description.loginWithDiscord'))} placement="top">
                                     <IconButton color={"primary"}>
-                                        <Icon className={'fab fa-discord'}/>
+                                        <Icon className={'mdi mdi-discord'}/>
                                     </IconButton>
                                 </Tooltip>
                             </Grid>
