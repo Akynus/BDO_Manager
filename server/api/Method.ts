@@ -6,8 +6,16 @@ import Character from "/imports/models/Character";
 import CharacterDao from "/server/dao/CharacterDao";
 import Horse from "/imports/models/Horse";
 import HorseDao from "/server/dao/HorseDao";
+import ProfileDao from "/server/dao/ProfileDao";
 
 Meteor.methods({
+    //<editor-folder defaultstate="collapsed" desc="Profile">
+    [EMethod.UPDATE_PROFILE]: (key: string, value: any) => {
+        if (!Meteor.userId()) throw new Meteor.Error(403);
+        ProfileDao.set(key, value);
+    },
+    //</editor-folder>
+
     //<editor-folder defaultstate="collapsed" desc="Setting">
     [EMethod.UPDATE_SETTING]: (key: string, value: any) => {
         if (!Meteor.userId()) throw new Meteor.Error(403);

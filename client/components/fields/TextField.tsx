@@ -9,7 +9,7 @@ export default function TextField(props: IProps): React.ReactElement<IProps> {
         <InputLabel htmlFor={props.name}>{props.label}</InputLabel>
         <Controller id={props.name} control={props.control} name={props.name}
                     render={(_props) => <OutlinedInput label={props.label} type={props.type} onChange={_props.onChange}
-                                                       value={_props.value} onBlur={_props.onBlur}/>}/>
+                                                       value={_props.value} onBlur={_props.onBlur} maxLength={props.maxLength}/>}/>
         {props.errors[props.name] && <FormHelperText>{props.errors[props.name].message}</FormHelperText>}
     </FormControl>)
 }
@@ -21,4 +21,5 @@ interface IProps {
     type?: string;
     errors: FieldErrors;
     disabled?: boolean;
+    maxLength?: number;
 }

@@ -75,6 +75,9 @@ export default interface ILang {
         formCharacter: string;
         formHorse: string;
         confirmExclusion: string;
+        change_family_name: string;
+        no_characters: string;
+        main_character: string;
     },
     description: {
         loginWithFacebook: string;
@@ -93,6 +96,8 @@ export default interface ILang {
         commonHorse: string;
         confirmExclusion: string;
         hasKrodale: string;
+        family_name: string;
+        choose_character: string;
     },
     field: {
         user: string;
@@ -110,7 +115,7 @@ export default interface ILang {
         atkAwk: string;
         defense: string;
         gearScore: string;
-        gearScoreLink:string;
+        gearScoreLink: string;
         hasKrogdalo: string;
         accel: string;
         speed: string;
@@ -143,5 +148,7 @@ export default interface ILang {
         success_remove_horse: string;
         error_remove_horse: string;
         error_update_setting: string;
+        no_characters: string;
+        error_update_profile: string;
     }
 }

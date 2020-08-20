@@ -46,7 +46,7 @@ export default function CharacterMiniCard(props: IProps): React.ReactElement<IPr
     }
 
     return <Card className={classes.root} key={String(props.data._id)}>
-        <CardActionArea className={classes.root}>
+        <CardActionArea className={classes.root} onClick={props.onSelect}>
             <div className={classes.background}>
                 <img width={'100%'} height={'100%'} className={classes.img} src={type().smallImg[props.data.combat]}/>
             </div>
@@ -59,4 +59,5 @@ export default function CharacterMiniCard(props: IProps): React.ReactElement<IPr
 
 interface IProps {
     data: Character;
+    onSelect: () => void;
 }

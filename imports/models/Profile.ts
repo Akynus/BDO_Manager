@@ -4,6 +4,8 @@ export default class Profile {
     _id: Mongo.ObjectID;
     user: string;
 
-    family: string;
-    character?: Mongo.ObjectID;
+    familyName: string;
+    mainCharacter?: Mongo.ObjectID;
+    guild?: Mongo.ObjectID;
+    biography?: string;
 }

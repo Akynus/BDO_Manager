@@ -10,6 +10,7 @@ import {
     ListItemText
 } from "@material-ui/core";
 import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
+import {useTranslation} from "react-i18next";
 
 //<editor-folder defaultstate="collapsed" desc="Styles">
 const useStyles = makeStyles((theme: Theme) => createStyles({
@@ -22,23 +23,27 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 
 export default function ProfileFamilyCard(props: IProps): React.ReactElement<IProps> {
     const classes = useStyles();
+    const {t} = useTranslation();
 
     return <Card elevation={10}>
         <ListItem>
             <ListItemAvatar>
                 <Avatar className={classes.avatarColor}>
-                    <Icon className={'mdi mdi-account-group'} />
+                    <Icon className={'mdi mdi-account-group'}/>
                 </Avatar>
             </ListItemAvatar>
-            <ListItemText primary={'Akynus'} secondary={'Nome da Familia'}/>
+            <ListItemText primary={props.familyName} secondary={t('description.family_name')}/>
             <ListItemSecondaryAction>
-                <IconButton>
-                    <Icon className={'mdi mdi-pencil'} />
+                <IconButton onClick={props.onChange}>
+                    <Icon className={'mdi mdi-pencil'}/>
                 </IconButton>
             </ListItemSecondaryAction>
         </ListItem>
+
     </Card>
 }
 
 interface IProps {
+    familyName: string;
+    onChange: () => void;
 }

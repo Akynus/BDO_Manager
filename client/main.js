@@ -27,6 +27,7 @@ Meteor.startup(() => {
         document.getElementById('application'));
 });*/
 
+import "/imports/resources/account";
 import "/client/resources/router";
 import "/client/resources/initialization";
 

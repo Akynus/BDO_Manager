@@ -52,6 +52,7 @@ authenticatedRoute.route(ERoutes.HOME, {
 authenticatedRoute.route(ERoutes.PROFILE, {
     name: 'profile',
     subscriptions() {
+        this.register(EPublish.PROFILE, Meteor.subscribe(EPublish.PROFILE));
         this.register(EPublish.CHARACTERS, Meteor.subscribe(EPublish.CHARACTERS));
     },
     action() {

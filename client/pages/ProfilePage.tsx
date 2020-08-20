@@ -8,6 +8,12 @@ import CharacterSelector, {CharacterSelectorRef} from "/client/components/form/C
 import ProfileFamilyCard from "/client/components/layout/ProfileFamilyCard";
 import ProfileGuildCard from "/client/components/layout/ProfileGuildCard";
 import ProfileBiographyCard from "/client/components/layout/ProfileBiographyCard";
+import {useTracker} from "react-meteor-hooks";
+import Profiles from "/imports/collections/ProfileCollection";
+import Profile from "/imports/models/Profile";
+import Character from "/imports/models/Character";
+import Characters from "/imports/collections/CharacterCollection";
+import ProfileFamilyNameForm, {ProfileFamilyNameFormRef} from "/client/components/form/ProfileFamilyNameForm";
 
 //<editor-folder defaultstate="collapsed" desc="Styles">
 const useStyles = makeStyles((theme: Theme) => createStyles({
@@ -36,7 +42,21 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 export default function ProfilePage(): React.ReactElement {
     const classes = useStyles();
     const {t} = useTranslation();
+    const profile = useTracker<Profile | undefined>(() => Profiles.findOne());
+    const mainCharacter = useTracker<Character | undefined>(() => {
+        if (profile) return Characters.findOne({_id: profile.mainCharacter});
+        return undefined;
+    }, [profile]);
     const characterSelector = React.createRef<CharacterSelectorRef>();
+    const profileFamilyForm = React.createRef<ProfileFamilyNameFormRef>();
+
+    if (!profile) return <div/>
+
+    function onChangeFamilyName(): void {
+        if (profileFamilyForm.current) {
+            profileFamilyForm.current.open();
+        }
+    }
 
     function onChoseCharacter(): void {
         if (characterSelector.current) {
@@ -52,7 +72,7 @@ export default function ProfilePage(): React.ReactElement {
                     <Grid item={true} xs={12}>
                         <Zoom timeout={300} in={true}>
                             <div>
-                                <ProfileCharacterCard onChose={onChoseCharacter}/>
+                                <ProfileCharacterCard character={mainCharacter} onChose={onChoseCharacter}/>
                             </div>
                         </Zoom>
                     </Grid>
@@ -62,7 +82,7 @@ export default function ProfilePage(): React.ReactElement {
                     <Grid item={true} xs={12} sm={12} md={6}>
                         <Zoom timeout={400} in={true}>
                             <div>
-                                <ProfileFamilyCard/>
+                                <ProfileFamilyCard onChange={onChangeFamilyName} familyName={profile.familyName}/>
                             </div>
                         </Zoom>
                     </Grid>
@@ -84,5 +104,6 @@ export default function ProfilePage(): React.ReactElement {
             </Grid>
         </Box>
         <CharacterSelector ref={characterSelector}/>
+        <ProfileFamilyNameForm ref={profileFamilyForm}/>
     </Container>);
 }

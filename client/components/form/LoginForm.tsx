@@ -69,6 +69,7 @@ export default function LoginForm(): React.ReactElement {
         setLoading(true);
         const object = getValues();
         Meteor.loginWithPassword(object.username, object.password, error => {
+            setLoading(false);
             if (error) {
                 setValue('password', '');
                 enqueueSnackbar(t('message.login_failed'), {variant: "error"});

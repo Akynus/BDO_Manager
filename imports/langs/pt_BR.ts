@@ -77,7 +77,10 @@ const values: ILang = {
         values: 'Valores',
         formCharacter: 'Cadastro de Personagem',
         formHorse: 'Cadastro de Montarias',
-        confirmExclusion: 'Excluir registro'
+        confirmExclusion: 'Excluir registro',
+        no_characters: 'Não há personagens',
+        change_family_name: "Alterar nome de familia",
+        main_character: 'Personagem principal'
     },
     description: {
         loginWithDiscord: 'Entrar com Discord',
@@ -95,7 +98,9 @@ const values: ILang = {
         confirmExclusion: 'Se você realmente deseja  excluir esse registro, digite <1>{{text}}</1> no campo de texto abaixo',
         dreamHorse: 'Dream Horse',
         commonHorse: 'Montaria',
-        hasKrodale: 'Set Krodale equipado'
+        hasKrodale: 'Set Krodale equipado',
+        family_name: 'Nome da Familia',
+        choose_character: 'Clique para selecionar seu personagem principal'
     },
     field: {
         user: 'Usuário',
@@ -145,7 +150,9 @@ const values: ILang = {
         error_save_horse: 'Erro ao salvar montaria',
         success_remove_horse: 'Montaria excluido com sucesso',
         error_remove_horse: 'Erro ao excluir montaria',
-        error_update_setting: 'Erro ao alterar configurações do usuário'
+        error_update_setting: 'Erro ao alterar configurações do usuário',
+        no_characters: 'Você não tem nenhum personagens cadastrado. <1>Clique aqui</1> para cadastrar um personagem',
+        error_update_profile: 'Erro ao atualizar perfil'
     }
 }
 
