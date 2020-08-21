@@ -7,4 +7,5 @@ import "/server/api/Method";
 
 SimpleSchema.extendOptions(['index', 'unique', 'denyInsert', 'denyUpdate']);
 
-Accounts.validateNewUser(UserDao.onCreate);
+Accounts.onCreateUser(UserDao.onCreate);
+Accounts.onLogin(UserDao.onLogin);

@@ -3,7 +3,7 @@ import {Session} from "meteor/session";
 import {Meteor} from "meteor/meteor";
 import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
 import clsx from "clsx";
-import {useSession} from "react-meteor-hooks";
+import {useCurrentUser, useSession} from "react-meteor-hooks";
 import ESession from "/imports/enumerables/ESession";
 import {
     Icon,
@@ -15,7 +15,7 @@ import {
     Tooltip,
     Typography,
     AppBar as AppBarMaterial,
-    Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Button
+    Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Button, ButtonBase, Avatar
 } from "@material-ui/core";
 // @ts-ignore
 import {FlowRouter} from 'meteor/ostrio:flow-router-extra';
@@ -60,6 +60,9 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
             display: 'flex',
         },
     },
+    buttonBase: {
+        borderRadius: '50%'
+    }
 }));
 //</editor-folder>
 
@@ -69,6 +72,7 @@ const AppBar: React.FunctionComponent = function (props) {
     const {t} = useTranslation();
     const opened = useSession(ESession.DRAWER_OPENED);
     const {enqueueSnackbar} = useSnackbar();
+    const user = useCurrentUser<Meteor.User>();
     const [target, setTarget] = React.useState<Element | null>(null);
     const [showLogout, setShowLogout] = React.useState<boolean>(false);
 
@@ -153,6 +157,13 @@ const AppBar: React.FunctionComponent = function (props) {
         Session.set(ESession.DRAWER_OPENED, true);
     }
 
+    function avatarUser(): React.ReactNode {
+        const url = (user?.profile && user.profile.avatar) ? user.profile.avatar : undefined;
+        return <Avatar color={'none'} src={url}>
+            <Icon className={'mdi mdi-account'}/>
+        </Avatar>
+    }
+
     return <AppBarMaterial elevation={10} position={"fixed"}
                            className={clsx(classes.toolbar, {[classes.toolbarShift]: opened})}>
         <Toolbar className={classes.content}>
@@ -164,9 +175,9 @@ const AppBar: React.FunctionComponent = function (props) {
             </Tooltip>
             <Typography className={classes.title} variant={"h6"} noWrap={true}>{t('title.application')}</Typography>
             <div className={classes.sectionMobile}>
-                <IconButton color="inherit" onClick={openUserMenu} edge="end" aria-controls={"use-menu"}>
-                    <Icon className={'mdi mdi-account'}/>
-                </IconButton>
+                <ButtonBase className={classes.buttonBase} onClick={openUserMenu}>
+                    {avatarUser()}
+                </ButtonBase>
             </div>
         </Toolbar>
         {useMenu()}

@@ -79,6 +79,18 @@ export default function LoginForm(): React.ReactElement {
         });
     }
 
+    function loginByDiscord(): void {
+        // @ts-ignore
+        Meteor.loginWithDiscord({
+            requestPermissions: ['identify', 'email', 'connections', 'guilds', 'guilds.join']
+        }, (error: any) => {
+            if (error) {
+                return;
+            }
+            FlowRouter.go('/home');
+        });
+    }
+
     return <Card className={classes.root} elevation={10}>
         <CardContent className={classes.content}>
             <form onSubmit={handleSubmit(onSubmit)}>
@@ -118,7 +130,7 @@ export default function LoginForm(): React.ReactElement {
                             </Grid>
                             <Grid item={true}>
                                 <Tooltip title={String(t('description.loginWithDiscord'))} placement="top">
-                                    <IconButton color={"primary"}>
+                                    <IconButton color={"primary"} onClick={loginByDiscord}>
                                         <Icon className={'mdi mdi-discord'}/>
                                     </IconButton>
                                 </Tooltip>
