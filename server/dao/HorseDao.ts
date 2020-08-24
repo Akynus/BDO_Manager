@@ -67,9 +67,9 @@ const HorseDao = {
         }).then(function () {
             return new Promise((resolve, reject) => {
                 Horses.remove({
-                    _id: id, $and: [{
-                        user: Meteor.userId()!
-                    }]
+                    _id: id, user:{
+                        $eq:Meteor.userId()!
+                    }
                 }, function (error: Error) {
                     if (error) return reject(error);
                     return resolve();

@@ -58,6 +58,13 @@ Meteor.methods({
     [EMethod.REMOVE_HORSE](id: Mongo.ObjectID) {
         if (!Meteor.userId()) throw new Meteor.Error(403);
         HorseDao.remove(id);
-    }
+    },
+    //</editor-folder>
+
+    //<editor-folder defaultstate="collapsed" desc="User">
+    [EMethod.GET_USER_SERVICE](service: string) {
+        if (!Meteor.userId()) throw new Meteor.Error(403);
+
+    },
     //</editor-folder>
 });

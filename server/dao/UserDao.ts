@@ -3,6 +3,7 @@ import Setting from "/imports/models/Setting";
 import Settings from "/imports/collections/SettingCollection";
 import Profile from "/imports/models/Profile";
 import Profiles from "/imports/collections/ProfileCollection";
+import {IDiscordData} from "/imports/models/User";
 
 interface ILoginEvent {
     type: string;
@@ -11,6 +12,22 @@ interface ILoginEvent {
 }
 
 const UserDao = {
+    getService(service: string): any {
+        switch (service) {
+            case "discord": {
+                const serviceData = Meteor.user()?.services['discord'];
+                if (!serviceData) return undefined;
+                const data: IDiscordData = {
+                    nickname: `${serviceData['username']}#${serviceData['discriminator']}`
+                }
+
+                return data;
+            }
+            default: {
+                return undefined;
+            }
+        }
+    },
     onCreate(options: Object, user: Meteor.User): any {
         try {
             if (!user._id) return false;
@@ -42,10 +59,11 @@ const UserDao = {
     onLogin(data: ILoginEvent) {
         switch (data['type']) {
             case 'discord': {
-                const discordData = data.user.services['discord'];
-                Meteor.users.update({_id: data.user._id}, {
+                const user: Meteor.User = data.user;
+                const discordData = user.services['discord'];
+                Meteor.users.update({_id: user._id}, {
                     $set: {
-                        'profile.avatar': `https://cdn.discordapp.com/avatars/${discordData.id}/${discordData.avatar}.png`
+                        'profile.avatar': `https://cdn.discordapp.com/avatars/${discordData.id}/${discordData.avatar}.png`,
                     }
                 });
             }

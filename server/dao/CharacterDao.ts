@@ -3,6 +3,7 @@ import Characters from "/imports/collections/CharacterCollection";
 import Character from "/imports/models/Character";
 import {Mongo} from "meteor/mongo";
 import Future from "fibers/future";
+import Profiles from "/imports/collections/ProfileCollection";
 
 const CharacterDao = {
     insert(object: Character): Mongo.ObjectID {
@@ -48,14 +49,35 @@ const CharacterDao = {
     },
     remove(id: Mongo.ObjectID): void {
         const future = new Future<void>();
-        Characters.remove({
-            _id: id, $and: [{
-                user: Meteor.userId()!
-            }]
-        }, function (error: Error) {
-            if (error) return future.throw(error);
-            return future.return();
-        });
+
+        new Promise<void>((resolve, reject) => {
+            Profiles.update({
+                user: {
+                    $eq: Meteor.userId()!
+                },
+                mainCharacter: {
+                    $eq: id
+                }
+            }, {
+                $unset: {mainCharacter: 0}
+            }, {multi: false}, function (error: any) {
+                if (error) return reject(error);
+                return resolve();
+            });
+        }).then(function () {
+            return new Promise<void>((resolve, reject) => {
+                Characters.remove({
+                    _id: id,
+                    user: {
+                        $eq: Meteor.userId()!
+                    }
+                }, function (error: any) {
+                    if (error) return reject(error);
+                    return resolve();
+                });
+            })
+        }).then(() => future.return()).catch(reason => future.throw(reason));
+
         return future.wait();
     }
 }

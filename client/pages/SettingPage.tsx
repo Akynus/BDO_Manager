@@ -25,6 +25,7 @@ import EMethod from "/imports/enumerables/EMethod";
 import {useSnackbar} from "notistack";
 import {timingCall} from "/imports/utils/Helpers";
 import AbsoluteLoading from "/client/components/layout/AbsoluteLoading";
+import SettingAccountForm from "/client/components/form/SettingAccountForm";
 
 //<editor-folder defaultstate="collapsed" desc="Styles">
 const useStyles = makeStyles((theme: Theme) => createStyles({
@@ -68,8 +69,8 @@ export default function SettingPage(): React.ReactElement {
     const settings: Setting[] = useMongoFetch(Settings.find());
     const {enqueueSnackbar} = useSnackbar();
     const tabs = [
-        {key: "1", icon: 'mdi mdi-palette', label: 'item.theming'},
-        {key: "2", icon: 'mdi mdi-bell', label: 'item.notification'}
+        {key: "1", icon: 'mdi mdi-account-settings', label: 'item.my_account'},
+        {key: "2", icon: 'mdi mdi-palette', label: 'item.theming'}
     ]
 
     function setting(): Setting {
@@ -118,9 +119,11 @@ export default function SettingPage(): React.ReactElement {
                         {tabsContent("vertical")}
                     </Hidden>
                     <TabPanel className={classes.form} value="1">
+                        <SettingAccountForm object={setting()}/>
+                    </TabPanel>
+                    <TabPanel className={classes.form} value="2">
                         <SettingThemingForm object={setting()} onChange={onChange}/>
                     </TabPanel>
-                    <TabPanel className={classes.form} value="2">2</TabPanel>
                 </TabContext>
             </Fade>
         </Card>

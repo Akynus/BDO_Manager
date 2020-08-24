@@ -70,7 +70,7 @@ export default function ProfileCharacterCard(props: IProps): React.ReactElement<
         <CardHeader avatar={<Avatar className={classes.avatarColor}>{props.character.level}</Avatar>}
                     title={props.character.name}
                     subheader={t('title.main_character')} action={<IconButton onClick={props.onChose}>
-            <Icon className={'mdi mdi-pencil'}/>
+            <Icon className={'mdi mdi-repeat'}/>
         </IconButton>}/>
         <CardMedia className={classes.media} title={props.character.name}
                    image={type().largeImg[props.character.combat]}/>

@@ -26,6 +26,10 @@ const values: ILang = {
         home: 'Página Inicial',
         theming: 'Tematização',
         notification: 'Notificação',
+        my_account: 'Minha conta',
+        account_services: {
+            discord: 'Discord'
+        },
         form: 'Formulário',
         characters: 'Personagens',
         horses: 'Montarias',
@@ -80,7 +84,9 @@ const values: ILang = {
         confirmExclusion: 'Excluir registro',
         no_characters: 'Não há personagens',
         change_family_name: "Alterar nome de familia",
-        main_character: 'Personagem principal'
+        main_character: 'Personagem principal',
+        account_and_services: 'Contas e Serviços',
+        user_account: 'Conta do Usuário'
     },
     description: {
         loginWithDiscord: 'Entrar com Discord',

@@ -24,6 +24,10 @@ export default interface ILang {
         theming: string;
         form: string;
         notification: string;
+        my_account: string;
+        account_services: {
+            discord: string;
+        }
         characters: string;
         horses: string;
         class: {
@@ -78,6 +82,8 @@ export default interface ILang {
         change_family_name: string;
         no_characters: string;
         main_character: string;
+        account_and_services: string;
+        user_account: string;
     },
     description: {
         loginWithFacebook: string;

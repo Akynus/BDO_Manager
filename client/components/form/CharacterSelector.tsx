@@ -58,7 +58,6 @@ const CharacterSelector = React.forwardRef<CharacterSelectorRef, IProps>((props,
             console.error(reason);
             enqueueSnackbar(t('message.error_update_profile'), {variant: "error"});
         });
-
         onClose();
     }
 

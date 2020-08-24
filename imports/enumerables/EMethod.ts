@@ -11,6 +11,8 @@ enum EMethod {
     INSERT_HORSE = "INSERT_HORSE",
     UPDATE_HORSE = "UPDATE_HORSE",
     REMOVE_HORSE = "REMOVE_HORSE",
+
+    GET_USER_SERVICE = "GET_USER_SERVICE"
 }
 
 export default EMethod;
