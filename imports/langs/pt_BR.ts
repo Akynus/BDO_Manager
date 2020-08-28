@@ -140,7 +140,8 @@ const values: ILang = {
         max: 'Valor menor ou igual à ${max}',
         min: 'Valor maior ou igual à ${min}',
         max_length: 'Tamanho maior que ${max} caracteres',
-        min_length: 'Tamanho menor que ${min} caracteres'
+        min_length: 'Tamanho menor que ${min} caracteres',
+        invalid: 'Campo invalido'
     },
     message: {
         not_found: 'Registro não encontrado',

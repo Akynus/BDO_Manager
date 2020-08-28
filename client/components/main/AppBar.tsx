@@ -88,13 +88,14 @@ const AppBar: React.FunctionComponent = function (props) {
     }
 
     function doLogout(): void {
+        setShowLogout(false);
         Meteor.logout(error => {
             if (error) {
                 enqueueSnackbar(t('message.logout_failed'), {variant: "error"});
                 return;
             }
 
-            enqueueSnackbar(t('message.logout_successful'));
+            enqueueSnackbar(t('message.logout_successful'), {autoHideDuration: 3});
             goPath('/login');
         });
     }

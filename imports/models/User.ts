@@ -1,13 +1,21 @@
 import {Meteor} from "meteor/meteor";
 
-interface IProfile {
+export interface UserProfile {
     avatar?: string;
 }
 
-export interface IDiscordData {
-    nickname: string;
+export interface IDiscord {
+    isUsing: boolean;
+    nickname?: string;
+}
+
+export interface IPassword {
+    hasPassword: boolean;
+    email?: string;
 }
 
 export default class User implements Meteor.User {
-    profile: IProfile;
+    _id: string;
+    username: string;
+    profile: UserProfile;
 }

@@ -7,6 +7,7 @@ import CharacterDao from "/server/dao/CharacterDao";
 import Horse from "/imports/models/Horse";
 import HorseDao from "/server/dao/HorseDao";
 import ProfileDao from "/server/dao/ProfileDao";
+import UserDao from "/server/dao/UserDao";
 
 Meteor.methods({
     //<editor-folder defaultstate="collapsed" desc="Profile">
@@ -64,7 +65,7 @@ Meteor.methods({
     //<editor-folder defaultstate="collapsed" desc="User">
     [EMethod.GET_USER_SERVICE](service: string) {
         if (!Meteor.userId()) throw new Meteor.Error(403);
-
+        return UserDao.getService(service);
     },
     //</editor-folder>
 });

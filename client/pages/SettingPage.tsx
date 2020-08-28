@@ -32,9 +32,10 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     root: {
         flexGrow: 1,
         display: "flex",
-        maxHeight: 800,
         flexDirection: "column",
         width: '100%',
+        minHeight: 500,
+        maxHeight: 620,
         height: '100%'
     },
     content: {
@@ -49,6 +50,8 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
         },
     },
     tabs: {
+        width: 200,
+        overflow: 'unset',
         borderRight: `1px solid ${theme.palette.divider}`,
         background: theme.palette.background.default
     },
@@ -57,7 +60,8 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
         marginRight: theme.spacing(1)
     },
     form: {
-        flex: "auto"
+        flex: "auto",
+        overflowX: 'auto'
     }
 }));
 //</editor-folder>

@@ -7,5 +7,8 @@ import "/server/api/Method";
 
 SimpleSchema.extendOptions(['index', 'unique', 'denyInsert', 'denyUpdate']);
 
+//<editor-folder defaultstate="collapsed" desc="Authentication params">
 Accounts.onCreateUser(UserDao.onCreate);
 Accounts.onLogin(UserDao.onLogin);
+Accounts.validateNewUser(UserDao.validateNewUser);
+//</editor-folder>

@@ -14,12 +14,13 @@ export default class Language {
         setLocale({
             mixed: {
                 required: t('validation.required'),
-                oneOf: t('validation.denied')
+                oneOf: t('validation.denied'),
+                default: t('validation.invalid')
             },
             string: {
                 length: t('validation.length'),
                 max: t('validation.max_length'),
-                min: t('validation.min_length')
+                min: t('validation.min_length'),
             },
             number: {
                 integer: t('validation.integer'),

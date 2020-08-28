@@ -138,6 +138,7 @@ export default interface ILang {
         max: string;
         min_length: string;
         max_length: string;
+        invalid: string;
     },
     message: {
         not_found: string;
