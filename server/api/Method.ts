@@ -75,5 +75,9 @@ Meteor.methods({
         if (!Meteor.userId()) throw new Meteor.Error(403);
         return UserDao.updatePassword(newPassword, oldPassword);
     },
+    [EMethod.CHECK_USER_NAME](username: string) {
+        if (!Meteor.userId()) throw new Meteor.Error(403);
+        return UserDao.checkUsername(username);
+    },
     //</editor-folder>
 });

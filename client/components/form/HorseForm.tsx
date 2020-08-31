@@ -261,7 +261,7 @@ const HorseForm = React.forwardRef<HorseFormFormRef>((props, ref) => {
                               secondary={t('description.formHorse')}/>
                 <ListItemSecondaryAction>
                     <IconButton onClick={() => setOpened(false)}>
-                        <Icon className={'fas fa-times'}/>
+                        <Icon className={'mdi mdi-close'}/>
                     </IconButton>
                 </ListItemSecondaryAction>
             </ListItem>

@@ -66,9 +66,9 @@ export default function ProfileCharacterCard(props: IProps): React.ReactElement<
         return ClassContext[props.character!.class];
     }
 
-    return <Card elevation={10} className={clsx([classes.root,classes.flexCard])}>
+    return <Card elevation={10} className={clsx([classes.root, classes.flexCard])}>
         <CardHeader avatar={<Avatar className={classes.avatarColor}>{props.character.level}</Avatar>}
-                    title={props.character.name}
+                    title={props.character.name} titleTypographyProps={{noWrap: true}}
                     subheader={t('title.main_character')} action={<IconButton onClick={props.onChose}>
             <Icon className={'mdi mdi-repeat'}/>
         </IconButton>}/>

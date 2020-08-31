@@ -337,7 +337,7 @@ const CharacterForm = React.forwardRef<CharacterFormRef>((props, ref) => {
                               secondary={t('description.formCharacter')}/>
                 <ListItemSecondaryAction>
                     <IconButton onClick={() => setOpened(false)}>
-                        <Icon className={'fas fa-times'}/>
+                        <Icon className={'mdi mdi-close'}/>
                     </IconButton>
                 </ListItemSecondaryAction>
             </ListItem>

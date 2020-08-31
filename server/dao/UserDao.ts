@@ -13,6 +13,7 @@ interface ILoginEvent {
 }
 
 const UserDao = {
+    //<editor-folder defaultstate="collapsed" desc="System User authentication - DONT CHANCE!">
     getService(service: string): any {
         switch (service) {
             case "discord": {
@@ -95,6 +96,9 @@ const UserDao = {
             }
         }
     },
+    //</editor-folder>
+
+    //<editor-folder defaultstate="collapsed" desc="User resources">
     insertPassword(newPassword: string): void {
         const service: IPassword = this.getService("password");
         if (service.hasPassword) throw new Meteor.Error(401);
@@ -107,7 +111,12 @@ const UserDao = {
         const data = Accounts._checkPassword(Meteor.user()!, {digest: digest, algorithm: "sha-256"});
         if (data.error) throw new Meteor.Error(401);
         Accounts.setPassword(Meteor.userId()!, newPassword, {logout: false});
+    },
+    checkUsername(username: string): boolean {
+        const user = Meteor.users.find({username: username});
+        return Boolean(user);
     }
+    //</editor-folder>
 }
 
 export default UserDao;

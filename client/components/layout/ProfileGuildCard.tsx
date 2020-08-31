@@ -54,7 +54,7 @@ export default function ProfileGuildCard(props: IProps): React.ReactElement<IPro
                 <Avatar className={classes.avatarColor}
                         src={'https://64.media.tumblr.com/d80fa1123b77a6929828e124de95a1d1/9d1ee33f29161cce-df/s400x600/f20dfd5ade8014689756ad9f2bfb21b0f052bb1b.png'}/>
             </ListItemAvatar>
-            <ListItemText primary={'CDW'} secondary={'Membro da Guilda'}/>
+            <ListItemText primaryTypographyProps={{noWrap: true}} primary={'CDW'} secondary={'Membro da Guilda'}/>
             <ListItemSecondaryAction>
                 <IconButton onClick={openGuildMenu}>
                     <Icon className={'mdi mdi-dots-vertical'}/>

@@ -18,7 +18,7 @@ const values: ILang = {
         forgotPassword: 'Esqueci minha senha',
         yes: 'Sim',
         no: 'Não',
-        none: 'Nenhum'
+        none: 'Nenhum',
     },
     item: {
         profile: 'Perfil',
@@ -87,7 +87,8 @@ const values: ILang = {
         main_character: 'Personagem principal',
         account_and_services: 'Contas e Serviços',
         user_account: 'Conta do Usuário',
-        user_password: 'Senha do Usuário'
+        user_password_insert: 'Autenticação por Usuário e Senha não habilitada',
+        user_authentication_password:'Autenticação do usuário'
     },
     description: {
         loginWithDiscord: 'Entrar com Discord',
@@ -108,8 +109,9 @@ const values: ILang = {
         hasKrodale: 'Set Krodale equipado',
         family_name: 'Nome da Familia',
         choose_character: 'Clique para selecionar seu personagem principal',
-        user_password_insert: 'Insira uma senha de acesso para habilitar a opção de <strong>Autenticação por Usuário e Senha</strong>',
-        user_password_update: 'Insira sua senha antiga e uma nova senha para realizar a alteração da senha'
+        user_password_insert: 'Caso vocês esteja realizando seu login atravez de uma rede social, você tambem pode adicinar uma autenticação por Usuário e Senha.',
+        user_password_insert_action: 'Clique aqui para inserir uma autenticação por Usuário e Senha.',
+        user_authentication_password: 'Painel de autenticação do usuário'
     },
     field: {
         user: 'Usuário',
@@ -136,7 +138,8 @@ const values: ILang = {
         gender: 'Gênero',
         confirm_password: 'Confirme a Nova senha',
         old_password: 'Senha atual',
-        new_password: 'Nova senha'
+        new_password: 'Nova senha',
+        user_name: 'Nome do usuário'
     },
     validation: {
         required: 'Campo obrigatório',
@@ -151,6 +154,7 @@ const values: ILang = {
     },
     message: {
         not_found: 'Registro não encontrado',
+        error_connection: 'Falha na comunicação com o servicor',
         login_successful: 'Bem-vindo <1>{use}</1>',
         login_failed: 'Autenticação do usuário inválida',
         logout_successful: 'Sessão do usuário encerrada',
@@ -168,7 +172,8 @@ const values: ILang = {
         error_update_profile: 'Erro ao atualizar perfil',
         error_insert_password: 'Erro ao inserir senha do usuário',
         error_update_password: 'Error ao alterar senha do usuário',
-        passwords_were_not_equals: 'Senhas não são iguais'
+        passwords_were_not_equals: 'Senhas não são iguais',
+        already_in_use: 'Já em uso'
     }
 }
 

@@ -32,7 +32,7 @@ export default function ProfileFamilyCard(props: IProps): React.ReactElement<IPr
                     <Icon className={'mdi mdi-account-group'}/>
                 </Avatar>
             </ListItemAvatar>
-            <ListItemText primary={props.familyName} secondary={t('description.family_name')}/>
+            <ListItemText primary={props.familyName} primaryTypographyProps={{noWrap: true}} secondary={t('description.family_name')}/>
             <ListItemSecondaryAction>
                 <IconButton onClick={props.onChange}>
                     <Icon className={'mdi mdi-pencil'}/>

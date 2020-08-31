@@ -84,7 +84,8 @@ export default interface ILang {
         main_character: string;
         account_and_services: string;
         user_account: string;
-        user_password: string;
+        user_password_insert: string;
+        user_authentication_password: string;
     },
     description: {
         loginWithFacebook: string;
@@ -106,7 +107,8 @@ export default interface ILang {
         family_name: string;
         choose_character: string;
         user_password_insert: string;
-        user_password_update: string;
+        user_password_insert_action: string;
+        user_authentication_password: string;
     },
     field: {
         user: string;
@@ -134,6 +136,7 @@ export default interface ILang {
         old_password: string;
         new_password: string;
         confirm_password: string;
+        user_name: string;
     },
     validation: {
         required: string;
@@ -148,6 +151,7 @@ export default interface ILang {
     },
     message: {
         not_found: string;
+        error_connection: string;
         login_successful: string;
         login_failed: string;
         logout_successful: string;
@@ -166,5 +170,6 @@ export default interface ILang {
         error_insert_password: string;
         error_update_password: string;
         passwords_were_not_equals: string;
+        already_in_use: string;
     }
 }
