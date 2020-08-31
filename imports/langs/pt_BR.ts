@@ -86,7 +86,8 @@ const values: ILang = {
         change_family_name: "Alterar nome de familia",
         main_character: 'Personagem principal',
         account_and_services: 'Contas e Serviços',
-        user_account: 'Conta do Usuário'
+        user_account: 'Conta do Usuário',
+        user_password: 'Senha do Usuário'
     },
     description: {
         loginWithDiscord: 'Entrar com Discord',
@@ -106,7 +107,9 @@ const values: ILang = {
         commonHorse: 'Montaria',
         hasKrodale: 'Set Krodale equipado',
         family_name: 'Nome da Familia',
-        choose_character: 'Clique para selecionar seu personagem principal'
+        choose_character: 'Clique para selecionar seu personagem principal',
+        user_password_insert: 'Insira uma senha de acesso para habilitar a opção de <strong>Autenticação por Usuário e Senha</strong>',
+        user_password_update: 'Insira sua senha antiga e uma nova senha para realizar a alteração da senha'
     },
     field: {
         user: 'Usuário',
@@ -130,7 +133,10 @@ const values: ILang = {
         speed: 'Velocidade',
         brake: 'Freio',
         turn: 'Torque',
-        gender: 'Gênero'
+        gender: 'Gênero',
+        confirm_password: 'Confirme a Nova senha',
+        old_password: 'Senha atual',
+        new_password: 'Nova senha'
     },
     validation: {
         required: 'Campo obrigatório',
@@ -159,7 +165,10 @@ const values: ILang = {
         error_remove_horse: 'Erro ao excluir montaria',
         error_update_setting: 'Erro ao alterar configurações do usuário',
         no_characters: 'Você não tem nenhum personagens cadastrado. <1>Clique aqui</1> para cadastrar um personagem',
-        error_update_profile: 'Erro ao atualizar perfil'
+        error_update_profile: 'Erro ao atualizar perfil',
+        error_insert_password: 'Erro ao inserir senha do usuário',
+        error_update_password: 'Error ao alterar senha do usuário',
+        passwords_were_not_equals: 'Senhas não são iguais'
     }
 }
 

@@ -84,6 +84,7 @@ export default interface ILang {
         main_character: string;
         account_and_services: string;
         user_account: string;
+        user_password: string;
     },
     description: {
         loginWithFacebook: string;
@@ -104,6 +105,8 @@ export default interface ILang {
         hasKrodale: string;
         family_name: string;
         choose_character: string;
+        user_password_insert: string;
+        user_password_update: string;
     },
     field: {
         user: string;
@@ -128,6 +131,9 @@ export default interface ILang {
         brake: string;
         turn: string;
         gender: string;
+        old_password: string;
+        new_password: string;
+        confirm_password: string;
     },
     validation: {
         required: string;
@@ -157,5 +163,8 @@ export default interface ILang {
         error_update_setting: string;
         no_characters: string;
         error_update_profile: string;
+        error_insert_password: string;
+        error_update_password: string;
+        passwords_were_not_equals: string;
     }
 }

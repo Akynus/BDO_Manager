@@ -64,11 +64,11 @@ const GenericFormDialogRef = React.forwardRef<GenericFormDialogRef, IProps>((pro
         props.onSubmit(data['text']);
     }
 
-    return (<Dialog open={visible} onClose={onClose}>
+    return (<Dialog fullWidth={true} maxWidth={"sm"} open={visible} onClose={onClose}>
         {titleDialog()}
         <DialogContent>
             {titleContentText()}
-            <TextField label={props.labelInput} name={'text'} control={control} errors={errors}/>
+            <TextField type={props.typeInput} label={props.labelInput} name={'text'} control={control} errors={errors}/>
         </DialogContent>
 
         <DialogActions>
@@ -86,6 +86,9 @@ interface IProps {
     title?: React.ReactNode;
     content: React.ReactNode;
     labelInput?: string;
+    typeInput?: string;
     onSubmit: (value: string) => void;
     isValid?: (value: string) => string | undefined;
 }
+
+export default GenericFormDialogRef;

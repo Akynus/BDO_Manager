@@ -4,6 +4,7 @@ import Settings from "/imports/collections/SettingCollection";
 import Profile from "/imports/models/Profile";
 import Profiles from "/imports/collections/ProfileCollection";
 import {IDiscord, IPassword, UserProfile} from "/imports/models/User";
+import crypto from "crypto";
 
 interface ILoginEvent {
     type: string;
@@ -93,6 +94,19 @@ const UserDao = {
                 });
             }
         }
+    },
+    insertPassword(newPassword: string): void {
+        const service: IPassword = this.getService("password");
+        if (service.hasPassword) throw new Meteor.Error(401);
+        Accounts.setPassword(Meteor.userId()!, newPassword);
+    },
+    updatePassword(newPassword: string, oldPassword: string): void {
+        const service: IPassword = this.getService("password");
+        if (!service.hasPassword) throw new Meteor.Error(401);
+        const digest = crypto.createHash('sha256').update(oldPassword).digest('hex');
+        const data = Accounts._checkPassword(Meteor.user()!, {digest: digest, algorithm: "sha-256"});
+        if (data.error) throw new Meteor.Error(401);
+        Accounts.setPassword(Meteor.userId()!, newPassword, {logout: false});
     }
 }
 

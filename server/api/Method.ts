@@ -67,5 +67,13 @@ Meteor.methods({
         if (!Meteor.userId()) throw new Meteor.Error(403);
         return UserDao.getService(service);
     },
+    [EMethod.INSERT_USER_PASSWORD](newPassword: string) {
+        if (!Meteor.userId()) throw new Meteor.Error(403);
+        return UserDao.insertPassword(newPassword);
+    },
+    [EMethod.UPDATE_USER_PASSWORD](newPassword: string, oldPassword: string) {
+        if (!Meteor.userId()) throw new Meteor.Error(403);
+        return UserDao.updatePassword(newPassword, oldPassword);
+    },
     //</editor-folder>
 });

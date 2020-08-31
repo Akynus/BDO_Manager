@@ -12,6 +12,7 @@ import CardLoading from "/client/components/layout/CardLoading";
 import {useMethod} from "react-meteor-hooks";
 import EMethod from "/imports/enumerables/EMethod";
 import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
+import ChangePasswordUserForm, {ChangePasswordUserFormRef} from "/client/components/form/ChangePasswordUserForm";
 
 //<editor-folder defaultstate="collapsed" desc="Styles">
 const useStyles = makeStyles((theme: Theme) => createStyles({
@@ -27,6 +28,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 export default function SettingAuthenticationPasswordCard(props: IProps): React.ReactElement<IProps> {
     const classes = useStyles();
     const {call, data, isLoading} = useMethod<IPassword, any>(EMethod.GET_USER_SERVICE, {});
+    const formPasswordChange = React.createRef<ChangePasswordUserFormRef>();
 
     React.useLayoutEffect(() => {
         call("password");
@@ -71,7 +73,7 @@ export default function SettingAuthenticationPasswordCard(props: IProps): React.
 
     function passwordOption(): React.ReactNode {
         if (data?.hasPassword) {
-            return <ListItem button={true}>
+            return <ListItem button={true} onClick={() => formPasswordChange.current!.open()}>
                 <ListItemIcon>
                     <Icon className={'mdi mdi-account-key'}/>
                 </ListItemIcon>
@@ -79,7 +81,7 @@ export default function SettingAuthenticationPasswordCard(props: IProps): React.
                               secondary={'Senha do usuário é utilizado durante o Login'}/>
             </ListItem>;
         } else {
-            return <ListItem button={true}>
+            return <ListItem button={true} onClick={() => formPasswordChange.current!.open()}>
                 <ListItemIcon>
                     <Icon className={'mdi mdi-key-change'}/>
                 </ListItemIcon>
@@ -105,6 +107,8 @@ export default function SettingAuthenticationPasswordCard(props: IProps): React.
             {emailOption()}
             {passwordOption()}
         </List>
+
+        <ChangePasswordUserForm updatingPassword={data?.hasPassword} ref={formPasswordChange}/>
     </Box>)
 }
 
