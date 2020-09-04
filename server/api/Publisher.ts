@@ -5,6 +5,11 @@ import Characters from "/imports/collections/CharacterCollection";
 import Horses from "/imports/collections/HorseCollection";
 import Profiles from "/imports/collections/ProfileCollection";
 
+// @ts-ignore
+Meteor.publish(null, function () {
+    return Meteor.users.find({_id: this.userId});
+});
+
 Meteor.publish(EPublish.PROFILE, function () {
     return Profiles.find({user: this.userId}, {
         fields: {

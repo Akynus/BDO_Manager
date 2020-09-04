@@ -76,7 +76,7 @@ export default function SettingThemingForm(props: IProps): React.ReactElement<IP
                     <ListItemIcon>
                         <Icon className={'mdi mdi-theme-light-dark'}/>
                     </ListItemIcon>
-                    <ListItemText primary={t('field.darkMode')} secondary={t('description.darkModeVisibility')}/>
+                    <ListItemText primary={t('field.setting.dark_mode')} secondary={t('description.darkModeVisibility')}/>
                     <ListItemSecondaryAction>
                         <Switch color={"secondary"} onChange={handleThemeStyle}
                                 checked={props.object.theming.type == "dark"}/>
@@ -94,7 +94,7 @@ export default function SettingThemingForm(props: IProps): React.ReactElement<IP
                     <ListItemIcon>
                         <Icon className={'mdi mdi-format-color-fill'}/>
                     </ListItemIcon>
-                    <ListItemText primary={t('field.primaryColor')}/>
+                    <ListItemText primary={t('field.setting.primary_color')}/>
                     <ListItemSecondaryAction>
                         <IconButton onClick={() => setShowPalletPrimary(true)}>
                             <Icon color={"primary"} className={'mdi mdi-checkbox-blank-circle'}/>
@@ -105,7 +105,7 @@ export default function SettingThemingForm(props: IProps): React.ReactElement<IP
                     <ListItemIcon>
                         <Icon className={'mdi mdi-format-color-fill'}/>
                     </ListItemIcon>
-                    <ListItemText primary={t('field.secondaryColor')}/>
+                    <ListItemText primary={t('field.setting.secondary_color')}/>
                     <ListItemSecondaryAction>
                         <IconButton onClick={() => setShowPalletSecondary(true)}>
                             <Icon color={"secondary"} className={'mdi mdi-checkbox-blank-circle'}/>

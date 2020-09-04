@@ -1,7 +1,10 @@
 import {Meteor} from "meteor/meteor";
+import {ClientUser} from "discord.js";
 
 export interface UserProfile {
     avatar?: string;
+    email: string;
+    username: string;
 }
 
 export interface IDiscord {
@@ -16,6 +19,6 @@ export interface IPassword {
 
 export default class User implements Meteor.User {
     _id: string;
-    username: string;
+    services: { discord: ClientUser };
     profile: UserProfile;
 }

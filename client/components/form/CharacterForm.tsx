@@ -128,7 +128,6 @@ const CharacterForm = React.forwardRef<CharacterFormRef>((props, ref) => {
             horse: ''
         },
     });
-
     //</editor-folder>
 
     React.useLayoutEffect(() => {
@@ -292,7 +291,8 @@ const CharacterForm = React.forwardRef<CharacterFormRef>((props, ref) => {
                                                 }}/>
                         </Grid>
                         <Grid item={true} xs={12}>
-                            <TextField type={'url'} label={String(t('field.gearScoreLink'))} name={'link'} control={control} errors={errors}/>
+                            <TextField type={'url'} label={String(t('field.gearScoreLink'))} name={'link'}
+                                       control={control} errors={errors}/>
                         </Grid>
                         <Grid item={true} xs={12}>
                             <Typography variant={"subtitle2"}>{t('title.gearScore')} ({gearScore()})</Typography>

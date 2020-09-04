@@ -55,6 +55,9 @@ authenticatedRoute.route(ERoutes.PROFILE, {
         this.register(EPublish.PROFILE, Meteor.subscribe(EPublish.PROFILE));
         this.register(EPublish.CHARACTERS, Meteor.subscribe(EPublish.CHARACTERS));
     },
+    onWait(){
+
+    },
     action() {
         ReactBuild(Core, {layout: true, children: <ProfilePage/>});
     }

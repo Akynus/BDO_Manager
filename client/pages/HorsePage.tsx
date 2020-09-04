@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
         flexGrow: 1,
         width: '100%',
         height: '100%',
-        minHeight:520,
+        minHeight: 520,
     },
     boxFlex: {
         width: '100%',
@@ -69,6 +69,7 @@ export default function HorsePage(): React.ReactElement {
     const [selected, setSelected] = React.useState<Mongo.ObjectID>();
     const horses: Horse[] = useMongoFetch(Horses.find());
     const confirmExclusion = React.createRef<ConfirmExclusionFormRef>();
+
     //</editor-folder>
 
     function onOpenForm(id?: Mongo.ObjectID) {
@@ -106,7 +107,8 @@ export default function HorsePage(): React.ReactElement {
                 <HorseCard data={horses} selected={selected} onSelect={setSelected}/>
             </div>
             <div className={classes.boxContent}>
-                <HorseView onEdit={onOpenForm} onDelete={onDelete} current={horses.find(value => value._id == selected)}/>
+                <HorseView onEdit={onOpenForm} onDelete={onDelete}
+                           current={horses.find(value => value._id == selected)}/>
             </div>
         </div>
     }

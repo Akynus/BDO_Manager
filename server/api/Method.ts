@@ -61,23 +61,4 @@ Meteor.methods({
         HorseDao.remove(id);
     },
     //</editor-folder>
-
-    //<editor-folder defaultstate="collapsed" desc="User">
-    [EMethod.GET_USER_SERVICE](service: string) {
-        if (!Meteor.userId()) throw new Meteor.Error(403);
-        return UserDao.getService(service);
-    },
-    [EMethod.INSERT_USER_PASSWORD](newPassword: string) {
-        if (!Meteor.userId()) throw new Meteor.Error(403);
-        return UserDao.insertPassword(newPassword);
-    },
-    [EMethod.UPDATE_USER_PASSWORD](newPassword: string, oldPassword: string) {
-        if (!Meteor.userId()) throw new Meteor.Error(403);
-        return UserDao.updatePassword(newPassword, oldPassword);
-    },
-    [EMethod.CHECK_USER_NAME](username: string) {
-        if (!Meteor.userId()) throw new Meteor.Error(403);
-        return UserDao.checkUsername(username);
-    },
-    //</editor-folder>
 });

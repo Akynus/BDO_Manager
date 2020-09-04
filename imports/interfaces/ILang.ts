@@ -23,6 +23,7 @@ export default interface ILang {
         home: string;
         theming: string;
         form: string;
+        discord: string;
         notification: string;
         my_account: string;
         account_services: {
@@ -65,7 +66,7 @@ export default interface ILang {
             arduanatt: string;
             dine: string;
             doom: string;
-        }
+        },
     },
     title: {
         application: string;
@@ -82,10 +83,7 @@ export default interface ILang {
         change_family_name: string;
         no_characters: string;
         main_character: string;
-        account_and_services: string;
         user_account: string;
-        user_password_insert: string;
-        user_authentication_password: string;
     },
     description: {
         loginWithFacebook: string;
@@ -106,16 +104,16 @@ export default interface ILang {
         hasKrodale: string;
         family_name: string;
         choose_character: string;
-        user_password_insert: string;
-        user_password_insert_action: string;
-        user_authentication_password: string;
+        login: {
+            discord: string;
+        },
+        setting: {
+            refresh_user: string;
+        }
     },
     field: {
         user: string;
         password: string;
-        darkMode: string;
-        primaryColor: string;
-        secondaryColor: string;
         name: string;
         character: string;
         level: string;
@@ -133,10 +131,12 @@ export default interface ILang {
         brake: string;
         turn: string;
         gender: string;
-        old_password: string;
-        new_password: string;
-        confirm_password: string;
-        user_name: string;
+        setting: {
+            dark_mode: string;
+            primary_color: string;
+            secondary_color: string;
+            refresh_user: string;
+        }
     },
     validation: {
         required: string;
@@ -166,10 +166,10 @@ export default interface ILang {
         error_remove_horse: string;
         error_update_setting: string;
         no_characters: string;
-        error_update_profile: string;
-        error_insert_password: string;
-        error_update_password: string;
-        passwords_were_not_equals: string;
-        already_in_use: string;
+        setting: {
+            successful_refresh_user_profile: string;
+            error_refresh_user_profile: string;
+            alert_authentication_third_party: string;
+        }
     }
 }

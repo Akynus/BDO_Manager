@@ -26,6 +26,7 @@ const values: ILang = {
         home: 'Página Inicial',
         theming: 'Tematização',
         notification: 'Notificação',
+        discord: 'Discord',
         my_account: 'Minha conta',
         account_services: {
             discord: 'Discord'
@@ -85,10 +86,7 @@ const values: ILang = {
         no_characters: 'Não há personagens',
         change_family_name: "Alterar nome de familia",
         main_character: 'Personagem principal',
-        account_and_services: 'Contas e Serviços',
-        user_account: 'Conta do Usuário',
-        user_password_insert: 'Autenticação por Usuário e Senha não habilitada',
-        user_authentication_password:'Autenticação do usuário'
+        user_account: 'Conta do Usuário'
     },
     description: {
         loginWithDiscord: 'Entrar com Discord',
@@ -109,16 +107,16 @@ const values: ILang = {
         hasKrodale: 'Set Krodale equipado',
         family_name: 'Nome da Familia',
         choose_character: 'Clique para selecionar seu personagem principal',
-        user_password_insert: 'Caso vocês esteja realizando seu login atravez de uma rede social, você tambem pode adicinar uma autenticação por Usuário e Senha.',
-        user_password_insert_action: 'Clique aqui para inserir uma autenticação por Usuário e Senha.',
-        user_authentication_password: 'Painel de autenticação do usuário'
+        login: {
+            discord: 'Entrar com Discord'
+        },
+        setting: {
+            refresh_user: 'Sincronizar informações do usuário com o Discord'
+        }
     },
     field: {
         user: 'Usuário',
         password: 'Senha',
-        darkMode: 'Modo Escuro',
-        primaryColor: 'Cor primária',
-        secondaryColor: 'Cor secundária',
         name: 'Nome',
         character: 'Personagem',
         level: 'Nivel',
@@ -136,10 +134,12 @@ const values: ILang = {
         brake: 'Freio',
         turn: 'Torque',
         gender: 'Gênero',
-        confirm_password: 'Confirme a Nova senha',
-        old_password: 'Senha atual',
-        new_password: 'Nova senha',
-        user_name: 'Nome do usuário'
+        setting: {
+            dark_mode: 'Modo Escuro',
+            primary_color: 'Cor primária',
+            secondary_color: 'Cor secundária',
+            refresh_user: 'Atualizar Tag do usuário'
+        }
     },
     validation: {
         required: 'Campo obrigatório',
@@ -155,7 +155,7 @@ const values: ILang = {
     message: {
         not_found: 'Registro não encontrado',
         error_connection: 'Falha na comunicação com o servicor',
-        login_successful: 'Bem-vindo <1>{use}</1>',
+        login_successful: 'Bem-vindo',
         login_failed: 'Autenticação do usuário inválida',
         logout_successful: 'Sessão do usuário encerrada',
         logout_failed: 'Erro ao encerrar a sessão do usuário',
@@ -169,11 +169,12 @@ const values: ILang = {
         error_remove_horse: 'Erro ao excluir montaria',
         error_update_setting: 'Erro ao alterar configurações do usuário',
         no_characters: 'Você não tem nenhum personagens cadastrado. <1>Clique aqui</1> para cadastrar um personagem',
-        error_update_profile: 'Erro ao atualizar perfil',
-        error_insert_password: 'Erro ao inserir senha do usuário',
-        error_update_password: 'Error ao alterar senha do usuário',
-        passwords_were_not_equals: 'Senhas não são iguais',
-        already_in_use: 'Já em uso'
+        setting: {
+            alert_authentication_third_party: 'Autenticação do usuário realizada por serviço de terceiros',
+            error_refresh_user_profile: 'Erro ao atualizar perfil do usuário',
+            successful_refresh_user_profile: 'Perfil do usuário atualizado com sucesso'
+        }
+
     }
 }
 

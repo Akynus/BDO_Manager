@@ -1,13 +1,9 @@
 import * as React from "react";
 import {
-    Backdrop,
-    Button,
+    Avatar,
     Card,
-    CardContent, CircularProgress,
-    Grid,
-    Icon, IconButton,
-    Link,
-    Tooltip,
+    CardContent,
+    Grid, Icon, ListItem, ListItemAvatar, ListItemText,
     Typography
 } from "@material-ui/core";
 // @ts-ignore
@@ -15,10 +11,6 @@ import {FlowRouter} from 'meteor/ostrio:flow-router-extra';
 import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
 import {useTranslation} from "react-i18next";
 import {useSnackbar} from "notistack";
-import {useForm} from "react-hook-form";
-import {yupResolver} from "@hookform/resolvers";
-import * as yup from "yup";
-import TextField from "/client/components/fields/TextField";
 import {Meteor} from "meteor/meteor";
 
 //<editor-folder defaultstate="collapsed" desc="Styles">
@@ -32,68 +24,51 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
         width: 350,
         padding: theme.spacing(3),
     },
-    icon: {
-        color: theme.palette.secondary.main
+    listActionDiscord: {
+        background: '#7289DA'
+    },
+    avatar: {
+        fontSize: '2rem',
+        background: 'none',
+        color: '#FFFFFF'
     },
     titleCard: {
         marginBottom: theme.spacing(2),
     },
-    loading: {
-        position: "absolute",
-        zIndex: theme.zIndex.drawer
+    primaryText: {
+        fontWeight: 500,
+        color: '#FFFFFF'
+    },
+    secondaryText: {
+        color: '#dddddd'
     }
-}));
-//</editor-folder>
-
-//<editor-folder defaultstate="collapsed" desc="Types">
-type LoginObject = {
-    username: string;
-    password: string;
-}
+}), {classNamePrefix: 'login'});
 //</editor-folder>
 
 export default function LoginForm(): React.ReactElement {
-    const schema = yup.object().shape({
-        username: yup.string().required(),
-        password: yup.string().required()
-    });
     const classes = useStyles();
     const {t} = useTranslation();
     const {enqueueSnackbar} = useSnackbar();
-    const [loading, setLoading] = React.useState<boolean>(false);
-    const {control, handleSubmit, errors, setValue, getValues} = useForm<LoginObject>({
-        resolver: yupResolver(schema)
-    });
-
-    function onSubmit(): void {
-        setLoading(true);
-        const object = getValues();
-        Meteor.loginWithPassword(object.username, object.password, error => {
-            setLoading(false);
-            if (error) {
-                setValue('password', '');
-                enqueueSnackbar(t('message.login_failed'), {variant: "error"});
-                return;
-            }
-            FlowRouter.go('/home');
-        });
-    }
 
     function loginByDiscord(): void {
         // @ts-ignore
         Meteor.loginWithDiscord({
-            requestPermissions: ['identify', 'email', 'connections', 'guilds', 'guilds.join']
+            requestPermissions: ['identify', 'email']
         }, (error: any) => {
             if (error) {
+                enqueueSnackbar(t('message.login_failed'), {variant: "error"});
                 return;
+            } else {
+                enqueueSnackbar(t('message.login_successful'), {variant: "success"});
+                FlowRouter.go('/home');
             }
-            FlowRouter.go('/home');
+
         });
     }
 
     return <Card className={classes.root} elevation={10}>
         <CardContent className={classes.content}>
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form>
                 <Grid container={true} spacing={2}>
                     <Grid item={true} xs={12}>
                         <Grid container={true} alignItems={"center"} justify={"center"} direction={"column"}>
@@ -104,44 +79,21 @@ export default function LoginForm(): React.ReactElement {
                         </Grid>
                     </Grid>
                     <Grid item={true} xs={12}>
-                        <TextField label={String(t('field.user'))} name={'username'} control={control} errors={errors}/>
-                    </Grid>
-                    <Grid item={true} xs={12}>
-                        <TextField type={"password"} label={String(t('field.password'))} name={'password'}
-                                   control={control}
-                                   errors={errors}/>
-                    </Grid>
-                    <Grid item={true} xs={12}>
-                        <Button size={"large"} variant={"contained"} color={"primary"} fullWidth={true}
-                                type={"submit"}>{t('action.login')}</Button>
-                    </Grid>
-                    <Grid item={true} xs={12}>
-                        <Link component="button" variant="subtitle2"
-                              color={"textSecondary"}>{t('action.forgotPassword')}</Link>
-                    </Grid>
-                    <Grid item={true} xs={12}>
-                        <Grid container={true} justify={"center"}>
-                            <Grid item={true}>
-                                <Tooltip title={String(t('description.loginWithFacebook'))} placement="top">
-                                    <IconButton color={"primary"}>
-                                        <Icon className={'mdi mdi-facebook'}/>
-                                    </IconButton>
-                                </Tooltip>
-                            </Grid>
-                            <Grid item={true}>
-                                <Tooltip title={String(t('description.loginWithDiscord'))} placement="top">
-                                    <IconButton color={"primary"} onClick={loginByDiscord}>
+                        <Card className={classes.listActionDiscord}>
+                            <ListItem dense={true} button={true} onClick={loginByDiscord}>
+                                <ListItemAvatar>
+                                    <Avatar className={classes.avatar}>
                                         <Icon className={'mdi mdi-discord'}/>
-                                    </IconButton>
-                                </Tooltip>
-                            </Grid>
-                        </Grid>
+                                    </Avatar>
+                                </ListItemAvatar>
+                                <ListItemText primaryTypographyProps={{className: classes.primaryText}}
+                                              secondaryTypographyProps={{className: classes.secondaryText}}
+                                              primary={t('item.discord')} secondary={t('description.login.discord')}/>
+                            </ListItem>
+                        </Card>
                     </Grid>
                 </Grid>
             </form>
-            <Backdrop className={classes.loading} open={loading}>
-                <CircularProgress color={"secondary"} size={50}/>
-            </Backdrop>
         </CardContent>
     </Card>;
 }
