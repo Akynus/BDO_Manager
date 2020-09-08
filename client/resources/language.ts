@@ -1,12 +1,17 @@
 import {Meteor} from "meteor/meteor";
 import i18n, {Resource, TFunction} from "i18next";
 import {initReactI18next} from "react-i18next";
+import ELanguage from "/imports/enumerables/ELanguage";
 import {setLocale} from 'yup';
 
 import pt_BR from "/imports/langs/pt_BR";
+import en_US from "/imports/langs/en_US";
+import Settings from "/imports/collections/SettingCollection";
+import Setting from "/imports/models/Setting";
 
 const resources: Resource = {
-    pt_BR
+    [ELanguage.pt_BR]: pt_BR,
+    [ELanguage.en_US]: en_US
 }
 
 export default class Language {
@@ -30,6 +35,12 @@ export default class Language {
         })
     }
 
+    public static setLng(lng: ELanguage): void {
+        i18n.changeLanguage(lng, error => {
+            if (error) console.error(error);
+        });
+    }
+
     public static get() {
         return i18n;
     }
@@ -40,8 +51,8 @@ i18n.use(initReactI18next).init({
     react: {
         wait: true
     },
-    lng: 'pt_BR',
-    fallbackLng: 'pt_BR',
+    lng: ELanguage.en_US,
+    fallbackLng: [ELanguage.en_US, ELanguage.pt_BR],
     keySeparator: '.',
     interpolation: {
         escapeValue: false,
@@ -51,6 +62,7 @@ i18n.use(initReactI18next).init({
     fallbackNS: [],
     debug: Meteor.isDevelopment,
 }, (error, t) => {
+    if (error) console.error(error);
     Language.setLocale(t);
 });
 
@@ -58,3 +70,11 @@ i18n.on('languageChanged', function (lng) {
     Language.setLocale(i18n.t);
 });
 
+Settings.find({}).observe({
+    added(obj: Setting) {
+        Language.setLng(obj.general.language);
+    },
+    changed(obj: Setting) {
+        Language.setLng(obj.general.language);
+    }
+})

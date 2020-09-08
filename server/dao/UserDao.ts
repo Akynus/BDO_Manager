@@ -4,6 +4,7 @@ import Settings from "/imports/collections/SettingCollection";
 import Profile from "/imports/models/Profile";
 import Profiles from "/imports/collections/ProfileCollection";
 import User from "/imports/models/User";
+import ELanguage from "/imports/enumerables/ELanguage";
 
 interface ILoginEvent {
     type: string;
@@ -22,6 +23,8 @@ const UserDao = {
             if (!user.services.discord) return false;
 
 
+            console.log(user.services.discord);
+
             //<editor-folder defaultstate="collapsed" desc="User options">
             user.profile = {
                 avatar: `https://cdn.discordapp.com/avatars/${user.services.discord.id}/${user.services.discord.avatar}.png`,
@@ -37,6 +40,12 @@ const UserDao = {
                 primary: '#5c6bc0',
                 secondary: '#2196f3'
             }
+
+            setting.general = {
+                language: Object.values(ELanguage).includes(user.services.discord.locale as ELanguage) ? user.services.discord.locale as ELanguage : ELanguage.en_US,
+                timezone: '+04:00'
+            }
+
             setting.user = user._id;
             Settings.insert(setting);
             //</editor-folder>

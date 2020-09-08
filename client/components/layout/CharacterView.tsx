@@ -113,18 +113,18 @@ export default function CharacterView(props: IProps): React.ReactElement<IProps>
                                                 atkPre: props.current!.atkPre,
                                                 atkAwk: props.current!.atkAwk,
                                                 defense: props.current!.defense
-                                            }, props.current!.class == EClasses.SHAI)}/> {t('field.gearScore')}
+                                            }, props.current!.class == EClasses.SHAI)}/> {t('field.gear_score')}
                                         </Grid>
                                         <Grid item={true} xs={12}>
                                             <Divider/>
                                         </Grid>
                                         <Grid item={true} xs={12}>
                                             <Chip color={"secondary"} size={"small"}
-                                                  label={props.current!.atkPre}/> {t('field.atkPre')}
+                                                  label={props.current!.atkPre}/> {t('field.atk_pre')}
                                         </Grid>
                                         {classCharacter().value != EClasses.SHAI && <Grid item={true} xs={12}>
                                             <Chip color={"secondary"} size={"small"}
-                                                  label={props.current!.atkAwk}/> {t('field.atkAwk')}
+                                                  label={props.current!.atkAwk}/> {t('field.atk_awk')}
                                         </Grid>}
                                         <Grid item={true} xs={12}>
                                             <Chip color={"secondary"} size={"small"}

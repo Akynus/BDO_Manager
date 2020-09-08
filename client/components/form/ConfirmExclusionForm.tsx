@@ -58,10 +58,10 @@ const ConfirmExclusionForm = React.forwardRef<ConfirmExclusionFormRef, IProps>((
     }
 
     return (<Dialog onClose={onClose} open={opened} maxWidth={"xs"} TransitionComponent={TransitionDialog}>
-        <DialogTitle>{t('title.confirmExclusion')}</DialogTitle>
+        <DialogTitle>{t('title.confirm_exclusion')}</DialogTitle>
         <DialogContent>
             <DialogContentText>
-                <Trans i18nKey={'description.confirmExclusion'}>
+                <Trans i18nKey={'description.confirm_exclusion'}>
                     If you are sure about remove object <strong>{{text: objectRef.text}}</strong> type its value in text
                     field bellow
                 </Trans>

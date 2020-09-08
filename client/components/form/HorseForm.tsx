@@ -198,7 +198,7 @@ const HorseForm = React.forwardRef<HorseFormFormRef>((props, ref) => {
                             </SelectField>
                         </Grid>
                         <Grid item={true} xs={6}>
-                            <SelectField<boolean> label={String(t('field.hasKrogdalo'))}
+                            <SelectField<boolean> label={String(t('field.has_krodale'))}
                                                   name={'krogdalo'} control={control}
                                                   errors={errors}>
                                 {/* @ts-ignore*/}
@@ -257,8 +257,8 @@ const HorseForm = React.forwardRef<HorseFormFormRef>((props, ref) => {
         <AbsoluteLoading loading={loading}/>
         <Container maxWidth={"md"}>
             <ListItem>
-                <ListItemText primaryTypographyProps={{variant: "h6"}} primary={t('title.formHorse')}
-                              secondary={t('description.formHorse')}/>
+                <ListItemText primaryTypographyProps={{variant: "h6"}} primary={t('title.horse_form')}
+                              secondary={t('description.horse_form')}/>
                 <ListItemSecondaryAction>
                     <IconButton onClick={() => setOpened(false)}>
                         <Icon className={'mdi mdi-close'}/>

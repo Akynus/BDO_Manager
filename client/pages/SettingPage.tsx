@@ -17,7 +17,6 @@ import BreadcrumbPage from "/client/components/layout/BreadcrumbPage";
 import {useTranslation} from "react-i18next";
 import {TabContext, TabList, TabPanel} from "@material-ui/lab";
 import clsx from "clsx";
-import SettingThemingForm from "/client/components/form/SettingThemingForm";
 import {useMongoFetch} from "react-meteor-hooks";
 import Settings from "/imports/collections/SettingCollection";
 import Setting from "/imports/models/Setting";
@@ -26,6 +25,8 @@ import {useSnackbar} from "notistack";
 import {timingCall} from "/imports/utils/Helpers";
 import AbsoluteLoading from "/client/components/layout/AbsoluteLoading";
 import SettingAccountForm from "/client/components/form/SettingAccountForm";
+import SettingThemingForm from "/client/components/form/SettingThemingForm";
+import SettingGeneralForm from "/client/components/form/SettingGeneralForm";
 
 //<editor-folder defaultstate="collapsed" desc="Styles">
 const useStyles = makeStyles((theme: Theme) => createStyles({
@@ -69,11 +70,12 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 export default function SettingPage(): React.ReactElement {
     const classes = useStyles();
     const {t} = useTranslation();
-    const [currentTab, setCurrentTab] = React.useState<string>('1');
+    const [currentTab, setCurrentTab] = React.useState<string>('0');
     const settings: Setting[] = useMongoFetch(Settings.find());
     const {enqueueSnackbar} = useSnackbar();
     const tabs = [
-        {key: "1", icon: 'mdi mdi-account-settings', label: 'item.my_account'},
+        {key: "0", icon: 'mdi mdi-cog', label: 'item.general'},
+        {key: "1", icon: 'mdi mdi-account-cog', label: 'item.my_account'},
         {key: "2", icon: 'mdi mdi-palette', label: 'item.theming'}
     ]
 
@@ -122,6 +124,9 @@ export default function SettingPage(): React.ReactElement {
                     <Hidden only={['sm', 'xs']}>
                         {tabsContent("vertical")}
                     </Hidden>
+                    <TabPanel className={classes.form} value="0">
+                        <SettingGeneralForm object={setting()} onChange={onChange}/>
+                    </TabPanel>
                     <TabPanel className={classes.form} value="1">
                         <SettingAccountForm object={setting()}/>
                     </TabPanel>

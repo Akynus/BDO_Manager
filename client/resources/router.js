@@ -1,5 +1,5 @@
 import React from "react";
-import {mount,withOptions} from 'react-mounter';
+import {mount, withOptions} from 'react-mounter';
 import {Session} from "meteor/session";
 import {FlowRouter} from 'meteor/ostrio:flow-router-extra';
 import EPublish from "/imports/enumerables/EPublish";
@@ -14,6 +14,7 @@ import ProfilePage from "/client/pages/ProfilePage";
 import CharacterPage from "/client/pages/CharacterPage";
 import HorsePage from "/client/pages/HorsePage";
 import SettingPage from "/client/pages/SettingPage";
+import Settings from "/imports/collections/SettingCollection";
 
 const ReactBuild = withOptions({
     rootId: 'application',
@@ -55,7 +56,7 @@ authenticatedRoute.route(ERoutes.PROFILE, {
         this.register(EPublish.PROFILE, Meteor.subscribe(EPublish.PROFILE));
         this.register(EPublish.CHARACTERS, Meteor.subscribe(EPublish.CHARACTERS));
     },
-    onWait(){
+    onWait() {
 
     },
     action() {

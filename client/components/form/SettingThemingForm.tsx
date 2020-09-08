@@ -86,7 +86,7 @@ export default function SettingThemingForm(props: IProps): React.ReactElement<IP
         </Grid>
         <Grid item={true} xs={12}>
             <Typography variant="button" color={"textSecondary"} display="block" gutterBottom={true}>
-                {t('title.colorLayout')}
+                {t('title.color_layout')}
             </Typography>
             <Divider/>
             <List>

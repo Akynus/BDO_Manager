@@ -15,7 +15,6 @@ const values: ILang = {
         insert_horse: 'Adicionar Montaria',
         login: 'Entrar',
         logout: 'Sair',
-        forgotPassword: 'Esqueci minha senha',
         yes: 'Sim',
         no: 'Não',
         none: 'Nenhum',
@@ -25,6 +24,7 @@ const values: ILang = {
         setting: 'Configurações',
         home: 'Página Inicial',
         theming: 'Tematização',
+        general: 'Geral',
         notification: 'Notificação',
         discord: 'Discord',
         my_account: 'Minha conta',
@@ -77,22 +77,20 @@ const values: ILang = {
         welcome: 'Bem-Vindo',
         logout: 'Encerrar sessão',
         accessibility: 'Acessibilidade',
-        colorLayout: 'Cor e Layout',
+        color_layout: 'Cor e Layout',
         description: 'Descrição',
-        gearScore: 'Gear Score',
+        gear_score: 'Gear Score',
         values: 'Valores',
-        formCharacter: 'Cadastro de Personagem',
-        formHorse: 'Cadastro de Montarias',
-        confirmExclusion: 'Excluir registro',
+        character_form: 'Cadastro de Personagem',
+        horse_form: 'Cadastro de Montarias',
+        confirm_exclusion: 'Excluir registro',
         no_characters: 'Não há personagens',
         change_family_name: "Alterar nome de familia",
         main_character: 'Personagem principal',
-        user_account: 'Conta do Usuário'
+        user_account: 'Conta do Usuário',
+        language_and_region: 'Idioma e Região'
     },
     description: {
-        loginWithDiscord: 'Entrar com Discord',
-        loginWithFacebook: 'Entrar com Facebook',
-        loginWithGoogle: "Entrar com Google",
         invalidAuthentication: "Autenticação inválida",
         logoutUser: 'Deseja encerrar a sessão do usuário atual?',
         drawerMenuHide: 'Compactar menu lateral',
@@ -100,19 +98,21 @@ const values: ILang = {
         darkModeVisibility: 'Habilitar modo escuro no layout do sistema',
         searchField: 'Pesquisar',
         choseYourClass: 'Escolha sua classe',
-        formCharacter: 'Selecione sua classe e preencha as descrições do personagem',
-        formHorse: 'Preencha as descrições da montaria',
-        confirmExclusion: 'Se você realmente deseja  excluir esse registro, digite <1>{{text}}</1> no campo de texto abaixo',
+        character_form: 'Selecione sua classe e preencha as descrições do personagem',
+        horse_form: 'Preencha as descrições da montaria',
+        confirm_exclusion: 'Se você realmente deseja  excluir esse registro, digite <1>{{text}}</1> no campo de texto abaixo',
         dream_horse: 'Lendário',
         commonHorse: 'Montaria',
-        hasKrodale: 'Set Krodale equipado',
+        has_krodale: 'Set Krodale equipado',
         family_name: 'Nome da Familia',
         choose_character: 'Clique para selecionar seu personagem principal',
         login: {
             discord: 'Entrar com Discord'
         },
         setting: {
-            refresh_user: 'Sincronizar informações do usuário com o Discord'
+            refresh_user: 'Sincronizar informações do usuário com o Discord',
+            language: 'Escolha o idiome de visualização',
+            region: 'Informe o Fuso Horario da sua região'
         }
     },
     field: {
@@ -124,12 +124,12 @@ const values: ILang = {
         type: 'Tipo',
         combat: 'Tipo de Combate',
         horse: 'Montaria',
-        atkPre: 'AP',
-        atkAwk: 'AP Desperto',
+        atk_pre: 'AP',
+        atk_awk: 'AP Desperto',
         defense: 'Defesa',
-        gearScore: 'Gear Score',
-        gearScoreLink: 'Link/Foto da Build',
-        hasKrogdalo: 'Usa equipamento Krogdalo?',
+        gear_score: 'Gear Score',
+        gear_score_link: 'Link/Foto da Build',
+        has_krodale: 'Usa equipamento Krogdalo?',
         accel: 'Aceleração',
         speed: 'Velocidade',
         brake: 'Freio',
@@ -139,7 +139,9 @@ const values: ILang = {
             dark_mode: 'Modo Escuro',
             primary_color: 'Cor primária',
             secondary_color: 'Cor secundária',
-            refresh_user: 'Atualizar Tag do usuário'
+            refresh_user: 'Atualizar Tag do usuário',
+            language: 'Idioma',
+            region: 'Região'
         }
     },
     validation: {

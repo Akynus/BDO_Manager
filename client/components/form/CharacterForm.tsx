@@ -293,19 +293,19 @@ const CharacterForm = React.forwardRef<CharacterFormRef>((props, ref) => {
                                                 }}/>
                         </Grid>
                         <Grid item={true} xs={12}>
-                            <TextField type={'url'} label={String(t('field.gearScoreLink'))} name={'link'}
+                            <TextField type={'url'} label={String(t('field.gear_score_link'))} name={'link'}
                                        control={control} errors={errors}/>
                         </Grid>
                         <Grid item={true} xs={12}>
-                            <Typography variant={"subtitle2"}>{t('title.gearScore')} ({gearScore()})</Typography>
+                            <Typography variant={"subtitle2"}>{t('title.gear_score')} ({gearScore()})</Typography>
                             <Divider/>
                         </Grid>
                         <Grid item={true} xs={4}>
-                            <TextField type={'number'} label={String(t('field.atkPre'))} name={'atkPre'}
+                            <TextField type={'number'} label={String(t('field.atkPre'))} name={'atk_pre'}
                                        control={control} errors={errors}/>
                         </Grid>
                         <Grid item={true} xs={4}>
-                            <TextField disabled={disableAwk} type={'number'} label={String(t('field.atkAwk'))}
+                            <TextField disabled={disableAwk} type={'number'} label={String(t('field.atk_awk'))}
                                        name={'atkAwk'}
                                        control={control} errors={errors}/>
                         </Grid>
@@ -335,8 +335,8 @@ const CharacterForm = React.forwardRef<CharacterFormRef>((props, ref) => {
         <AbsoluteLoading loading={loading}/>
         <Container maxWidth={"md"}>
             <ListItem>
-                <ListItemText primaryTypographyProps={{variant: "h6"}} primary={t('title.formCharacter')}
-                              secondary={t('description.formCharacter')}/>
+                <ListItemText primaryTypographyProps={{variant: "h6"}} primary={t('title.character_form')}
+                              secondary={t('description.character_form')}/>
                 <ListItemSecondaryAction>
                     <IconButton onClick={() => setOpened(false)}>
                         <Icon className={'mdi mdi-close'}/>

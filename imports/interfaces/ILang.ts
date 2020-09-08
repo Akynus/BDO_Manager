@@ -12,7 +12,6 @@ export default interface ILang {
         delete: string;
         login: string;
         logout: string;
-        forgotPassword: string;
         yes: string;
         no: string;
         none: string;
@@ -24,6 +23,7 @@ export default interface ILang {
         theming: string;
         form: string;
         discord: string;
+        general: string;
         notification: string;
         my_account: string;
         account_services: {
@@ -51,7 +51,7 @@ export default interface ILang {
             archer: string;
             shai: string;
             guardian: string;
-            hashashin:string;
+            hashashin: string;
         };
         combat: {
             awakening: string;
@@ -67,29 +67,27 @@ export default interface ILang {
             arduanatt: string;
             dine: string;
             doom: string;
-        },
+        }
     },
     title: {
         application: string;
         welcome: string;
         logout: string;
         accessibility: string;
-        colorLayout: string;
-        gearScore: string;
+        color_layout: string;
+        gear_score: string;
         values: string;
         description: string;
-        formCharacter: string;
-        formHorse: string;
-        confirmExclusion: string;
+        character_form: string;
+        horse_form: string;
+        confirm_exclusion: string;
         change_family_name: string;
         no_characters: string;
         main_character: string;
         user_account: string;
+        language_and_region: string;
     },
     description: {
-        loginWithFacebook: string;
-        loginWithGoogle: string;
-        loginWithDiscord: string;
         invalidAuthentication: string;
         logoutUser: string;
         drawerMenuHide: string;
@@ -97,12 +95,12 @@ export default interface ILang {
         darkModeVisibility: string;
         searchField: string;
         choseYourClass: string;
-        formCharacter: string;
-        formHorse: string;
+        character_form: string;
+        horse_form: string;
         dream_horse: string;
         commonHorse: string;
-        confirmExclusion: string;
-        hasKrodale: string;
+        confirm_exclusion: string;
+        has_krodale: string;
         family_name: string;
         choose_character: string;
         login: {
@@ -110,6 +108,8 @@ export default interface ILang {
         },
         setting: {
             refresh_user: string;
+            language: string;
+            region: string;
         }
     },
     field: {
@@ -121,12 +121,12 @@ export default interface ILang {
         combat: string;
         horse: string;
         type: string;
-        atkPre: string;
-        atkAwk: string;
+        atk_pre: string;
+        atk_awk: string;
         defense: string;
-        gearScore: string;
-        gearScoreLink: string;
-        hasKrogdalo: string;
+        gear_score: string;
+        gear_score_link: string;
+        has_krodale: string;
         accel: string;
         speed: string;
         brake: string;
@@ -137,6 +137,8 @@ export default interface ILang {
             primary_color: string;
             secondary_color: string;
             refresh_user: string;
+            language: string;
+            region: string;
         }
     },
     validation: {
