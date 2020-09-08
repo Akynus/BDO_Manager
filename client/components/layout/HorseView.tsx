@@ -80,7 +80,7 @@ export default function HorseView(props: IProps): React.ReactElement<IProps> {
     function isDreamHorse(): React.ReactNode {
         return <Grid container={true} item={true} xs={12} alignItems={"center"}>
             <Icon
-                className={clsx(['mdi mdi-star', classes.iconSize, classes.yellowIcon])}/> {t('description.dreamHorse')}
+                className={clsx(['mdi mdi-star', classes.iconSize, classes.yellowIcon])}/> {t('description.dream_horse')}
         </Grid>
     }
 

@@ -254,6 +254,19 @@ const ClassContext: ObjectType = {
             [ECharacterCombat.SUCCESSION]: '/images/classes/large/guardian_succ.jpg'
         }
     },
+    [EClasses.HASHASHIN]:{
+        name:'item.class.hashashin',
+        smallImg: {
+            [ECharacterCombat.AWAKENING]: '/images/classes/small/hashashin_awak.jpg',
+            [ECharacterCombat.SUCCESSION]: '/images/classes/small/hashashin_succ.jpg'
+        },
+        largeImg: {
+            [ECharacterCombat.AWAKENING]: '/images/classes/large/hashashin_awak.jpg',
+            [ECharacterCombat.SUCCESSION]: '/images/classes/large/hashashin_succ.jpg'
+        },
+        value:EClasses.HASHASHIN,
+        icon:'/icons/hashashin.png'
+    }
 }
 
 export default ClassContext;

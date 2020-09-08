@@ -180,6 +180,8 @@ const CharacterForm = React.forwardRef<CharacterFormRef>((props, ref) => {
         data.class = characterClass;
         setLoading(true);
 
+        console.log(data);
+
         let method = (current) ? EMethod.UPDATE_CHARACTER : EMethod.INSERT_CHARACTER;
         if (current) {
             data._id = current;

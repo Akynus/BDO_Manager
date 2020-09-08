@@ -53,7 +53,8 @@ const values: ILang = {
             lahn: 'Lahn',
             archer: 'Arqueiro',
             shai: 'Shai',
-            guardian: 'Guardiã'
+            guardian: 'Guardiã',
+            hashashin: 'Hashashin'
         },
         combat: {
             awakening: 'Despertar',
@@ -102,7 +103,7 @@ const values: ILang = {
         formCharacter: 'Selecione sua classe e preencha as descrições do personagem',
         formHorse: 'Preencha as descrições da montaria',
         confirmExclusion: 'Se você realmente deseja  excluir esse registro, digite <1>{{text}}</1> no campo de texto abaixo',
-        dreamHorse: 'Dream Horse',
+        dream_horse: 'Lendário',
         commonHorse: 'Montaria',
         hasKrodale: 'Set Krodale equipado',
         family_name: 'Nome da Familia',

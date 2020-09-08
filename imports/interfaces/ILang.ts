@@ -51,6 +51,7 @@ export default interface ILang {
             archer: string;
             shai: string;
             guardian: string;
+            hashashin:string;
         };
         combat: {
             awakening: string;
@@ -98,7 +99,7 @@ export default interface ILang {
         choseYourClass: string;
         formCharacter: string;
         formHorse: string;
-        dreamHorse: string;
+        dream_horse: string;
         commonHorse: string;
         confirmExclusion: string;
         hasKrodale: string;

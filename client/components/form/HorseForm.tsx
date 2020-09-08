@@ -168,7 +168,7 @@ const HorseForm = React.forwardRef<HorseFormFormRef>((props, ref) => {
                     </Avatar>
                 </ListItemAvatar>
                 <ListItemText primary={t(currentHorse().name)}
-                              secondary={t(currentHorse().isDreamHorse ? 'description.dreamHorse' : 'description.commonHorse')}/>
+                              secondary={t(currentHorse().isDreamHorse ? 'description.dream_horse' : 'description.commonHorse')}/>
             </ListItem>
             <Divider/>
             <Box className={classes.formPadding}>

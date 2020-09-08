@@ -27,7 +27,7 @@ const CharacterDao = {
                 name: object.name,
                 level: object.level,
                 class: object.class,
-                combatStyle: object.combat,
+                combat: object.combat,
                 atkPre: object.atkPre,
                 atkAwk: object.atkAwk,
                 defense: object.defense,
