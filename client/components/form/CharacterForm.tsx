@@ -233,7 +233,7 @@ const CharacterForm = React.forwardRef<CharacterFormRef>((props, ref) => {
                         <Typography variant={"subtitle2"}>{t('description.choseYourClass')}</Typography>
                         <Divider/>
                     </Grid>
-                    <Grid item={true} container={true} spacing={1} xs={12} justify={"space-between"}>
+                    <Grid item={true} container={true} spacing={1} xs={12}>
                         {Object.keys(ClassContext).map(value => {
                             return <Grid key={ClassContext[value].value} item={true} xs={2}>
                                 <Tooltip title={String(t(ClassContext[value].name))} placement={"top"}>
@@ -301,7 +301,7 @@ const CharacterForm = React.forwardRef<CharacterFormRef>((props, ref) => {
                             <Divider/>
                         </Grid>
                         <Grid item={true} xs={4}>
-                            <TextField type={'number'} label={String(t('field.atkPre'))} name={'atk_pre'}
+                            <TextField type={'number'} label={String(t('field.atk_pre'))} name={'atkPre'}
                                        control={control} errors={errors}/>
                         </Grid>
                         <Grid item={true} xs={4}>

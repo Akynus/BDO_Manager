@@ -109,7 +109,7 @@ export default interface ILang {
         setting: {
             refresh_user: string;
             language: string;
-            region: string;
+            timezone: string;
         }
     },
     field: {
@@ -138,7 +138,7 @@ export default interface ILang {
             secondary_color: string;
             refresh_user: string;
             language: string;
-            region: string;
+            timezone: string;
         }
     },
     validation: {

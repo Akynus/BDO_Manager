@@ -112,7 +112,7 @@ const values: ILang = {
         setting: {
             refresh_user: 'Sincronizar informações do usuário com o Discord',
             language: 'Escolha o idiome de visualização',
-            region: 'Informe o Fuso Horario da sua região'
+            timezone: 'Informe o Fuso Horario da sua região'
         }
     },
     field: {
@@ -141,7 +141,7 @@ const values: ILang = {
             secondary_color: 'Cor secundária',
             refresh_user: 'Atualizar Tag do usuário',
             language: 'Idioma',
-            region: 'Região'
+            timezone: 'Fuso horário'
         }
     },
     validation: {

@@ -5,6 +5,7 @@ import Profile from "/imports/models/Profile";
 import Profiles from "/imports/collections/ProfileCollection";
 import User from "/imports/models/User";
 import ELanguage from "/imports/enumerables/ELanguage";
+import moment from "moment-timezone";
 
 interface ILoginEvent {
     type: string;
@@ -43,7 +44,7 @@ const UserDao = {
 
             setting.general = {
                 language: Object.values(ELanguage).includes(user.services.discord.locale as ELanguage) ? user.services.discord.locale as ELanguage : ELanguage.en_US,
-                timezone: '+04:00'
+                timezone: moment.tz.guess(true)
             }
 
             setting.user = user._id;

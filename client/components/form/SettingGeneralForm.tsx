@@ -14,6 +14,7 @@ import {
 import {useTranslation} from "react-i18next";
 import LanguageContext from "/imports/objects/LanguageContext";
 import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
+import moment from "moment-timezone";
 
 //<editor-folder defaultstate="collapsed" desc="Styles">
 const useStyles = makeStyles((theme: Theme) => createStyles({
@@ -21,14 +22,30 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
         height: 25,
         width: 40,
         objectFit: 'cover'
+    },
+    avatarTime: {
+        height: 25,
+        width: 25,
+        background: 'none',
+        fontSize: 15
     }
 }), {classNamePrefix: 'setting-general'});
 //</editor-folder>
+
+const timezones: string[] = [
+    "America/Sao_Paulo",
+    "America/Cuiaba",
+    "America/Manaus",
+    "America/Los_Angeles",
+    "America/Rio_Branco",
+];
+
 
 export default function SettingGeneralForm(props: IProps): React.ReactElement<IProps> {
     const {t} = useTranslation();
     const classes = useStyles();
     const [showLanguageSelect, setShowLanguageSelect] = React.useState<boolean>(false);
+    const [showTimezoneSelect, setShowTimezoneSelect] = React.useState<boolean>(false);
 
     function onOpenLanguage(): void {
         setShowLanguageSelect(true);
@@ -38,8 +55,17 @@ export default function SettingGeneralForm(props: IProps): React.ReactElement<IP
         setShowLanguageSelect(false);
     }
 
+    function onOpenTimezone(): void {
+        setShowTimezoneSelect(true);
+    }
+
+    function onCloseTimezone(): void {
+        setShowTimezoneSelect(false);
+    }
+
     function onChange(key: string, value: any): void {
-        setShowLanguageSelect(false);
+        onCloseLanguage();
+        onCloseTimezone();
         props.onChange(key, value);
     }
 
@@ -65,6 +91,30 @@ export default function SettingGeneralForm(props: IProps): React.ReactElement<IP
         </Menu>
     }
 
+    function menuTimezone(): React.ReactNode {
+        return <Menu anchorEl={document.getElementById("timezone-text-value")!} keepMounted={true}
+                     open={showTimezoneSelect} onClose={onCloseTimezone} PaperProps={{
+            style: {
+                maxHeight: 300
+            }
+        }}>
+
+            {timezones.sort((a, b) => {
+                const timeA = moment.tz(a).format('Z');
+                const timeB = moment.tz(b).format('Z');
+                console.log(timeA, timeB, timeA.localeCompare(timeB));
+                return timeA.localeCompare(timeB);
+            }).map(value => {
+                const timezone = moment.tz(value);
+                return <MenuItem key={value} onClick={() => onChange('general.timezone', value)}>
+                    <ListItem dense={true}>
+                        <ListItemText primary={`GMT ${timezone.format('Z')}`} secondary={value}/>
+                    </ListItem>
+                </MenuItem>
+            })}
+        </Menu>
+    }
+
     return <Grid container={true} spacing={3}>
         <Grid item={true} xs={12} spacing={1}>
             <Typography variant="button" color={"textSecondary"} display="block" gutterBottom={true}>
@@ -81,17 +131,21 @@ export default function SettingGeneralForm(props: IProps): React.ReactElement<IP
                     <Typography id={'language-text-value'} variant={"subtitle2"}
                                 color={"textSecondary"}>{t(LanguageContext[props.object.general.language].name)}</Typography>
                 </ListItem>
-                <ListItem button={true}>
+                <ListItem button={true} onClick={onOpenTimezone}>
                     <ListItemIcon>
                         <Icon className={'mdi mdi-calendar-clock'}/>
                     </ListItemIcon>
-                    <ListItemText primary={t('field.setting.region')}
-                                  secondary={t('description.setting.region')}/>
-                    <Typography variant={"subtitle2"} color={"textSecondary"}>+ 04:00</Typography>
+                    <ListItemText primary={t('field.setting.timezone')}
+                                  secondary={t('description.setting.timezone')}/>
+                    <Typography variant={"subtitle2"} color={"textSecondary"}>
+                        <Typography id={'timezone-text-value'} variant={"subtitle2"}
+                                    color={"textSecondary"}>{`${moment.tz(props.object.general.timezone).format('Z')} ${props.object.general.timezone}`}</Typography>
+                    </Typography>
                 </ListItem>
             </List>
         </Grid>
         {menuLanguage()}
+        {menuTimezone()}
     </Grid>
 }
 
