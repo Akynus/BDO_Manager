@@ -2,11 +2,13 @@ import React from "react";
 import {mount, withOptions} from 'react-mounter';
 import {Session} from "meteor/session";
 import {FlowRouter} from 'meteor/ostrio:flow-router-extra';
+import {FlowRouterTitle} from 'meteor/ostrio:flow-router-title';
 import EPublish from "/imports/enumerables/EPublish";
 import {URLBackground} from "/imports/objects/GlobalVars";
 import Core from "/client/components/main/Core";
 import ERoutes from "/imports/enumerables/ERoutes";
 import ESession from "/imports/enumerables/ESession";
+import PathNotFound from "/client/components/layout/PathNotFound";
 
 import LoginPage from "/client/pages/LoginPage";
 import HomePage from "/client/pages/HomePage";
@@ -14,16 +16,20 @@ import ProfilePage from "/client/pages/ProfilePage";
 import CharacterPage from "/client/pages/CharacterPage";
 import HorsePage from "/client/pages/HorsePage";
 import SettingPage from "/client/pages/SettingPage";
-import Settings from "/imports/collections/SettingCollection";
+import Language from "/client/resources/language";
 
 const ReactBuild = withOptions({
     rootId: 'application',
 }, mount);
 
-//<editor-folder defaultstate="collapsed" desc="Authenticated Routes">
-const authenticatedRoute = FlowRouter.group({
+
+const mainRouter = FlowRouter.group({
     title: 'BDO Manager',
-    titlePrefix: 'BDO Manager - ',
+    titlePrefix: 'BDO Manager - '
+});
+
+//<editor-folder defaultstate="collapsed" desc="Authenticated Routes">
+const authenticatedRoute = mainRouter.group({
     subscriptions() {
         this.register(EPublish.SETTING, Meteor.subscribe(EPublish.SETTING));
     },
@@ -45,13 +51,18 @@ authenticatedRoute.route(ERoutes.INDEX, {
 });
 authenticatedRoute.route(ERoutes.HOME, {
     name: 'home',
-    title: 'Test',
+    title() {
+        return Language.get().t('item.home');
+    },
     action() {
         ReactBuild(Core, {layout: true, children: <HomePage/>});
     }
 });
 authenticatedRoute.route(ERoutes.PROFILE, {
     name: 'profile',
+    title() {
+        return Language.get().t('item.profile');
+    },
     subscriptions() {
         this.register(EPublish.PROFILE, Meteor.subscribe(EPublish.PROFILE));
         this.register(EPublish.CHARACTERS, Meteor.subscribe(EPublish.CHARACTERS));
@@ -65,7 +76,9 @@ authenticatedRoute.route(ERoutes.PROFILE, {
 });
 authenticatedRoute.route(ERoutes.CHARACTERS, {
     name: 'characters',
-    title: 'Test',
+    title() {
+        return Language.get().t('item.characters');
+    },
     subscriptions() {
         this.register(EPublish.CHARACTERS, Meteor.subscribe(EPublish.CHARACTERS));
         this.register(EPublish.HORSES, Meteor.subscribe(EPublish.HORSES));
@@ -76,6 +89,9 @@ authenticatedRoute.route(ERoutes.CHARACTERS, {
 });
 authenticatedRoute.route(ERoutes.HORSES, {
     name: 'horses',
+    title() {
+        return Language.get().t('item.horses');
+    },
     subscriptions() {
         this.register(EPublish.HORSES, Meteor.subscribe(EPublish.HORSES));
     },
@@ -85,6 +101,9 @@ authenticatedRoute.route(ERoutes.HORSES, {
 });
 authenticatedRoute.route(ERoutes.SETTING, {
     name: 'setting',
+    title() {
+        return Language.get().t('item.setting');
+    },
     action() {
         ReactBuild(Core, {layout: true, children: <SettingPage/>});
     }
@@ -92,7 +111,7 @@ authenticatedRoute.route(ERoutes.SETTING, {
 //</editor-folder>
 
 //<editor-folder defaultstate="collapsed" desc="Unauthenticated Routes">
-const unauthenticatedRoute = FlowRouter.group({
+const unauthenticatedRoute = mainRouter.group({
     triggersEnter: [(context, redirect) => {
         if (Meteor.userId()) redirect('/home');
     }]
@@ -105,6 +124,7 @@ unauthenticatedRoute.route(ERoutes.INDEX, {
 });
 unauthenticatedRoute.route(ERoutes.LOGIN, {
     name: 'login',
+    title: 'Login',
     waitOnResources() {
         return {
             images: [URLBackground.ABOUT_LOGIN,
@@ -120,3 +140,4 @@ unauthenticatedRoute.route(ERoutes.LOGIN, {
 });
 //</editor-folder>
 
+new FlowRouterTitle(FlowRouter);

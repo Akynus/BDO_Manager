@@ -70,6 +70,11 @@ const values: ILang = {
             arduanatt: 'Arduanatt',
             dine: 'Diné',
             doom: 'Doom'
+        },
+        guild: 'Guilda',
+        guild_items: {
+            manage: 'Gerenciar',
+            members: 'Membros'
         }
     },
     title: {

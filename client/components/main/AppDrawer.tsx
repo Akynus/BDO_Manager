@@ -7,6 +7,8 @@ import {FlowRouter} from 'meteor/ostrio:flow-router-extra';
 import {useSession} from "react-meteor-hooks";
 import ESession from "/imports/enumerables/ESession";
 import {
+    Box,
+    Collapse,
     Divider,
     Drawer,
     Icon,
@@ -52,18 +54,23 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
         padding: theme.spacing(0, 4),
         // necessary for content to be below app bar
         ...theme.mixins.toolbar,
-    }
-}));
+    },
+    nested: {
+        paddingLeft: theme.spacing(4),
+    },
+}), {classNamePrefix: 'app-drawer'});
 
 interface IRouteItem {
     key: string;
     icon: string;
     title: string;
+    items?: IRouteItem[];
 }
 
 
 const AppDrawer: React.FunctionComponent = function (props) {
     const classes = useStyles();
+    const [dropdownKey, setDropdownKey] = React.useState<string>('');
     const opened = useSession(ESession.DRAWER_OPENED);
     const {t} = useTranslation();
 
@@ -72,6 +79,7 @@ const AppDrawer: React.FunctionComponent = function (props) {
     }
 
     function goPath(path: string): void {
+        setDropdownKey('');
         FlowRouter.go(path);
     }
 
@@ -80,23 +88,67 @@ const AppDrawer: React.FunctionComponent = function (props) {
         return current.path == path;
     }
 
+    function typeActionOnClick(value: string, type: 'ROUTE' | 'DROPDOWN'): () => void {
+        switch (type) {
+            case "ROUTE": {
+                return () => goPath(value);
+            }
+            case "DROPDOWN": {
+                return () => {
+                    if (dropdownKey == value) {
+                        setDropdownKey('');
+                    } else {
+                        setDropdownKey(value);
+                    }
+                };
+            }
+        }
+    }
+
     function items(): React.ReactNode {
         const routes: IRouteItem[] = [
             {key: ERoutes.HOME, icon: 'mdi mdi-home', title: 'item.home'},
             {key: ERoutes.PROFILE, icon: 'mdi mdi-card-account-details', title: 'item.profile'},
             {key: ERoutes.CHARACTERS, icon: 'mdi mdi-account-multiple', title: 'item.characters'},
             {key: ERoutes.HORSES, icon: 'mdi mdi-horseshoe', title: 'item.horses'},
+            {
+                key: 'GUILD', icon: 'mdi mdi-account-group', title: 'item.guild', items: [
+                    {
+                        key: ERoutes.GUILD_MANAGE,
+                        icon: 'mdi mdi-badge-account-horizontal',
+                        title: 'item.guild_items.manage',
+                    },
+                    {key: ERoutes.GUILD_MEMBERS, icon: 'mdi mdi-account-details', title: 'item.guild_items.members',},
+                ]
+            },
             {key: ERoutes.SETTING, icon: 'mdi mdi-cogs', title: 'item.setting'},
         ];
 
         return <List>
-            {routes.map(value => <ListItem key={value.key} onClick={() => goPath(value.key)}
-                                           selected={isCurrentPath(value.key)} button={true}>
+            {routes.map(value => [<ListItem key={value.key}
+                                            onClick={typeActionOnClick(value.key, (value.items) ? "DROPDOWN" : "ROUTE")}
+                                            selected={isCurrentPath(value.key)} button={true}>
                     <ListItemIcon>
                         <Icon className={value.icon}/>
                     </ListItemIcon>
                     <ListItemText primary={t(value.title)}/>
-                </ListItem>
+                    {value.items && (dropdownKey == value.key ? <Icon className={'mdi mdi-chevron-up'}/> :
+                        <Icon className={'mdi mdi-chevron-down'}/>)}
+                </ListItem>, <Box>
+                    {value.items && <Collapse in={dropdownKey == value.key} timeout="auto" unmountOnExit={true}>
+                        <List component="div" disablePadding={true}>
+                            {value.items.map(value1 => {
+                                return <ListItem key={value1.key} className={classes.nested}
+                                                 onClick={typeActionOnClick(value1.key, "ROUTE")}
+                                                 selected={isCurrentPath(value1.key)} button={true}>
+                                    <ListItemIcon>
+                                        <Icon className={value1.icon}/>
+                                    </ListItemIcon>
+                                    <ListItemText primary={t(value1.title)}/>
+                                </ListItem>
+                            })}
+                        </List>
+                    </Collapse>}</Box>]
             )}
         </List>
     }

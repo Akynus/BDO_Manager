@@ -67,6 +67,11 @@ export default interface ILang {
             arduanatt: string;
             dine: string;
             doom: string;
+        },
+        guild: string;
+        guild_items: {
+            manage: string;
+            members: string;
         }
     },
     title: {

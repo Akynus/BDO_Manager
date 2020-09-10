@@ -88,7 +88,12 @@ const values: ILang = {
         notification: 'Notification',
         profile: 'Profile',
         setting: 'Setting',
-        theming: "theming"
+        theming: "theming",
+        guild: 'Guild',
+        guild_items: {
+            manage: 'Manage',
+            members: 'Members'
+        }
     },
     description: {},
     field: {
@@ -109,7 +114,7 @@ const values: ILang = {
         name: 'Name',
         password: 'Password',
         setting: {
-            region: 'Region',
+            timezone: 'Timezone',
             language: 'Language',
             refresh_user: 'Refresh user',
             dark_mode: 'Dark mode',
