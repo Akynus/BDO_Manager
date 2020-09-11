@@ -15,6 +15,7 @@ import {useTranslation} from "react-i18next";
 import LanguageContext from "/imports/objects/LanguageContext";
 import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
 import moment from "moment-timezone";
+import TimezoneList from "/imports/objects/TimezoneList";
 
 //<editor-folder defaultstate="collapsed" desc="Styles">
 const useStyles = makeStyles((theme: Theme) => createStyles({
@@ -31,14 +32,6 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     }
 }), {classNamePrefix: 'setting-general'});
 //</editor-folder>
-
-const timezones: string[] = [
-    "America/Sao_Paulo",
-    "America/Cuiaba",
-    "America/Manaus",
-    "America/Los_Angeles",
-    "America/Rio_Branco",
-];
 
 
 export default function SettingGeneralForm(props: IProps): React.ReactElement<IProps> {
@@ -99,10 +92,9 @@ export default function SettingGeneralForm(props: IProps): React.ReactElement<IP
             }
         }}>
 
-            {timezones.sort((a, b) => {
+            {TimezoneList.sort((a, b) => {
                 const timeA = moment.tz(a).format('Z');
                 const timeB = moment.tz(b).format('Z');
-                console.log(timeA, timeB, timeA.localeCompare(timeB));
                 return timeA.localeCompare(timeB);
             }).map(value => {
                 const timezone = moment.tz(value);

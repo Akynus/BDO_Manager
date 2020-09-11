@@ -55,6 +55,10 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
         // necessary for content to be below app bar
         ...theme.mixins.toolbar,
     },
+    dropdown: {
+        background: theme.palette.background.default,
+        boxShadow: theme.shadows["3"]
+    },
     nested: {
         paddingLeft: theme.spacing(4),
     },
@@ -79,7 +83,6 @@ const AppDrawer: React.FunctionComponent = function (props) {
     }
 
     function goPath(path: string): void {
-        setDropdownKey('');
         FlowRouter.go(path);
     }
 
@@ -88,10 +91,13 @@ const AppDrawer: React.FunctionComponent = function (props) {
         return current.path == path;
     }
 
-    function typeActionOnClick(value: string, type: 'ROUTE' | 'DROPDOWN'): () => void {
+    function typeActionOnClick(value: string, type: 'ROUTE' | 'DROPDOWN', closeDropdown: boolean = true): () => void {
         switch (type) {
             case "ROUTE": {
-                return () => goPath(value);
+                return () => {
+                    if (closeDropdown) setDropdownKey('');
+                    goPath(value);
+                };
             }
             case "DROPDOWN": {
                 return () => {
@@ -111,35 +117,26 @@ const AppDrawer: React.FunctionComponent = function (props) {
             {key: ERoutes.PROFILE, icon: 'mdi mdi-card-account-details', title: 'item.profile'},
             {key: ERoutes.CHARACTERS, icon: 'mdi mdi-account-multiple', title: 'item.characters'},
             {key: ERoutes.HORSES, icon: 'mdi mdi-horseshoe', title: 'item.horses'},
-            {
-                key: 'GUILD', icon: 'mdi mdi-account-group', title: 'item.guild', items: [
-                    {
-                        key: ERoutes.GUILD_MANAGE,
-                        icon: 'mdi mdi-badge-account-horizontal',
-                        title: 'item.guild_items.manage',
-                    },
-                    {key: ERoutes.GUILD_MEMBERS, icon: 'mdi mdi-account-details', title: 'item.guild_items.members',},
-                ]
-            },
+            {key: ERoutes.GUILD, icon: 'mdi mdi-account-group', title: 'item.guild'},
             {key: ERoutes.SETTING, icon: 'mdi mdi-cogs', title: 'item.setting'},
         ];
 
         return <List>
-            {routes.map(value => [<ListItem key={value.key}
-                                            onClick={typeActionOnClick(value.key, (value.items) ? "DROPDOWN" : "ROUTE")}
-                                            selected={isCurrentPath(value.key)} button={true}>
+            {routes.map((value, index) => [<ListItem key={value.key}
+                                                     onClick={typeActionOnClick(value.key, (value.items) ? "DROPDOWN" : "ROUTE")}
+                                                     selected={isCurrentPath(value.key)} button={true}>
                     <ListItemIcon>
                         <Icon className={value.icon}/>
                     </ListItemIcon>
                     <ListItemText primary={t(value.title)}/>
                     {value.items && (dropdownKey == value.key ? <Icon className={'mdi mdi-chevron-up'}/> :
                         <Icon className={'mdi mdi-chevron-down'}/>)}
-                </ListItem>, <Box>
+                </ListItem>, <Box key={index} className={classes.dropdown}>
                     {value.items && <Collapse in={dropdownKey == value.key} timeout="auto" unmountOnExit={true}>
                         <List component="div" disablePadding={true}>
                             {value.items.map(value1 => {
-                                return <ListItem key={value1.key} className={classes.nested}
-                                                 onClick={typeActionOnClick(value1.key, "ROUTE")}
+                                return <ListItem key={value1.key} className={clsx({[classes.nested]: opened})}
+                                                 onClick={typeActionOnClick(value1.key, "ROUTE", false)}
                                                  selected={isCurrentPath(value1.key)} button={true}>
                                     <ListItemIcon>
                                         <Icon className={value1.icon}/>

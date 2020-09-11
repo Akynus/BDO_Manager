@@ -8,15 +8,16 @@ import {URLBackground} from "/imports/objects/GlobalVars";
 import Core from "/client/components/main/Core";
 import ERoutes from "/imports/enumerables/ERoutes";
 import ESession from "/imports/enumerables/ESession";
-import PathNotFound from "/client/components/layout/PathNotFound";
+import Language from "/client/resources/language";
 
+import PathNotFound from "/client/components/layout/PathNotFound";
 import LoginPage from "/client/pages/LoginPage";
 import HomePage from "/client/pages/HomePage";
 import ProfilePage from "/client/pages/ProfilePage";
 import CharacterPage from "/client/pages/CharacterPage";
 import HorsePage from "/client/pages/HorsePage";
 import SettingPage from "/client/pages/SettingPage";
-import Language from "/client/resources/language";
+import GuildPage from "/client/pages/GuildPage";
 
 const ReactBuild = withOptions({
     rootId: 'application',
@@ -108,6 +109,15 @@ authenticatedRoute.route(ERoutes.SETTING, {
         ReactBuild(Core, {layout: true, children: <SettingPage/>});
     }
 });
+authenticatedRoute.route(ERoutes.GUILD, {
+    name: 'guild',
+    title() {
+        return Language.get().t('item.guild');
+    },
+    action() {
+        ReactBuild(Core, {layout: true, children: <GuildPage/>});
+    }
+})
 //</editor-folder>
 
 //<editor-folder defaultstate="collapsed" desc="Unauthenticated Routes">
@@ -139,5 +149,18 @@ unauthenticatedRoute.route(ERoutes.LOGIN, {
     }
 });
 //</editor-folder>
+
+FlowRouter.route('*', {
+    name: 'not found',
+    title() {
+        return Language.get().t('title.path_not_found');
+    },
+    subscriptions() {
+        this.register(EPublish.SETTING, Meteor.subscribe(EPublish.SETTING));
+    },
+    action() {
+        ReactBuild(Core, {layout: Boolean(Meteor.userId()), children: <PathNotFound/>});
+    }
+});
 
 new FlowRouterTitle(FlowRouter);

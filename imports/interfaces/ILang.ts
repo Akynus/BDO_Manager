@@ -91,6 +91,10 @@ export default interface ILang {
         main_character: string;
         user_account: string;
         language_and_region: string;
+        path_not_found: string;
+        join_guild: string;
+        create_guild: string;
+        guild_form: string;
     },
     description: {
         invalidAuthentication: string;
@@ -108,6 +112,9 @@ export default interface ILang {
         has_krodale: string;
         family_name: string;
         choose_character: string;
+        join_guild: string;
+        create_guild: string;
+        guild_form: string;
         login: {
             discord: string;
         },

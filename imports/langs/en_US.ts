@@ -35,7 +35,10 @@ const values: ILang = {
         language_and_region: 'Language & Region',
         logout: 'Logout',
         values: 'Values',
-        welcome: 'Welcome'
+        welcome: 'Welcome',
+        path_not_found: 'Path Not Found',
+        create_guild: 'Create a new Guild',
+        join_guild: 'Join in a Guild'
     },
     item: {
         general: 'General',

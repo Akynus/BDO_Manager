@@ -4,8 +4,7 @@ enum ERoutes {
     SETTING = '/setting',
     CHARACTERS = '/characters',
     HORSES = "/horses",
-    GUILD_MANAGE = '/guild/manage',
-    GUILD_MEMBERS = 'guild/members',
+    GUILD = '/guild',
 
     INDEX = '/',
     LOGIN = '/login'

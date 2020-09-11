@@ -87,7 +87,7 @@ export default function HorseView(props: IProps): React.ReactElement<IProps> {
     function hasKrogdale(): React.ReactNode {
         return <Grid container={true} item={true} xs={12} alignItems={"center"}>
             <Icon
-                className={clsx(['mdi mdi-shield', classes.iconSize, classes.greenIcon])}/> {t('description.hasKrodale')}
+                className={clsx(['mdi mdi-shield', classes.iconSize, classes.greenIcon])}/> {t('description.has_krodale')}
         </Grid>
     }
 

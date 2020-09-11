@@ -1,19 +1,21 @@
 import SimpleSchema from 'simpl-schema';
 import ELanguage from "/imports/enumerables/ELanguage";
+import TimezoneList from "/imports/objects/TimezoneList";
 
 export default new SimpleSchema({
-    general:{
+    general: {
         type: Object,
         label: 'General'
     },
-    "general.language":{
-        type:String,
-        label:'Language',
+    "general.language": {
+        type: String,
+        label: 'Language',
         allowedValues: Object.values(ELanguage)
     },
-    "general.timezone":{
-        type:String,
-        label:'Timezone',
+    "general.timezone": {
+        type: String,
+        label: 'Timezone',
+        allowedValues: TimezoneList
     },
     theming: {
         type: Object,

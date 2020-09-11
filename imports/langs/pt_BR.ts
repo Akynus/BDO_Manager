@@ -93,7 +93,10 @@ const values: ILang = {
         change_family_name: "Alterar nome de familia",
         main_character: 'Personagem principal',
         user_account: 'Conta do Usuário',
-        language_and_region: 'Idioma e Região'
+        language_and_region: 'Idioma e Região',
+        path_not_found: 'Página não encontrada',
+        join_guild: 'Entrar em uma Guilda',
+        create_guild: 'Criar uma nova Guilda'
     },
     description: {
         invalidAuthentication: "Autenticação inválida",
@@ -111,6 +114,8 @@ const values: ILang = {
         has_krodale: 'Set Krodale equipado',
         family_name: 'Nome da Familia',
         choose_character: 'Clique para selecionar seu personagem principal',
+        join_guild: 'Utilize um código de convite para entrar em uma guilda',
+        create_guild: 'Crie e convide jogadores para sua guilda',
         login: {
             discord: 'Entrar com Discord'
         },

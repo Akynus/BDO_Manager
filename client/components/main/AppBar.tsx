@@ -61,7 +61,12 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
         },
     },
     buttonBase: {
-        borderRadius: '50%'
+        borderRadius: '50%',
+        marginLeft: theme.spacing(1),
+    },
+    buttonAvatar: {
+        background: 'none',
+        color: theme.palette.getContrastText(theme.palette.primary.main)
     }
 }));
 //</editor-folder>
@@ -79,6 +84,7 @@ const AppBar: React.FunctionComponent = function (props) {
     //</editor-folder>
 
     function goPath(path: string): void {
+        setTarget(null);
         FlowRouter.go(path);
     }
 
@@ -160,7 +166,7 @@ const AppBar: React.FunctionComponent = function (props) {
 
     function avatarUser(): React.ReactNode {
         const url = (user?.profile && user.profile.avatar) ? user.profile.avatar : undefined;
-        return <Avatar color={'none'} src={url}>
+        return <Avatar className={classes.buttonAvatar} src={url}>
             <Icon className={'mdi mdi-account'}/>
         </Avatar>
     }
@@ -176,6 +182,12 @@ const AppBar: React.FunctionComponent = function (props) {
             </Tooltip>
             <Typography className={classes.title} variant={"h6"} noWrap={true}>{t('title.application')}</Typography>
             <div className={classes.sectionMobile}>
+                <ButtonBase className={classes.buttonBase}>
+                    <Avatar className={classes.buttonAvatar}>
+                        <Icon className={'mdi mdi-bell'}/>
+                    </Avatar>
+                </ButtonBase>
+
                 <ButtonBase className={classes.buttonBase} onClick={openUserMenu}>
                     {avatarUser()}
                 </ButtonBase>
