@@ -125,19 +125,19 @@ export default function HorseView(props: IProps): React.ReactElement<IProps> {
                                     <Grid container={true} spacing={1}>
                                         <Grid item={true} xs={12}>
                                             <Chip color={"secondary"} size={"small"}
-                                                  label={props.current!.speed}/> {t('field.speed')}
+                                                  label={props.current!.speed.toFixed(1)}/> {t('field.speed')}
                                         </Grid>
                                         <Grid item={true} xs={12}>
                                             <Chip color={"secondary"} size={"small"}
-                                                  label={props.current!.accel}/> {t('field.accel')}
+                                                  label={props.current!.accel.toFixed(1)}/> {t('field.accel')}
                                         </Grid>
                                         <Grid item={true} xs={12}>
                                             <Chip color={"secondary"} size={"small"}
-                                                  label={props.current!.brake}/> {t('field.brake')}
+                                                  label={props.current!.brake.toFixed(1)}/> {t('field.brake')}
                                         </Grid>
                                         <Grid item={true} xs={12}>
                                             <Chip color={"secondary"} size={"small"}
-                                                  label={props.current!.turn}/> {t('field.turn')}
+                                                  label={props.current!.turn.toFixed(1)}/> {t('field.turn')}
                                         </Grid>
                                     </Grid>
                                 </CardContent>

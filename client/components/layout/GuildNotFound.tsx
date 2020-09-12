@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     },
     iconMedia: {
         fontSize: theme.typography.pxToRem(100),
-        color: theme.palette.primary.main
+        color: theme.palette.secondary.main
     },
     cardContent: {
         height: 110
@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 }), {classNamePrefix: 'guild-not-found'});
 //</editor-folder>
 
-export default function GuildNotFound(): React.ReactElement {
+export default function GuildNotFound(props: IProps): React.ReactElement<IProps> {
     const classes = useStyles();
     const {t} = useTranslation();
 
@@ -40,7 +40,7 @@ export default function GuildNotFound(): React.ReactElement {
         <Grid container={true} spacing={3} alignItems={"center"} justify={"center"}>
             <Grid item={true} xs={12} md={4} sm={5}>
                 <Card className={classes.card} elevation={4}>
-                    <CardActionArea>
+                    <CardActionArea onClick={props.onJoin}>
                         <CardMedia className={classes.cardMedia}>
                             <Icon className={clsx(['mdi mdi-account-arrow-right', classes.iconMedia])}/>
                         </CardMedia>
@@ -57,7 +57,7 @@ export default function GuildNotFound(): React.ReactElement {
             </Grid>
             <Grid item={true} xs={12} md={4} sm={5}>
                 <Card className={classes.card} elevation={4}>
-                    <CardActionArea>
+                    <CardActionArea onClick={props.onCreate}>
                         <CardMedia className={classes.cardMedia}>
                             <Icon className={clsx(['mdi mdi-account-multiple-plus', classes.iconMedia])}/>
                         </CardMedia>
@@ -74,4 +74,9 @@ export default function GuildNotFound(): React.ReactElement {
             </Grid>
         </Grid>
     </Box>
+}
+
+interface IProps {
+    onJoin: () => void;
+    onCreate: () => void;
 }

@@ -1,9 +1,10 @@
 import * as React from "react";
 import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
-import {AppBar, Box, Card, Container} from "@material-ui/core";
+import {Card, Container} from "@material-ui/core";
 import BreadcrumbPage from "/client/components/layout/BreadcrumbPage";
 import {useTranslation} from "react-i18next";
 import GuildNotFound from "/client/components/layout/GuildNotFound";
+import GuildCreateForm, {GuildCreateFormRef} from "/client/components/form/GuildCreateForm";
 
 //<editor-folder defaultstate="collapsed" desc="Styles">
 const useStyles = makeStyles((theme: Theme) => createStyles({
@@ -30,11 +31,21 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 export default function GuildPage(): React.ReactElement {
     const classes = useStyles();
     const {t} = useTranslation();
+    const formCreateGuild = React.useRef<GuildCreateFormRef>();
+
+    function onJoin(): void {
+
+    }
+
+    function onCreate(): void {
+        if (formCreateGuild) formCreateGuild.current!.open();
+    }
 
     return (<Container maxWidth="lg" className={classes.root}>
         <BreadcrumbPage title={t('item.guild')}/>
         <Card elevation={10} className={classes.content}>
-            <GuildNotFound/>
+            <GuildNotFound onCreate={onCreate} onJoin={onJoin}/>
         </Card>
+        <GuildCreateForm ref={formCreateGuild}/>
     </Container>);
 }

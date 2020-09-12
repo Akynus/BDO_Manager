@@ -31,6 +31,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
         width: '100%',
         height: '100%',
         minHeight:520,
+        marginBottom: theme.spacing(4),
     },
     boxFlex: {
         width: '100%',
