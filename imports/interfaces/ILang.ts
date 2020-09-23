@@ -12,6 +12,8 @@ export default interface ILang {
         delete: string;
         login: string;
         logout: string;
+        next: string;
+        skip: string;
         yes: string;
         no: string;
         none: string;
@@ -144,6 +146,8 @@ export default interface ILang {
         brake: string;
         turn: string;
         gender: string;
+        discord: string;
+        note: string;
         setting: {
             dark_mode: string;
             primary_color: string;
@@ -153,6 +157,29 @@ export default interface ILang {
             timezone: string;
         }
     },
+    form: {
+        guild: {
+            title: {
+                guild: string;
+                guild_description: string;
+                header: string;
+                header_description: string;
+            }
+            item: {
+                step_one: string;
+                step_two: string;
+                step_three: string;
+                step_four: string;
+            },
+            field: {
+                name: string;
+                discord: string;
+                note: string;
+                icon:string;
+                background:string;
+            }
+        }
+    }
     validation: {
         required: string;
         length: string;
@@ -163,6 +190,7 @@ export default interface ILang {
         min_length: string;
         max_length: string;
         invalid: string;
+        url: string;
     },
     message: {
         not_found: string;

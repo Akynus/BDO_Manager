@@ -54,9 +54,12 @@ export default function LoginForm(): React.ReactElement {
         // @ts-ignore
         Meteor.loginWithDiscord({
             requestPermissions: ['identify', 'email']
-        }, (error: any) => {
+        }, (error: Meteor.TypedError) => {
             if (error) {
-                enqueueSnackbar(t('message.login_failed'), {variant: "error"});
+                if (error.errorType != "Accounts.LoginCancelledError") {
+                    console.error(error);
+                    enqueueSnackbar(t('message.login_failed'), {variant: "error"});
+                }
                 return;
             } else {
                 enqueueSnackbar(t('message.login_successful'), {variant: "success"});

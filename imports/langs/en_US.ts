@@ -138,7 +138,8 @@ const values: ILang = {
         min: 'Value must be more or equals ${min}',
         max_length: 'Length bigger than ${max} characters',
         min_length: 'Length smaller than ${min} characters',
-        invalid: 'Invalid'
+        invalid: 'Invalid',
+        url: 'Invalid link'
     },
 }
 

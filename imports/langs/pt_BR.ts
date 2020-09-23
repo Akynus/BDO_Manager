@@ -15,6 +15,8 @@ const values: ILang = {
         insert_horse: 'Adicionar Montaria',
         login: 'Entrar',
         logout: 'Sair',
+        next: 'Próximo',
+        skip: 'Pular',
         yes: 'Sim',
         no: 'Não',
         none: 'Nenhum',
@@ -96,7 +98,8 @@ const values: ILang = {
         language_and_region: 'Idioma e Região',
         path_not_found: 'Página não encontrada',
         join_guild: 'Entrar em uma Guilda',
-        create_guild: 'Criar uma nova Guilda'
+        create_guild: 'Criar uma nova Guilda',
+        guild_form: 'Formulário de Guilda',
     },
     description: {
         invalidAuthentication: "Autenticação inválida",
@@ -123,7 +126,8 @@ const values: ILang = {
             refresh_user: 'Sincronizar informações do usuário com o Discord',
             language: 'Escolha o idiome de visualização',
             timezone: 'Informe o Fuso Horario da sua região'
-        }
+        },
+        guild_form: 'Preencha as descrições sobre sua Guilda e comece a recrutrar membros'
     },
     field: {
         user: 'Usuário',
@@ -145,6 +149,8 @@ const values: ILang = {
         brake: 'Freio',
         turn: 'Torque',
         gender: 'Gênero',
+        discord: 'Discord',
+        note: 'Observações',
         setting: {
             dark_mode: 'Modo Escuro',
             primary_color: 'Cor primária',
@@ -163,7 +169,31 @@ const values: ILang = {
         min: 'Valor maior ou igual à ${min}',
         max_length: 'Tamanho maior que ${max} caracteres',
         min_length: 'Tamanho menor que ${min} caracteres',
-        invalid: 'Campo invalido'
+        invalid: 'Campo invalido',
+        url: 'Link informado é invalido',
+    },
+    form: {
+        guild: {
+            title: {
+                guild: 'Painel da Guilda',
+                guild_description: 'Informações basicas para descrição da Guilda',
+                header: 'Apresentação',
+                header_description: 'Adicione o icone e um plano de fundo para o painel da Guilda'
+            },
+            item: {
+                step_one: 'Informações Gerais',
+                step_two: 'Apresentação da Guilda',
+                step_three: 'Regras e Permissões',
+                step_four: 'Finalização'
+            },
+            field: {
+                name: 'Nome da Guilda',
+                discord: 'Link do Discord',
+                note: 'Observações e comentários',
+                icon: 'Icone da Guilda',
+                background: 'Plano de fundo'
+            }
+        }
     },
     message: {
         not_found: 'Registro não encontrado',

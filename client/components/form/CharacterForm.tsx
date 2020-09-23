@@ -43,6 +43,7 @@ import {countGS, timingCall} from "/imports/utils/Helpers";
 import Horse from "/imports/models/Horse";
 import {useMethod, useMongoFetch} from "react-meteor-hooks";
 import Horses from "/imports/collections/HorseCollection";
+import RandomID from "/client/utils/RandomID";
 
 const TransitionDialog = React.forwardRef(function Transition(props: TransitionProps & { children?: React.ReactElement }, ref: React.Ref<unknown>) {
     return <Fade timeout={1000} ref={ref} {...props} />;
@@ -77,7 +78,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
         width: '100%'
     },
     formPadding: {padding: theme.spacing(2)}
-}));
+}), {classNamePrefix: RandomID()});
 //</editor-folder>
 
 //<editor-folder defaultstate="collapsed" desc="Types">

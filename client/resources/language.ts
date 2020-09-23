@@ -23,6 +23,7 @@ export default class Language {
                 default: t('validation.invalid')
             },
             string: {
+                url: t('validation.url'),
                 length: t('validation.length'),
                 max: t('validation.max_length'),
                 min: t('validation.min_length'),
@@ -37,8 +38,10 @@ export default class Language {
 
     public static setLng(lng: ELanguage): void {
         i18n.changeLanguage(lng, error => {
-            if (error) console.error(error);
-        });
+            if (error) {
+                console.error(error);
+            }
+        }).then(Language.setLocale);
     }
 
     public static get() {
@@ -77,4 +80,4 @@ Settings.find({}).observe({
     changed(obj: Setting) {
         Language.setLng(obj.general.language);
     }
-})
+});
