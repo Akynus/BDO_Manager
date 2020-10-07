@@ -43,7 +43,7 @@ const Theming: React.FunctionComponent = function (props) {
 
     function typography(): TypographyOptions {
         return {
-            //fontFamily: 'Poppins, Arial',
+            fontFamily: 'Quicksand, Arial',
         }
     }
 

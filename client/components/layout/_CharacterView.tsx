@@ -51,7 +51,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     }
 }));
 
-export default function CharacterView(props: IProps): React.ReactElement<IProps> {
+export default function _CharacterView(props: IProps): React.ReactElement<IProps> {
     const classes = useStyles();
     const {t} = useTranslation();
     const [speedOpen, setSpeedOpen] = React.useState<boolean>(false);

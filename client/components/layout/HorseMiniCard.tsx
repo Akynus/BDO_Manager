@@ -7,7 +7,8 @@ import {useTranslation} from "react-i18next";
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
     root: {
-        position: 'relative'
+        position: 'relative',
+        height: 110
     },
     background: {
         position: 'absolute',
@@ -26,12 +27,12 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     },
     img: {
         width: '100%',
-        height: '100%',
+        height: 110,
         objectFit: 'cover'
     }
 }));
 
-export default function HorseMiniCard(props:IProps):React.ReactElement<IProps>{
+export default function HorseMiniCard(props: IProps): React.ReactElement<IProps> {
     if (!props.horse) return <div/>;
     const classes = useStyles();
     const {t} = useTranslation();
@@ -40,7 +41,7 @@ export default function HorseMiniCard(props:IProps):React.ReactElement<IProps>{
         return HorseContext[props.horse!.type!];
     }
 
-    return <Card className={classes.root} key={String(props.horse._id)}>
+    return <Card elevation={10} className={classes.root} key={String(props.horse._id)}>
         <div className={classes.background}>
             <img width={'100%'} height={'100%'} className={classes.img}
                  src={type().img}/>

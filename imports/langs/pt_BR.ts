@@ -139,7 +139,7 @@ const values: ILang = {
         combat: 'Tipo de Combate',
         horse: 'Montaria',
         atk_pre: 'AP',
-        atk_awk: 'AP Desperto',
+        atk_awk: 'AP Despertado',
         defense: 'Defesa',
         gear_score: 'Gear Score',
         gear_score_link: 'Link/Foto da Build',
