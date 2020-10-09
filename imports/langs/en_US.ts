@@ -116,6 +116,12 @@ const values: ILang = {
         level: 'Level',
         name: 'Name',
         password: 'Password',
+        characters: {
+            score_ap: 'Hidden Attack',
+            score_ap_awk: 'Hidden Attack Awakening',
+            score_dp: 'Damage Reduction',
+            score_bonus:'Bonus'
+        },
         setting: {
             timezone: 'Timezone',
             language: 'Language',

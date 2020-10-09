@@ -148,6 +148,12 @@ export default interface ILang {
         gender: string;
         discord: string;
         note: string;
+        characters: {
+            score_ap: string;
+            score_ap_awk: string;
+            score_dp: string;
+            score_bonus:string;
+        },
         setting: {
             dark_mode: string;
             primary_color: string;
@@ -175,8 +181,8 @@ export default interface ILang {
                 name: string;
                 discord: string;
                 note: string;
-                icon:string;
-                background:string;
+                icon: string;
+                background: string;
             }
         }
     }

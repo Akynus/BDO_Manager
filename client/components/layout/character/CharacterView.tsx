@@ -7,7 +7,7 @@ import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
 import {TabContext, TabPanel} from "@material-ui/lab";
 import {
     Avatar, Box,
-    Card, CardContent,
+    Card, CardContent, CardHeader,
     Grid,
     Grow,
     Hidden,
@@ -25,6 +25,8 @@ import {useTranslation} from "react-i18next";
 import {red} from "@material-ui/core/colors";
 import HorseMiniCard from "/client/components/layout/HorseMiniCard";
 import Horses from "/imports/collections/HorseCollection";
+import RenownScoreTable from "/client/components/layout/character/RenownScoreTable";
+import {getRenownScore} from "/imports/utils/Helpers";
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
     tabPanel: {
@@ -39,6 +41,13 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     },
     cardImg: {
         height: 364
+    },
+    paddingTop: {
+        paddingTop: theme.spacing(2)
+    },
+    alignMiddle: {
+        display: 'flex',
+        alignItems: 'center'
     },
     containerInfo: {
         height: 'min-content',
@@ -123,13 +132,13 @@ export default function CharacterView(props: IProps): React.ReactElement<IProps>
                 </Slide>
             </Grid>
             <Grid item xs={4}>
-                {cardGear('mdi mdi-sword', item.atkPre, t('field.atk_pre'))}
+                {cardGear('mdi mdi-sword', item.atkPre, t('field.atk_pre'), `+${getRenownScore("AP", item.atkPre)}`)}
             </Grid>
             <Grid item xs={4}>
-                {cardGear('mdi mdi-sword', item.atkAwk, t('field.atk_awk'))}
+                {cardGear('mdi mdi-sword', item.atkAwk, t('field.atk_awk'), `+${getRenownScore("AP_AWK", item.atkAwk)}`)}
             </Grid>
             <Grid item xs={4}>
-                {cardGear('mdi mdi-shield-half-full', item.defense, t('field.defense'))}
+                {cardGear('mdi mdi-shield-half-full', item.defense, t('field.defense'), `${getRenownScore("DP", item.defense)}%`)}
             </Grid>
             <Grid item xs={12} md={8}>
                 {horseItem(item)}
@@ -137,7 +146,7 @@ export default function CharacterView(props: IProps): React.ReactElement<IProps>
         </Grid>
     }
 
-    function cardGear(icon: string, value: number, label: any): React.ReactNode {
+    function cardGear(icon: string, value: number, label: any, bonus: string): React.ReactNode {
         return <Grow timeout={600} in={true}>
             <Card elevation={10}>
                 <CardContent>
@@ -149,7 +158,16 @@ export default function CharacterView(props: IProps): React.ReactElement<IProps>
                             </Avatar>
                         </Grid>
                         <Grid item>
-                            <Typography variant={"h6"} noWrap={true} gutterBottom={false}>{value}</Typography>
+                            <Typography className={classes.alignMiddle} align={"center"} variant={"h6"}
+                                        component={"span"} noWrap={true}
+                                        gutterBottom={false}>
+                                {value}
+                                <Typography component={"span"} display={"inline"}
+                                            variant={"subtitle2"} color={"textSecondary"}
+                                            noWrap={true}
+                                            gutterBottom={false}>{` (${bonus})`}</Typography>
+                            </Typography>
+
                         </Grid>
                         <Grid item>
                             <Typography variant={"subtitle2"} color={"textSecondary"} noWrap={true}
@@ -178,6 +196,28 @@ export default function CharacterView(props: IProps): React.ReactElement<IProps>
                 <Box flexGrow={1}>
                     {profileContent(item)}
                 </Box>
+            </Box>
+            <Box className={classes.paddingTop}>
+                <Grid container spacing={2} alignItems={"center"}>
+                    <Grid item xs={12} md={4}>
+                        <Card elevation={10}>
+                            <CardHeader title={t('field.characters.score_ap')}/>
+                            <RenownScoreTable type={"AP"} score={item.atkPre}/>
+                        </Card>
+                    </Grid>
+                    <Grid item xs={12} md={4}>
+                        <Card elevation={10}>
+                            <CardHeader title={t('field.characters.score_ap_awk')}/>
+                            <RenownScoreTable type={"AP_AWK"} score={item.atkAwk}/>
+                        </Card>
+                    </Grid>
+                    <Grid item xs={12} md={4}>
+                        <Card elevation={10}>
+                            <CardHeader title={t('field.characters.score_dp')}/>
+                            <RenownScoreTable type={"DP"} score={item.defense}/>
+                        </Card>
+                    </Grid>
+                </Grid>
             </Box>
         </TabPanel>
     }

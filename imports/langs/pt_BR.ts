@@ -151,6 +151,12 @@ const values: ILang = {
         gender: 'Gênero',
         discord: 'Discord',
         note: 'Observações',
+        characters: {
+            score_ap: 'Ataque Bonus',
+            score_ap_awk: 'Ataque Desperto Bonus',
+            score_dp: 'Redução de Dano',
+            score_bonus: 'Bônus'
+        },
         setting: {
             dark_mode: 'Modo Escuro',
             primary_color: 'Cor primária',

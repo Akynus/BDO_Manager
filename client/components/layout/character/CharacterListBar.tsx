@@ -7,6 +7,7 @@ import ICharacterClass from "/imports/interfaces/ICharacterClass";
 import ClassContext from "/imports/objects/ClassContext";
 import EClasses from "/imports/enumerables/EClasses";
 import clsx from "clsx";
+import {useTranslation} from "react-i18next";
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
     bar: {
@@ -20,6 +21,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 
 export default function CharacterListBar(props: IProps): React.ReactElement<IProps> {
     const classes = useStyles();
+    const {t} = useTranslation();
 
     function classType(classKey: EClasses): ICharacterClass {
         return ClassContext[classKey];
@@ -34,7 +36,7 @@ export default function CharacterListBar(props: IProps): React.ReactElement<IPro
     function addItem(): React.ReactNode {
         return <Tab key={'add-item'} value={null}
                     icon={<Icon className={clsx(['mdi mdi-account-multiple-plus', classes.iconAdd])}/>}
-                    unselectable={"on"} label={'Adicionar'}/>
+                    unselectable={"on"} label={t('action.insert_character')}/>
     }
 
     function buildList(): React.ReactNode {
