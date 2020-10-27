@@ -1,4 +1,4 @@
-enum EClasses {
+enum EClass {
     WARRIOR = "WARRIOR",
     RANGER = "RANGER",
     SORCERESS = "SORCERESS",
@@ -21,4 +21,4 @@ enum EClasses {
     HASHASHIN="HASHASHIN"
 }
 
-export default EClasses;
+export default EClass;

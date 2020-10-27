@@ -1,6 +1,6 @@
 import * as React from "react";
 import Character from "/imports/models/Character";
-import EClasses from "/imports/enumerables/EClasses";
+import EClass from "/imports/enumerables/EClass";
 import ICharacterClass from "/imports/interfaces/ICharacterClass";
 import ClassContext from "/imports/objects/ClassContext";
 import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
@@ -73,7 +73,7 @@ export default function CharacterView(props: IProps): React.ReactElement<IProps>
     const classes = useStyles();
     const {t} = useTranslation();
 
-    function classType(classKey: EClasses): ICharacterClass {
+    function classType(classKey: EClass): ICharacterClass {
         return ClassContext[classKey];
     }
 
@@ -85,7 +85,7 @@ export default function CharacterView(props: IProps): React.ReactElement<IProps>
         return <Grid container={true} spacing={1}>
             <Grid item={true} xs={6}>
                 <Tooltip placement={"top"} title={String(t('action.edit'))}>
-                    <IconButton aria-label="edit">
+                    <IconButton aria-label="edit" onClick={() => props.onEdit(item._id)}>
                         <Icon className={'mdi mdi-pencil'}/>
                     </IconButton>
                 </Tooltip>
@@ -231,4 +231,5 @@ export default function CharacterView(props: IProps): React.ReactElement<IProps>
 interface IProps {
     selected?: Mongo.ObjectID | undefined;
     datasource: Character[];
+    onEdit: (id: Mongo.ObjectID) => void;
 }

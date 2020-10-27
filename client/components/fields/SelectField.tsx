@@ -28,7 +28,7 @@ export default function SelectField<T = Object>(props: IProps<T>): React.ReactEl
 
     return (<FormControl disabled={props.disabled} fullWidth={true} variant={"outlined"} size={"small"}
                          error={Boolean(props.errors[props.name])}>
-        <InputLabel htmlFor={props.name}>{props.label}</InputLabel>
+        <InputLabel shrink={true} htmlFor={props.name}>{props.label}</InputLabel>
         <Controller id={props.name} control={props.control} name={props.name}
                     render={(_props) => <Select label={props.label} value={_props.value} onChange={_props.onChange} onBlur={_props.onBlur}>{buildItems()}</Select>}/>
         {props.errors[props.name] && <FormHelperText>{props.errors[props.name].message}</FormHelperText>}

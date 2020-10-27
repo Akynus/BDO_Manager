@@ -1,16 +1,16 @@
-import EClasses from "/imports/enumerables/EClasses";
+import EClass from "/imports/enumerables/EClass";
 import ICharacterClass from "/imports/interfaces/ICharacterClass";
 import ECharacterCombat from "/imports/enumerables/ECharacterCombat";
 
 type ObjectType = {
-    [x in EClasses]: ICharacterClass
+    [x in EClass]: ICharacterClass
 };
 
 const ClassContext: ObjectType = {
-    [EClasses.WARRIOR]: {
+    [EClass.WARRIOR]: {
         icon: '/icons/warrior.png',
         name: 'item.class.warrior',
-        value: EClasses.WARRIOR,
+        value: EClass.WARRIOR,
         smallImg: {
             [ECharacterCombat.AWAKENING]: '/images/classes/small/warrior_awak.jpg',
             [ECharacterCombat.SUCCESSION]: '/images/classes/small/warrior_succ.jpg'
@@ -20,10 +20,10 @@ const ClassContext: ObjectType = {
             [ECharacterCombat.SUCCESSION]: '/images/classes/large/warrior_succ.jpg'
         }
     },
-    [EClasses.SORCERESS]: {
+    [EClass.SORCERESS]: {
         icon: '/icons/sorceress.png',
         name: 'item.class.sorceress',
-        value: EClasses.SORCERESS,
+        value: EClass.SORCERESS,
         smallImg: {
             [ECharacterCombat.AWAKENING]: '/images/classes/small/sorceress_awak.jpg',
             [ECharacterCombat.SUCCESSION]: '/images/classes/small/sorceress_succ.jpg'
@@ -33,10 +33,10 @@ const ClassContext: ObjectType = {
             [ECharacterCombat.SUCCESSION]: '/images/classes/large/sorceress_succ.jpg'
         }
     },
-    [EClasses.RANGER]: {
+    [EClass.RANGER]: {
         icon: '/icons/ranger.png',
         name: 'item.class.sorceress',
-        value: EClasses.RANGER,
+        value: EClass.RANGER,
         smallImg: {
             [ECharacterCombat.AWAKENING]: '/images/classes/small/ranger_awak.jpg',
             [ECharacterCombat.SUCCESSION]: '/images/classes/small/ranger_succ.jpg'
@@ -46,10 +46,10 @@ const ClassContext: ObjectType = {
             [ECharacterCombat.SUCCESSION]: '/images/classes/large/ranger_succ.jpg'
         }
     },
-    [EClasses.BERSERKER]: {
+    [EClass.BERSERKER]: {
         icon: '/icons/berserker.png',
         name: 'item.class.berserker',
-        value: EClasses.BERSERKER,
+        value: EClass.BERSERKER,
         smallImg: {
             [ECharacterCombat.AWAKENING]: '/images/classes/small/berserker_awak.jpg',
             [ECharacterCombat.SUCCESSION]: '/images/classes/small/berserker_succ.jpg'
@@ -59,10 +59,10 @@ const ClassContext: ObjectType = {
             [ECharacterCombat.SUCCESSION]: '/images/classes/large/berserker_succ.jpg'
         }
     },
-    [EClasses.TAMER]: {
+    [EClass.TAMER]: {
         icon: '/icons/tamer.png',
         name: 'item.class.tamer',
-        value: EClasses.TAMER,
+        value: EClass.TAMER,
         smallImg: {
             [ECharacterCombat.AWAKENING]: '/images/classes/small/tamer_awak.jpg',
             [ECharacterCombat.SUCCESSION]: '/images/classes/small/tamer_succ.jpg'
@@ -72,10 +72,10 @@ const ClassContext: ObjectType = {
             [ECharacterCombat.SUCCESSION]: '/images/classes/large/tamer_succ.jpg'
         }
     },
-    [EClasses.VALKYRIE]: {
+    [EClass.VALKYRIE]: {
         icon: '/icons/valkyrie.png',
         name: 'item.class.valkyrie',
-        value: EClasses.VALKYRIE,
+        value: EClass.VALKYRIE,
         smallImg: {
             [ECharacterCombat.AWAKENING]: '/images/classes/small/valkyrie_awak.jpg',
             [ECharacterCombat.SUCCESSION]: '/images/classes/small/valkyrie_succ.jpg'
@@ -85,10 +85,10 @@ const ClassContext: ObjectType = {
             [ECharacterCombat.SUCCESSION]: '/images/classes/large/valkyrie_succ.jpg'
         }
     },
-    [EClasses.MUSA]: {
+    [EClass.MUSA]: {
         icon: '/icons/musa.png',
         name: 'item.class.musa',
-        value: EClasses.MUSA,
+        value: EClass.MUSA,
         smallImg: {
             [ECharacterCombat.AWAKENING]: '/images/classes/small/musa_awak.jpg',
             [ECharacterCombat.SUCCESSION]: '/images/classes/small/musa_succ.jpg'
@@ -98,10 +98,10 @@ const ClassContext: ObjectType = {
             [ECharacterCombat.SUCCESSION]: '/images/classes/large/musa_succ.jpg'
         }
     },
-    [EClasses.MAEHWA]: {
+    [EClass.MAEHWA]: {
         icon: '/icons/maehwa.png',
         name: 'item.class.maehwa',
-        value: EClasses.MAEHWA,
+        value: EClass.MAEHWA,
         smallImg: {
             [ECharacterCombat.AWAKENING]: '/images/classes/small/maehwa_awak.jpg',
             [ECharacterCombat.SUCCESSION]: '/images/classes/small/maehwa_succ.jpg'
@@ -111,10 +111,10 @@ const ClassContext: ObjectType = {
             [ECharacterCombat.SUCCESSION]: '/images/classes/large/maehwa_succ.jpg'
         }
     },
-    [EClasses.NINJA]: {
+    [EClass.NINJA]: {
         icon: '/icons/ninja.png',
         name: 'item.class.ninja',
-        value: EClasses.NINJA,
+        value: EClass.NINJA,
         smallImg: {
             [ECharacterCombat.AWAKENING]: '/images/classes/small/ninja_awak.jpg',
             [ECharacterCombat.SUCCESSION]: '/images/classes/small/ninja_succ.jpg'
@@ -124,10 +124,10 @@ const ClassContext: ObjectType = {
             [ECharacterCombat.SUCCESSION]: '/images/classes/large/ninja_succ.jpg'
         }
     },
-    [EClasses.KUNOICHI]: {
+    [EClass.KUNOICHI]: {
         icon: '/icons/kunoichi.png',
         name: 'item.class.kunoichi',
-        value: EClasses.KUNOICHI,
+        value: EClass.KUNOICHI,
         smallImg: {
             [ECharacterCombat.AWAKENING]: '/images/classes/small/kunoichi_awak.jpg',
             [ECharacterCombat.SUCCESSION]: '/images/classes/small/kunoichi_succ.jpg'
@@ -137,10 +137,10 @@ const ClassContext: ObjectType = {
             [ECharacterCombat.SUCCESSION]: '/images/classes/large/kunoichi_succ.jpg'
         }
     },
-    [EClasses.WIZARD]: {
+    [EClass.WIZARD]: {
         icon: '/icons/wizard.png',
         name: 'item.class.wizard',
-        value: EClasses.WIZARD,
+        value: EClass.WIZARD,
         smallImg: {
             [ECharacterCombat.AWAKENING]: '/images/classes/small/wizard_awak.jpg',
             [ECharacterCombat.SUCCESSION]: '/images/classes/small/wizard_succ.jpg'
@@ -150,10 +150,10 @@ const ClassContext: ObjectType = {
             [ECharacterCombat.SUCCESSION]: '/images/classes/large/wizard_succ.jpg'
         }
     },
-    [EClasses.WITCH]: {
+    [EClass.WITCH]: {
         icon: '/icons/witch.png',
         name: 'item.class.witch',
-        value: EClasses.WITCH,
+        value: EClass.WITCH,
         smallImg: {
             [ECharacterCombat.AWAKENING]: '/images/classes/small/witch_awak.jpg',
             [ECharacterCombat.SUCCESSION]: '/images/classes/small/witch_succ.jpg'
@@ -163,10 +163,10 @@ const ClassContext: ObjectType = {
             [ECharacterCombat.SUCCESSION]: '/images/classes/large/witch_succ.jpg'
         }
     },
-    [EClasses.DARK_KNIGHT]: {
+    [EClass.DARK_KNIGHT]: {
         icon: '/icons/dark_knight.png',
         name: 'item.class.dark_knight',
-        value: EClasses.DARK_KNIGHT,
+        value: EClass.DARK_KNIGHT,
         smallImg: {
             [ECharacterCombat.AWAKENING]: '/images/classes/small/dark_knight_awak.jpg',
             [ECharacterCombat.SUCCESSION]: '/images/classes/small/dark_knight_succ.jpg'
@@ -176,10 +176,10 @@ const ClassContext: ObjectType = {
             [ECharacterCombat.SUCCESSION]: '/images/classes/large/dark_knight_succ.jpg'
         }
     },
-    [EClasses.STRIKER]: {
+    [EClass.STRIKER]: {
         icon: '/icons/striker.png',
         name: 'item.class.striker',
-        value: EClasses.STRIKER,
+        value: EClass.STRIKER,
         smallImg: {
             [ECharacterCombat.AWAKENING]: '/images/classes/small/striker_awak.jpg',
             [ECharacterCombat.SUCCESSION]: '/images/classes/small/striker_succ.jpg'
@@ -189,10 +189,10 @@ const ClassContext: ObjectType = {
             [ECharacterCombat.SUCCESSION]: '/images/classes/large/striker_succ.jpg'
         }
     },
-    [EClasses.MYSTIC]: {
+    [EClass.MYSTIC]: {
         icon: '/icons/mystic.png',
         name: 'item.class.mystic',
-        value: EClasses.MYSTIC,
+        value: EClass.MYSTIC,
         smallImg: {
             [ECharacterCombat.AWAKENING]: '/images/classes/small/mystic_awak.jpg',
             [ECharacterCombat.SUCCESSION]: '/images/classes/small/mystic_succ.jpg'
@@ -202,10 +202,10 @@ const ClassContext: ObjectType = {
             [ECharacterCombat.SUCCESSION]: '/images/classes/large/mystic_succ.jpg'
         }
     },
-    [EClasses.LAHN]: {
+    [EClass.LAHN]: {
         icon: '/icons/lahn.png',
         name: 'item.class.lahn',
-        value: EClasses.LAHN,
+        value: EClass.LAHN,
         smallImg: {
             [ECharacterCombat.AWAKENING]: '/images/classes/small/lahn_awak.jpg',
             [ECharacterCombat.SUCCESSION]: '/images/classes/small/lahn_succ.jpg'
@@ -215,10 +215,10 @@ const ClassContext: ObjectType = {
             [ECharacterCombat.SUCCESSION]: '/images/classes/large/lahn_succ.jpg'
         }
     },
-    [EClasses.ARCHER]: {
+    [EClass.ARCHER]: {
         icon: '/icons/archer.png',
         name: 'item.class.archer',
-        value: EClasses.ARCHER,
+        value: EClass.ARCHER,
         smallImg: {
             [ECharacterCombat.AWAKENING]: '/images/classes/small/archer_awak.jpg',
             [ECharacterCombat.SUCCESSION]: '/images/classes/small/archer_awak.jpg'
@@ -228,10 +228,10 @@ const ClassContext: ObjectType = {
             [ECharacterCombat.SUCCESSION]: '/images/classes/large/archer_awak.jpg'
         }
     },
-    [EClasses.SHAI]: {
+    [EClass.SHAI]: {
         icon: '/icons/shai.png',
         name: 'item.class.shai',
-        value: EClasses.SHAI,
+        value: EClass.SHAI,
         smallImg: {
             [ECharacterCombat.AWAKENING]: '/images/classes/small/shai_awak.jpg',
             [ECharacterCombat.SUCCESSION]: '/images/classes/small/shai_awak.jpg'
@@ -241,10 +241,10 @@ const ClassContext: ObjectType = {
             [ECharacterCombat.SUCCESSION]: '/images/classes/large/shai_awak.jpg'
         }
     },
-    [EClasses.GUARDIAN]: {
+    [EClass.GUARDIAN]: {
         icon: '/icons/guardian.png',
         name: 'item.class.guardian',
-        value: EClasses.GUARDIAN,
+        value: EClass.GUARDIAN,
         smallImg: {
             [ECharacterCombat.AWAKENING]: '/images/classes/small/guardian_awak.jpg',
             [ECharacterCombat.SUCCESSION]: '/images/classes/small/guardian_succ.jpg'
@@ -254,7 +254,7 @@ const ClassContext: ObjectType = {
             [ECharacterCombat.SUCCESSION]: '/images/classes/large/guardian_succ.jpg'
         }
     },
-    [EClasses.HASHASHIN]:{
+    [EClass.HASHASHIN]:{
         name:'item.class.hashashin',
         smallImg: {
             [ECharacterCombat.AWAKENING]: '/images/classes/small/hashashin_awak.jpg',
@@ -264,7 +264,7 @@ const ClassContext: ObjectType = {
             [ECharacterCombat.AWAKENING]: '/images/classes/large/hashashin_awak.jpg',
             [ECharacterCombat.SUCCESSION]: '/images/classes/large/hashashin_succ.jpg'
         },
-        value:EClasses.HASHASHIN,
+        value:EClass.HASHASHIN,
         icon:'/icons/hashashin.png'
     }
 }

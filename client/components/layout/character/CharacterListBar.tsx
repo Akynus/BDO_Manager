@@ -5,7 +5,7 @@ import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
 import {Mongo} from "meteor/mongo";
 import ICharacterClass from "/imports/interfaces/ICharacterClass";
 import ClassContext from "/imports/objects/ClassContext";
-import EClasses from "/imports/enumerables/EClasses";
+import EClass from "EClass.ts";
 import clsx from "clsx";
 import {useTranslation} from "react-i18next";
 
@@ -23,7 +23,7 @@ export default function CharacterListBar(props: IProps): React.ReactElement<IPro
     const classes = useStyles();
     const {t} = useTranslation();
 
-    function classType(classKey: EClasses): ICharacterClass {
+    function classType(classKey: EClass): ICharacterClass {
         return ClassContext[classKey];
     }
 

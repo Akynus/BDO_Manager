@@ -1,5 +1,5 @@
 import {Mongo} from "meteor/mongo";
-import EClasses from "/imports/enumerables/EClasses";
+import EClass from "EClass.ts";
 import ECharacterCombat from "/imports/enumerables/ECharacterCombat";
 
 export default class Character {
@@ -7,7 +7,7 @@ export default class Character {
     user: string;
 
     name: string;
-    class: EClasses;
+    class: EClass;
     level: number;
     combat: ECharacterCombat;
 

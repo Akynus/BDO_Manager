@@ -1,5 +1,5 @@
 import SimpleSchema from 'simpl-schema';
-import EClasses from "/imports/enumerables/EClasses";
+import EClass from "/imports/enumerables/EClass";
 import ECharacterCombat from "/imports/enumerables/ECharacterCombat";
 
 export default new SimpleSchema({
@@ -18,7 +18,7 @@ export default new SimpleSchema({
         type: String,
         optional: false,
         label: 'Character class',
-        allowedValues: Object.values(EClasses)
+        allowedValues: Object.values(EClass)
     },
     level: {
         type: SimpleSchema.Integer,

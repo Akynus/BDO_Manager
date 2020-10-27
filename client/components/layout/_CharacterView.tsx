@@ -7,7 +7,7 @@ import Character from "/imports/models/Character";
 import ICharacterClass from "/imports/interfaces/ICharacterClass";
 import ClassContext from "/imports/objects/ClassContext";
 import {countGS} from "/imports/utils/Helpers";
-import EClasses from "/imports/enumerables/EClasses";
+import EClass from "EClass.ts";
 import {useTracker} from "react-meteor-hooks";
 import Horses from "/imports/collections/HorseCollection";
 import Horse from "/imports/models/Horse";
@@ -113,7 +113,7 @@ export default function _CharacterView(props: IProps): React.ReactElement<IProps
                                                 atkPre: props.current!.atkPre,
                                                 atkAwk: props.current!.atkAwk,
                                                 defense: props.current!.defense
-                                            }, props.current!.class == EClasses.SHAI)}/> {t('field.gear_score')}
+                                            }, props.current!.class == EClass.SHAI)}/> {t('field.gear_score')}
                                         </Grid>
                                         <Grid item={true} xs={12}>
                                             <Divider/>
@@ -122,7 +122,7 @@ export default function _CharacterView(props: IProps): React.ReactElement<IProps
                                             <Chip color={"secondary"} size={"small"}
                                                   label={props.current!.atkPre}/> {t('field.atk_pre')}
                                         </Grid>
-                                        {classCharacter().value != EClasses.SHAI && <Grid item={true} xs={12}>
+                                        {classCharacter().value != EClass.SHAI && <Grid item={true} xs={12}>
                                             <Chip color={"secondary"} size={"small"}
                                                   label={props.current!.atkAwk}/> {t('field.atk_awk')}
                                         </Grid>}

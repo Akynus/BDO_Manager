@@ -28,7 +28,7 @@ import {ToggleButton} from "@material-ui/lab";
 import clsx from "clsx";
 import {Mongo} from "meteor/mongo";
 import {TransitionProps} from "@material-ui/core/transitions";
-import EClasses from "/imports/enumerables/EClasses";
+import EClass from "/imports/enumerables/EClass";
 import {useForm} from "react-hook-form";
 import {yupResolver} from '@hookform/resolvers';
 import * as yup from "yup";
@@ -111,7 +111,7 @@ const CharacterForm = React.forwardRef<CharacterFormRef>((props, ref) => {
     const {enqueueSnackbar} = useSnackbar();
     const [loading, setLoading] = React.useState<boolean>(false);
     const [opened, setOpened] = React.useState<boolean>(false);
-    const [characterClass, setCharacterClass] = React.useState<EClasses>(EClasses.WARRIOR);
+    const [characterClass, setCharacterClass] = React.useState<EClass>(EClass.WARRIOR);
     const [current, setCurrent] = React.useState<OptionalId>();
     const [disableCombat, setDisableCombat] = React.useState<boolean>(false);
     const [disableAwk, setDisableAwk] = React.useState<boolean>(false);
@@ -133,13 +133,13 @@ const CharacterForm = React.forwardRef<CharacterFormRef>((props, ref) => {
 
     React.useLayoutEffect(() => {
         switch (characterClass) {
-            case EClasses.ARCHER: {
+            case EClass.ARCHER: {
                 setValue('combat', ECharacterCombat.AWAKENING);
                 setDisableAwk(false);
                 setDisableCombat(true);
                 break;
             }
-            case EClasses.SHAI: {
+            case EClass.SHAI: {
                 setValue('combat', ECharacterCombat.AWAKENING);
                 setValue('atkAwk', 1);
                 setDisableAwk(true);
@@ -157,7 +157,7 @@ const CharacterForm = React.forwardRef<CharacterFormRef>((props, ref) => {
     function onOpen(id: OptionalId): void {
         reset();
         setOpened(true);
-        setCharacterClass(EClasses.WARRIOR);
+        setCharacterClass(EClass.WARRIOR);
         setCurrent(id);
 
         if (id) {
@@ -206,7 +206,7 @@ const CharacterForm = React.forwardRef<CharacterFormRef>((props, ref) => {
         const {atkPre, atkAwk, defense} = watch();
         return countGS({
             atkPre, atkAwk, defense
-        }, characterClass == EClasses.SHAI);
+        }, characterClass == EClass.SHAI);
     }
 
     function combatDescription(): string {
@@ -332,7 +332,7 @@ const CharacterForm = React.forwardRef<CharacterFormRef>((props, ref) => {
         </Card>
     }
 
-    return (<Dialog open={opened} fullScreen={true} TransitionComponent={TransitionDialog}>
+    return (<Dialog open={opened} fullScreen={true}>
         <AbsoluteLoading loading={loading}/>
         <Container maxWidth={"md"}>
             <ListItem>

@@ -1,4 +1,4 @@
-import EClasses from "/imports/enumerables/EClasses";
+import EClass from "EClass.ts";
 import ECharacterCombat from "/imports/enumerables/ECharacterCombat";
 
 type Image = {
@@ -8,7 +8,7 @@ type Image = {
 interface ICharacterClass {
     icon: string;
     name: string;
-    value: EClasses;
+    value: EClass;
     smallImg: Image;
     largeImg: Image;
 }

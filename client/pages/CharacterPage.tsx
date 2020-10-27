@@ -2,13 +2,12 @@ import * as React from "react";
 import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
 import {Container, Fade, Grid} from "@material-ui/core";
 import BreadcrumbPage from "/client/components/layout/BreadcrumbPage";
-import CharacterForm, {CharacterFormRef} from "/client/components/form/CharacterForm";
+import CharacterRegisterForm, {CharacterRegisterFormRef} from "/client/components/form/character/CharacterRegisterForm";
 import {useTranslation} from "react-i18next";
 import {useMongoFetch} from "react-meteor-hooks";
 import Characters from "/imports/collections/CharacterCollection";
 import Character from "/imports/models/Character";
 import {Mongo} from "meteor/mongo";
-import ConfirmExclusionForm, {ConfirmExclusionFormRef} from "/client/components/form/ConfirmExclusionForm";
 import EMethod from "/imports/enumerables/EMethod";
 import {useSnackbar} from "notistack";
 import CharacterListBar from "/client/components/layout/character/CharacterListBar";
@@ -44,9 +43,7 @@ export default function CharacterPage(): React.ReactElement {
     const {enqueueSnackbar} = useSnackbar();
     const characters: Character[] = useMongoFetch(Characters.find());
     const [selected, setSelected] = React.useState<Mongo.ObjectID>();
-    const form = React.createRef<CharacterFormRef>();
-    const confirmExclusion = React.createRef<ConfirmExclusionFormRef>();
-
+    const form = React.createRef<CharacterRegisterFormRef>();
     //</editor-folder>
 
     //<editor-folder defaultstate="collapsed" desc="Triggers">
@@ -68,10 +65,6 @@ export default function CharacterPage(): React.ReactElement {
         form.current!.open(id);
     }
 
-    function onDelete(object: Character) {
-        confirmExclusion.current!.open({id: object._id, text: object.name});
-    }
-
     function onConfirmDelete(id: Mongo.ObjectID): void {
         Meteor.call(EMethod.REMOVE_CHARACTER, id, function (error: Error) {
             if (error) return enqueueSnackbar(t('message.error_remove_character'), {variant: "error"});
@@ -87,7 +80,7 @@ export default function CharacterPage(): React.ReactElement {
                     <CharacterListBar datasource={characters} selected={selected} onSelect={onSelect}/>
                 </Grid>
                 <Grid item={true} xs={12}>
-                    <CharacterView datasource={characters} selected={selected}/>
+                    <CharacterView onEdit={onOpenForm} datasource={characters} selected={selected}/>
                 </Grid>
             </Grid>
         </div>
@@ -100,7 +93,6 @@ export default function CharacterPage(): React.ReactElement {
                 {content()}
             </Fade>
         </div>
-        <ConfirmExclusionForm onConfirm={onConfirmDelete} ref={confirmExclusion}/>
-        <CharacterForm ref={form}/>
+        <CharacterRegisterForm ref={form}/>
     </Container>)
 }
