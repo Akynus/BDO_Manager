@@ -4,7 +4,6 @@ import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
 import {
     Avatar,
     Box,
-    Button,
     Card,
     CardContent,
     CardMedia,
@@ -26,7 +25,6 @@ import {
 import ClassContext from "/imports/objects/ClassContext";
 import {ToggleButton} from "@material-ui/lab";
 import clsx from "clsx";
-import {Mongo} from "meteor/mongo";
 import {TransitionProps} from "@material-ui/core/transitions";
 import EClasses from "/imports/enumerables/EClasses";
 import {useForm} from "react-hook-form";
@@ -35,7 +33,6 @@ import * as yup from "yup";
 import Character from "/imports/models/Character";
 import TextField from "/client/components/fields/TextField";
 import SelectField from "/client/components/fields/SelectField";
-import AbsoluteLoading from "/client/components/layout/AbsoluteLoading";
 import ECharacterCombat from "/imports/enumerables/ECharacterCombat";
 import EMethod from "/imports/enumerables/EMethod";
 import {useSnackbar} from 'notistack';
@@ -44,6 +41,7 @@ import Horse from "/imports/models/Horse";
 import {useMethod, useMongoFetch} from "react-meteor-hooks";
 import Horses from "/imports/collections/HorseCollection";
 import RandomID from "/client/utils/RandomID";
+import ButtonComponent from "/client/components/fields/ButtonComponent";
 
 const TransitionDialog = React.forwardRef(function Transition(props: TransitionProps & { children?: React.ReactElement }, ref: React.Ref<unknown>) {
     return <Fade timeout={1000} ref={ref} {...props} />;
@@ -82,9 +80,9 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 //</editor-folder>
 
 //<editor-folder defaultstate="collapsed" desc="Types">
-type OptionalId = Mongo.ObjectID | undefined;
+type ObjectEditing = Character | undefined;
 export type CharacterFormRef = {
-    open: (id: OptionalId) => void;
+    open: (id: ObjectEditing) => void;
     close: () => void;
 }
 //</editor-folder>
@@ -109,14 +107,13 @@ const CharacterForm = React.forwardRef<CharacterFormRef>((props, ref) => {
     const classes = useStyles();
     const {t} = useTranslation();
     const {enqueueSnackbar} = useSnackbar();
-    const [loading, setLoading] = React.useState<boolean>(false);
     const [opened, setOpened] = React.useState<boolean>(false);
     const [characterClass, setCharacterClass] = React.useState<EClasses>(EClasses.WARRIOR);
-    const [current, setCurrent] = React.useState<OptionalId>();
+    const [current, setCurrent] = React.useState<ObjectEditing>();
     const [disableCombat, setDisableCombat] = React.useState<boolean>(false);
     const [disableAwk, setDisableAwk] = React.useState<boolean>(false);
     const horses: Horse[] = useMongoFetch(Horses.find());
-    const {call} = useMethod<Character, any>(EMethod.GET_CHARACTER, {});
+    const {call, isLoading} = useMethod<any, any>(EMethod.SAVE_CHARACTER, {});
     const {control, handleSubmit, errors, watch, reset, setValue} = useForm<Character>({
         resolver: yupResolver(schema), defaultValues: {
             name: '',
@@ -154,52 +151,36 @@ const CharacterForm = React.forwardRef<CharacterFormRef>((props, ref) => {
         }
     }, [characterClass]);
 
-    function onOpen(id: OptionalId): void {
-        reset();
+    function onOpen(object: ObjectEditing): void {
         setOpened(true);
-        setCharacterClass(EClasses.WARRIOR);
-        setCurrent(id);
+        setCurrent(object);
 
-        if (id) {
-            const timing = timingCall(EMethod.GET_CHARACTER);
-            setLoading(true);
-            call(id).then(data => {
-                setCharacterClass(data.class);
-                Object.entries(data).map(([key, value]) => setValue(key, value));
-            }).catch((error: any) => {
-                console.error(error);
-                enqueueSnackbar(t('message.not_found'));
-                return;
-            }).finally(() => {
-                timing();
-                setLoading(false);
-            });
+        if (object) {
+            setCharacterClass(object.class);
+            Object.entries(object).map(([key, value]) => console.log(key, value));
+            Object.entries(object).map(([key, value]) => setValue(key, value));
+        } else {
+            reset();
+            setCharacterClass(EClasses.WARRIOR);
         }
     }
 
     function onSubmit(data: Character) {
         data.class = characterClass;
-        setLoading(true);
-
-        console.log(data);
-
-        let method = (current) ? EMethod.UPDATE_CHARACTER : EMethod.INSERT_CHARACTER;
         if (current) {
-            data._id = current;
+            data._id = current._id;
         }
 
-        const timing = timingCall(method);
-        Meteor.call(method, data, (error: any, data: any) => {
-            setLoading(false);
-            timing();
-            if (error) {
-                enqueueSnackbar(t('message.error_save_character'), {variant: "error"});
-                return;
-            }
+        const timing = timingCall(EMethod.SAVE_CHARACTER);
+        call(data).then(() => {
             enqueueSnackbar(t('message.success_save_character'), {variant: "success"});
             setOpened(false);
+        }).catch(reason => {
+            console.error(reason);
+            enqueueSnackbar(t('message.error_save_character'), {variant: "error"});
+        }).finally(() => {
+            timing();
         });
-
     }
 
     function gearScore(): number {
@@ -321,19 +302,24 @@ const CharacterForm = React.forwardRef<CharacterFormRef>((props, ref) => {
             <Box className={classes.formPadding}>
                 <Grid container={true} spacing={2} justify={"flex-end"}>
                     <Grid item={true}>
-                        <Button onClick={() => setOpened(false)}>{t('action.close')}</Button>
+                        <ButtonComponent onClick={() => setOpened(false)}>
+                            {t('action.close')}
+                        </ButtonComponent>
                     </Grid>
                     <Grid item={true}>
-                        <Button onClick={handleSubmit(onSubmit)} variant={"contained"}
-                                color={"primary"}>{t('action.save')}</Button>
+                        <ButtonComponent loading={isLoading} onClick={handleSubmit(onSubmit)}
+                                         variant={"contained"}
+                                         color={"primary"}>
+                            {t('action.save')}
+                        </ButtonComponent>
                     </Grid>
                 </Grid>
             </Box>
         </Card>
     }
 
-    return (<Dialog open={opened} fullScreen={true} TransitionComponent={TransitionDialog}>
-        <AbsoluteLoading loading={loading}/>
+    return (<Dialog disableEnforceFocus={true} keepMounted={true} open={opened} fullScreen={true}
+                    TransitionComponent={TransitionDialog}>
         <Container maxWidth={"md"}>
             <ListItem>
                 <ListItemText primaryTypographyProps={{variant: "h6"}} primary={t('title.character_form')}

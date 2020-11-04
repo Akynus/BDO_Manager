@@ -100,6 +100,7 @@ const values: ILang = {
         join_guild: 'Entrar em uma Guilda',
         create_guild: 'Criar uma nova Guilda',
         guild_form: 'Formulário de Guilda',
+        character_remove: 'Excluir personagem'
     },
     description: {
         invalidAuthentication: "Autenticação inválida",
@@ -119,6 +120,7 @@ const values: ILang = {
         choose_character: 'Clique para selecionar seu personagem principal',
         join_guild: 'Utilize um código de convite para entrar em uma guilda',
         create_guild: 'Crie e convide jogadores para sua guilda',
+        character_remove: 'Confirmar exclusão do personagem selecionado',
         login: {
             discord: 'Entrar com Discord'
         },
@@ -218,6 +220,7 @@ const values: ILang = {
         error_remove_horse: 'Erro ao excluir montaria',
         error_update_setting: 'Erro ao alterar configurações do usuário',
         no_characters: 'Você não tem nenhum personagens cadastrado. <1>Clique aqui</1> para cadastrar um personagem',
+        denied_add_new_character: 'Você não pode adicionar novos Personagens',
         setting: {
             alert_authentication_third_party: 'Autenticação do usuário realizada por serviço de terceiros',
             error_refresh_user_profile: 'Erro ao atualizar perfil do usuário',

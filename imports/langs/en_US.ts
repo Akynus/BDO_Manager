@@ -17,7 +17,9 @@ const values: ILang = {
         logout: 'Logout',
         no: 'No',
         none: 'None',
-        yes: 'Yes'
+        yes: 'Yes',
+        skip: 'Skip',
+        next: 'Next'
     },
     title: {
         application: 'BDO Manager',
@@ -38,7 +40,9 @@ const values: ILang = {
         welcome: 'Welcome',
         path_not_found: 'Path Not Found',
         create_guild: 'Create a new Guild',
-        join_guild: 'Join in a Guild'
+        join_guild: 'Join in a Guild',
+        character_remove: 'Character delete',
+        guild_form: 'Guild Form'
     },
     item: {
         general: 'General',
@@ -98,7 +102,9 @@ const values: ILang = {
             members: 'Members'
         }
     },
-    description: {},
+    description: {
+        character_remove: 'Confirm character delete'
+    },
     field: {
         gear_score_link: 'Gear Score Link',
         gender: 'Gender',
@@ -120,7 +126,7 @@ const values: ILang = {
             score_ap: 'Hidden Attack',
             score_ap_awk: 'Hidden Attack Awakening',
             score_dp: 'Damage Reduction',
-            score_bonus:'Bonus'
+            score_bonus: 'Bonus'
         },
         setting: {
             timezone: 'Timezone',

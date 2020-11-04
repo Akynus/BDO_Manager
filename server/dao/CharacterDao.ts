@@ -49,7 +49,6 @@ const CharacterDao = {
     },
     remove(id: Mongo.ObjectID): void {
         const future = new Future<void>();
-
         new Promise<void>((resolve, reject) => {
             Profiles.update({
                 user: {
@@ -75,7 +74,7 @@ const CharacterDao = {
                     if (error) return reject(error);
                     return resolve();
                 });
-            })
+            });
         }).then(() => future.return()).catch(reason => future.throw(reason));
 
         return future.wait();

@@ -1,6 +1,6 @@
 import * as React from "react";
 import {Box, Chip, Table, TableBody, TableCell, TableHead, TableRow} from "@material-ui/core";
-import RenownScoreList, {IRenownScore} from "/imports/objects/RenownScoreList";
+import RenownScoreList, {IScore} from "/imports/objects/RenownScoreList";
 import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
 import {getRenownScore} from "/imports/utils/Helpers";
 import {useTranslation} from "react-i18next";
@@ -16,7 +16,7 @@ function TableAP(score: number): React.ReactElement {
     const classes = useStyles();
     const {t} = useTranslation();
 
-    function buildRow(data: IRenownScore, index: number): React.ReactNode {
+    function buildRow(data: IScore, index: number): React.ReactNode {
 
         const isCurrent = (getRenownScore("AP", score) == data.bonus);
 
@@ -49,7 +49,7 @@ function TableDP(score: number): React.ReactElement {
     const classes = useStyles();
     const {t} = useTranslation();
 
-    function buildRow(data: IRenownScore, index: number): React.ReactNode {
+    function buildRow(data: IScore, index: number): React.ReactNode {
 
         const isCurrent = (getRenownScore("DP", score) == data.bonus);
 

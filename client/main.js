@@ -31,6 +31,11 @@ import "/imports/resources/account";
 import "/client/resources/router";
 import "/client/resources/initialization";
 
+Meteor.startup(function () {
+    // Client startup method.
+    //Meteor.absoluteUrl.defaultOptions.rootUrl = 'http://192.168.0.104:5000';
+});
+
 
 
 

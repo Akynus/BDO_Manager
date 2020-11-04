@@ -34,7 +34,7 @@ export default function CharacterListBar(props: IProps): React.ReactElement<IPro
     }
 
     function addItem(): React.ReactNode {
-        return <Tab key={'add-item'} value={null}
+        return <Tab key={'add-item'} value={null} disabled={props.disable}
                     icon={<Icon className={clsx(['mdi mdi-account-multiple-plus', classes.iconAdd])}/>}
                     unselectable={"on"} label={t('action.insert_character')}/>
     }
@@ -44,7 +44,7 @@ export default function CharacterListBar(props: IProps): React.ReactElement<IPro
                      indicatorColor="primary" textColor="secondary"
                      value={props.selected}
                      onChange={(event, value) => props.onSelect(value)}>
-            {props.datasource.map(itemList).concat([addItem()])}
+            {props.datasource.map(itemList).concat(props.disable ? [] : [addItem()])}
         </Tabs>
     }
 
@@ -56,5 +56,6 @@ export default function CharacterListBar(props: IProps): React.ReactElement<IPro
 interface IProps {
     selected?: Mongo.ObjectID | undefined;
     datasource: Character[];
+    disable?: boolean;
     onSelect: (id: Mongo.ObjectID) => void;
 }

@@ -33,7 +33,8 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
         padding: 0
     },
     avatarLevel: {
-        background: theme.palette.secondary.main
+        background: theme.palette.secondary.main,
+        color:theme.palette.getContrastText(theme.palette.secondary.main)
     },
     contentImg: {
         width: 600,
@@ -85,14 +86,15 @@ export default function CharacterView(props: IProps): React.ReactElement<IProps>
         return <Grid container={true} spacing={1}>
             <Grid item={true} xs={6}>
                 <Tooltip placement={"top"} title={String(t('action.edit'))}>
-                    <IconButton aria-label="edit">
+                    <IconButton onClick={() => props.onEdit(item)} aria-label="edit">
                         <Icon className={'mdi mdi-pencil'}/>
                     </IconButton>
                 </Tooltip>
             </Grid>
             <Grid item={true} xs={6}>
                 <Tooltip placement={"top"} title={String(t('action.delete'))}>
-                    <IconButton className={classes.deleteButton} aria-label="delete">
+                    <IconButton onClick={() => props.onDelete(item)} className={classes.deleteButton}
+                                aria-label="delete">
                         <Icon className={'mdi mdi-delete'}/>
                     </IconButton>
                 </Tooltip>
@@ -135,7 +137,7 @@ export default function CharacterView(props: IProps): React.ReactElement<IProps>
                 {cardGear('mdi mdi-sword', item.atkPre, t('field.atk_pre'), `+${getRenownScore("AP", item.atkPre)}`)}
             </Grid>
             <Grid item xs={4}>
-                {cardGear('mdi mdi-sword', item.atkAwk, t('field.atk_awk'), `+${getRenownScore("AP_AWK", item.atkAwk)}`)}
+                {cardGear('mdi mdi-sword-cross', item.atkAwk, t('field.atk_awk'), `+${getRenownScore("AP_AWK", item.atkAwk)}`)}
             </Grid>
             <Grid item xs={4}>
                 {cardGear('mdi mdi-shield-half-full', item.defense, t('field.defense'), `${getRenownScore("DP", item.defense)}%`)}
@@ -229,6 +231,8 @@ export default function CharacterView(props: IProps): React.ReactElement<IProps>
 }
 
 interface IProps {
+    onEdit(object: Character): void;
+    onDelete(object: Character): void;
     selected?: Mongo.ObjectID | undefined;
     datasource: Character[];
 }

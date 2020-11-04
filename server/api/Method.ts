@@ -7,7 +7,6 @@ import CharacterDao from "/server/dao/CharacterDao";
 import Horse from "/imports/models/Horse";
 import HorseDao from "/server/dao/HorseDao";
 import ProfileDao from "/server/dao/ProfileDao";
-import UserDao from "/server/dao/UserDao";
 
 Meteor.methods({
     //<editor-folder defaultstate="collapsed" desc="Profile">
@@ -25,13 +24,14 @@ Meteor.methods({
     //</editor-folder>
 
     //<editor-folder defaultstate="collapsed" desc="Character">
-    [EMethod.INSERT_CHARACTER]: (object: Character) => {
+    [EMethod.SAVE_CHARACTER]: (object: Character) => {
         if (!Meteor.userId()) throw new Meteor.Error(403);
-        return CharacterDao.insert(object);
-    },
-    [EMethod.UPDATE_CHARACTER]: (object: Character) => {
-        if (!Meteor.userId()) throw new Meteor.Error(403);
-        CharacterDao.update(object);
+
+        if (object._id) {
+            return CharacterDao.update(object);
+        } else {
+            return CharacterDao.insert(object);
+        }
     },
     [EMethod.GET_CHARACTER]: (id: Mongo.ObjectID) => {
         if (!Meteor.userId()) throw new Meteor.Error(403);

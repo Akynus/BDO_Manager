@@ -8,11 +8,11 @@ import {useMongoFetch} from "react-meteor-hooks";
 import Characters from "/imports/collections/CharacterCollection";
 import Character from "/imports/models/Character";
 import {Mongo} from "meteor/mongo";
-import ConfirmExclusionForm, {ConfirmExclusionFormRef} from "/client/components/form/ConfirmExclusionForm";
 import EMethod from "/imports/enumerables/EMethod";
 import {useSnackbar} from "notistack";
 import CharacterListBar from "/client/components/layout/character/CharacterListBar";
 import CharacterView from "/client/components/layout/character/CharacterView";
+import CharacterConfirmExclusion, {CharacterConfirmExclusionRef} from "/client/components/layout/character/CharacterConfirmExclusion";
 
 //<editor-folder defaultstate="collapsed" desc="Styles">
 const useStyles = makeStyles((theme: Theme) => createStyles({
@@ -45,13 +45,13 @@ export default function CharacterPage(): React.ReactElement {
     const characters: Character[] = useMongoFetch(Characters.find());
     const [selected, setSelected] = React.useState<Mongo.ObjectID>();
     const form = React.createRef<CharacterFormRef>();
-    const confirmExclusion = React.createRef<ConfirmExclusionFormRef>();
+    const exclusion = React.createRef<CharacterConfirmExclusionRef>();
 
     //</editor-folder>
 
     //<editor-folder defaultstate="collapsed" desc="Triggers">
     React.useEffect(() => {
-        if (characters[0]) setSelected(characters[0]._id);
+        if (characters[0] && !selected) setSelected(characters[0]._id);
     }, [characters]);
 
     //</editor-folder>
@@ -64,16 +64,16 @@ export default function CharacterPage(): React.ReactElement {
         }
     }
 
-    function onOpenForm(id?: Mongo.ObjectID) {
-        form.current!.open(id);
+    function onOpenForm(object?: Character) {
+        form.current!.open(object);
     }
 
     function onDelete(object: Character) {
-        confirmExclusion.current!.open({id: object._id, text: object.name});
+        exclusion.current!.open(object);
     }
 
-    function onConfirmDelete(id: Mongo.ObjectID): void {
-        Meteor.call(EMethod.REMOVE_CHARACTER, id, function (error: Error) {
+    function onConfirmDelete(object: Character): void {
+        Meteor.call(EMethod.REMOVE_CHARACTER, object._id, function (error: Error) {
             if (error) return enqueueSnackbar(t('message.error_remove_character'), {variant: "error"});
             setSelected(undefined);
             return enqueueSnackbar(t('message.success_remove_character'), {variant: "success"});
@@ -84,10 +84,11 @@ export default function CharacterPage(): React.ReactElement {
         return <div className={classes.boxFlex}>
             <Grid spacing={2} container={true}>
                 <Grid item={true} xs={12}>
-                    <CharacterListBar datasource={characters} selected={selected} onSelect={onSelect}/>
+                    <CharacterListBar datasource={characters} selected={selected} onSelect={onSelect}
+                                      disable={characters.length >= 3}/>
                 </Grid>
                 <Grid item={true} xs={12}>
-                    <CharacterView datasource={characters} selected={selected}/>
+                    <CharacterView onEdit={onOpenForm} onDelete={onDelete} datasource={characters} selected={selected}/>
                 </Grid>
             </Grid>
         </div>
@@ -100,7 +101,7 @@ export default function CharacterPage(): React.ReactElement {
                 {content()}
             </Fade>
         </div>
-        <ConfirmExclusionForm onConfirm={onConfirmDelete} ref={confirmExclusion}/>
+        <CharacterConfirmExclusion ref={exclusion} onConfirm={onConfirmDelete}/>
         <CharacterForm ref={form}/>
     </Container>)
 }

@@ -97,6 +97,7 @@ export default interface ILang {
         join_guild: string;
         create_guild: string;
         guild_form: string;
+        character_remove: string;
     },
     description: {
         invalidAuthentication: string;
@@ -117,6 +118,7 @@ export default interface ILang {
         join_guild: string;
         create_guild: string;
         guild_form: string;
+        character_remove: string;
         login: {
             discord: string;
         },
@@ -152,7 +154,7 @@ export default interface ILang {
             score_ap: string;
             score_ap_awk: string;
             score_dp: string;
-            score_bonus:string;
+            score_bonus: string;
         },
         setting: {
             dark_mode: string;
@@ -215,6 +217,7 @@ export default interface ILang {
         error_remove_horse: string;
         error_update_setting: string;
         no_characters: string;
+        denied_add_new_character: string;
         setting: {
             successful_refresh_user_profile: string;
             error_refresh_user_profile: string;
