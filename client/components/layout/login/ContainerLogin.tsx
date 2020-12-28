@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     root: {
         width: '90vw',
         height: 'auto',
-        maxWidth: 900,
+        maxWidth: 800,
         display: 'flex',
         flexDirection: 'row'
     },

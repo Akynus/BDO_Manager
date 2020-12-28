@@ -14,7 +14,8 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     avatar: {
         backgroundColor: theme.palette.primary.main,
         width: 40,
-        height: 40
+        height: 40,
+        color: theme.palette.getContrastText(theme.palette.primary.main)
     }
 }), {classNamePrefix: 'insert-card-button'});
 

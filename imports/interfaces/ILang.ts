@@ -78,7 +78,6 @@ export default interface ILang {
             logo_text: string;
             welcome_text: string;
             description_text: string;
-            discord_name: string;
             discord_text: string;
         },
         character: {

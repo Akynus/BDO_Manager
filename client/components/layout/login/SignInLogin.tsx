@@ -1,24 +1,28 @@
 import * as React from "react";
 import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
-import {Avatar, Card, Grow, Icon, ListItem, ListItemAvatar, ListItemText, Slide} from "@material-ui/core";
+import {Button, Grow, Icon, Zoom} from "@material-ui/core";
 import {useTranslation} from "react-i18next";
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
     root: {
         width: '100%',
-        height: 500,
+        height: 400,
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
     },
     logo: {
-        width: 300,
-        height: 200,
-        objectFit: 'cover'
+        width: 'auto',
+        height: 150,
+        objectFit: 'fill',
+        marginBottom: theme.spacing(4),
+        animation: 'beat 4s infinite'
     },
     button: {
-        background: '#7289DA',
+        paddingLeft: theme.spacing(4),
+        paddingRight: theme.spacing(4),
+        borderRadius: theme.spacing(4)
     },
     avatar: {
         fontSize: '2rem',
@@ -31,6 +35,13 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     },
     secondary: {
         color: '#dddddd'
+    },
+    '@keyframes beat': {
+        '0%': {transform: 'scale(1)'},
+        '25%': {transform: 'scale(0.7)'},
+        '50%': {transform: 'scale(1)'},
+        '75%': {transform: 'scale(0.7)'},
+        '100%': {transform: 'scale(0.1)'},
     }
 }), {classNamePrefix: 'sign-in-login'});
 
@@ -47,22 +58,17 @@ export default function SignInLogin(props: IProps): React.ReactElement<IProps> {
 
     return <div className={classes.root}>
         <Grow timeout={300} in={showItems}>
-            <img src={"/images/logo.png"} className={classes.logo}/>
+            <div>
+                <img alt={t('item.login.logo_text')} src={"/images/logo.png"} className={classes.logo}/>
+            </div>
         </Grow>
-        <Slide direction="up" timeout={300} in={showItems}>
-            <Card className={classes.button}>
-                <ListItem dense={true} button={true} onClick={() => props.onSignIn("discord")}>
-                    <ListItemAvatar>
-                        <Avatar className={classes.avatar}>
-                            <Icon className={'mdi mdi-discord'}/>
-                        </Avatar>
-                    </ListItemAvatar>
-                    <ListItemText primaryTypographyProps={{className: classes.primary}}
-                                  secondaryTypographyProps={{className: classes.secondary}}
-                                  primary={t('item.login.discord_name')} secondary={t('item.login.discord_text')}/>
-                </ListItem>
-            </Card>
-        </Slide>
+        <Zoom timeout={300} in={showItems}>
+            <Button onClick={() => props.onSignIn("discord")} className={classes.button}
+                    startIcon={<Icon className={'mdi mdi-discord'}/>} variant="contained"
+                    color="primary">
+                {t('item.login.discord_text')}
+            </Button>
+        </Zoom>
     </div>
 }
 

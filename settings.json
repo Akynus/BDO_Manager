@@ -1,0 +1,13 @@
+{
+  "private": {
+    "services": {
+      "discord": {
+        "loginStyle": "popup",
+        "clientId": "511848483620257792",
+        "secret": "YvkhXIsbfWZGtuUgChANO6jvbTO1dnlX"
+      }
+    }
+  },
+  "public": {
+  }
+}

@@ -3,26 +3,43 @@
     src: url('/fonts/Quicksand-Light.ttf') format('truetype');
     font-weight: 300;
 }
+
 @font-face {
     font-family: Quicksand;
     src: url('/fonts/Quicksand-Regular.ttf') format('truetype');
     font-weight: 400;
 }
+
 @font-face {
     font-family: Quicksand;
     src: url('/fonts/Quicksand-Medium.ttf') format('truetype');
     font-weight: 500;
 }
+
 @font-face {
     font-family: Quicksand;
     src: url('/fonts/Quicksand-Semibold.ttf') format('truetype');
     font-weight: 600;
 }
+
 @font-face {
     font-family: Quicksand;
     src: url('/fonts/Quicksand-Bold.ttf') format('truetype');
     font-weight: 700;
 }
+
+@keyframes beat {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(0.8);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
 
 #application {
     width: 100vw;

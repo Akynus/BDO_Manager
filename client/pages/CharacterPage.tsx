@@ -1,6 +1,6 @@
 import * as React from "react";
 import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
-import {Container, Grid, Zoom} from "@material-ui/core";
+import {Container, Grid} from "@material-ui/core";
 import TitlesPage from "/client/components/layout/generic/TitlesPage";
 import SkeletonLoad from "/client/components/layout/generic/SkeletonLoad";
 import {useTranslation} from "react-i18next";
@@ -9,6 +9,7 @@ import EPublish from "/imports/enumerables/EPublish";
 import Character from "/imports/models/Character";
 import Characters from "/imports/collections/CharacterCollection";
 import InsertCardButton from "/client/components/layout/generic/InsertCardButton";
+import CharacterCardList from "/client/components/layout/character/CharacterCardList";
 
 //<editor-folder desc="collapsed" desc="Styles">
 const useStyles = makeStyles((theme: Theme) => createStyles({
@@ -59,6 +60,9 @@ export default function CharacterPage(): React.ReactElement {
                 <InsertCardButton label={t('action.insert')} description={t('item.character.insert_text')}
                                   onClick={onInsert}/>
             </Grid>}
+            {datasource.map(value => <Grid lg={3} md={4} sm={6} xs={12} item={true}>
+                <CharacterCardList character={value}/>
+            </Grid>)}
         </Grid>
     </Container>)
 }

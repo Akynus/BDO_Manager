@@ -6,7 +6,7 @@ import {useTranslation} from "react-i18next";
 const useStyles = makeStyles((theme: Theme) => createStyles({
     root: {
         width: '100%',
-        height: 500,
+        height: 400,
         position: 'relative',
         display: 'flex',
         flexDirection: 'column',

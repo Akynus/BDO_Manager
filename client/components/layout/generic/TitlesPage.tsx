@@ -26,7 +26,7 @@ export default function TitlesPage(props: IProps): React.ReactElement<IProps> {
                     <Icon className={clsx([classes.icon, props.icon])}/>
                 </Avatar>
             </ListItemAvatar>
-            <ListItemText primary={<Typography variant={"h4"}>{props.title}</Typography>}/>
+            <ListItemText primary={<Typography color={"textPrimary"} variant={"h4"}>{props.title}</Typography>}/>
         </ListItem>
         <Divider/>
     </div>
