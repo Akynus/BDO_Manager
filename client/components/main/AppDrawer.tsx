@@ -115,7 +115,7 @@ const AppDrawer: React.FunctionComponent = function (props) {
         const routes: IRouteItem[] = [
             {key: ERoutes.HOME, icon: 'mdi mdi-home', title: 'item.home'},
             {key: ERoutes.PROFILE, icon: 'mdi mdi-card-account-details', title: 'item.profile'},
-            {key: ERoutes.CHARACTERS, icon: 'mdi mdi-account-multiple', title: 'item.characters'},
+            {key: ERoutes.CHARACTERS, icon: 'mdi mdi-account-multiple', title: 'view.characters'},
             {key: ERoutes.HORSES, icon: 'mdi mdi-horseshoe', title: 'item.horses'},
             {key: ERoutes.GUILD, icon: 'mdi mdi-account-group', title: 'item.guild'},
             {key: ERoutes.SETTING, icon: 'mdi mdi-cogs', title: 'item.setting'},

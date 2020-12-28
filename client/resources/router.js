@@ -78,11 +78,7 @@ authenticatedRoute.route(ERoutes.PROFILE, {
 authenticatedRoute.route(ERoutes.CHARACTERS, {
     name: 'characters',
     title() {
-        return Language.get().t('item.characters');
-    },
-    subscriptions() {
-        this.register(EPublish.CHARACTERS, Meteor.subscribe(EPublish.CHARACTERS));
-        this.register(EPublish.HORSES, Meteor.subscribe(EPublish.HORSES));
+        return Language.get().t('view.characters');
     },
     action() {
         ReactBuild(Core, {layout: true, children: <CharacterPage/>});

@@ -11,7 +11,6 @@ const values: ILang = {
         delete: 'Excluir',
         save: 'Salvar',
         insert: 'Adicionar',
-        insert_character: 'Adicionar Personagem',
         insert_horse: 'Adicionar Montaria',
         login: 'Entrar',
         logout: 'Sair',
@@ -34,7 +33,6 @@ const values: ILang = {
             discord: 'Discord'
         },
         form: 'Formulário',
-        characters: 'Personagens',
         horses: 'Montarias',
         class: {
             warrior: 'Guerreiro',
@@ -77,7 +75,22 @@ const values: ILang = {
         guild_items: {
             manage: 'Gerenciar',
             members: 'Membros'
+        },
+        //Manter abaixo
+        login: {
+            logo_text: 'BDO Manager',
+            description_text: 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
+            welcome_text: 'Bem-Vindo',
+            discord_name: 'Discord',
+            discord_text: 'Entrar com Discord'
+        },
+        character: {
+            insert_text: 'Clique para inserir novo personagem'
         }
+    },
+    view: {
+        login: 'Login',
+        characters: 'Personagens'
     },
     title: {
         application: 'BDO Manager',

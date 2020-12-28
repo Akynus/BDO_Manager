@@ -9,6 +9,7 @@
     "visualize": "meteor --production --extra-packages bundle-visualizer"
   },
   "dependencies": {
+    "@material-ui/icons": "^4.11.2",
     "bcrypt": "^5.0.0",
     "clsx": "^1.1.1",
     "discord.js": "^12.3.1",
@@ -27,6 +28,7 @@
     "react-i18next": "^11.7.0",
     "react-meteor-hooks": "^0.3.1",
     "react-mounter": "^1.2.0",
+    "react-particles-js": "^3.4.1",
     "react-router-dom": "^5.0.1",
     "react-top-loading-bar": "^2.0.0",
     "sha256": "^0.2.0",

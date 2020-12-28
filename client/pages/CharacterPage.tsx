@@ -1,20 +1,16 @@
 import * as React from "react";
 import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
-import {Container, Fade, Grid} from "@material-ui/core";
-import BreadcrumbPage from "/client/components/layout/BreadcrumbPage";
-import CharacterForm, {CharacterFormRef} from "/client/components/form/CharacterForm";
+import {Container, Grid, Zoom} from "@material-ui/core";
+import TitlesPage from "/client/components/layout/generic/TitlesPage";
+import SkeletonLoad from "/client/components/layout/generic/SkeletonLoad";
 import {useTranslation} from "react-i18next";
-import {useMongoFetch} from "react-meteor-hooks";
-import Characters from "/imports/collections/CharacterCollection";
+import {useMongoFetch, useSubscription} from "react-meteor-hooks";
+import EPublish from "/imports/enumerables/EPublish";
 import Character from "/imports/models/Character";
-import {Mongo} from "meteor/mongo";
-import EMethod from "/imports/enumerables/EMethod";
-import {useSnackbar} from "notistack";
-import CharacterListBar from "/client/components/layout/character/CharacterListBar";
-import CharacterView from "/client/components/layout/character/CharacterView";
-import CharacterConfirmExclusion, {CharacterConfirmExclusionRef} from "/client/components/layout/character/CharacterConfirmExclusion";
+import Characters from "/imports/collections/CharacterCollection";
+import InsertCardButton from "/client/components/layout/generic/InsertCardButton";
 
-//<editor-folder defaultstate="collapsed" desc="Styles">
+//<editor-folder desc="collapsed" desc="Styles">
 const useStyles = makeStyles((theme: Theme) => createStyles({
     root: {
         display: "flex",
@@ -23,85 +19,46 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
         flexGrow: 1,
         width: '100%',
         height: '100%'
-    },
-    content: {
-        position: 'relative',
-        marginTop: theme.spacing(2),
-        width: '100%',
-        marginBottom: theme.spacing(4),
-    },
-    boxFlex: {
-        width: '100%',
-        display: "flex"
-    },
+    }
 }));
 //</editor-folder>
 
 export default function CharacterPage(): React.ReactElement {
-    //<editor-folder defaultstate="collapsed" desc="Variables">
+    //<editor-folder desc="collapsed" desc="Variables">
     const classes = useStyles();
     const {t} = useTranslation();
-    const {enqueueSnackbar} = useSnackbar();
-    const characters: Character[] = useMongoFetch(Characters.find());
-    const [selected, setSelected] = React.useState<Mongo.ObjectID>();
-    const form = React.createRef<CharacterFormRef>();
-    const exclusion = React.createRef<CharacterConfirmExclusionRef>();
+    const loading = useSubscription(EPublish.CHARACTERS);
+    const datasource: Character[] = useMongoFetch(Characters.find());
+    //</editor-folder>
+
+    //<editor-folder desc="collapsed" desc="Component Loading">
+    if (loading) return (<Container maxWidth="lg" className={classes.root}>
+        <TitlesPage title={t('view.characters')} icon={'mdi mdi-account-multiple'}/>
+        <SkeletonLoad>
+            <SkeletonLoad.Card/>
+            <SkeletonLoad.Card/>
+            <SkeletonLoad.Card/>
+            <SkeletonLoad.Card/>
+        </SkeletonLoad>
+    </Container>)
 
     //</editor-folder>
 
-    //<editor-folder defaultstate="collapsed" desc="Triggers">
-    React.useEffect(() => {
-        if (characters[0] && !selected) setSelected(characters[0]._id);
-    }, [characters]);
-
-    //</editor-folder>
-
-    function onSelect(value: any): void {
-        if (value) {
-            setSelected(value)
-        } else {
-            onOpenForm();
-        }
+    function allowInsert(): boolean {
+        return true;
     }
 
-    function onOpenForm(object?: Character) {
-        form.current!.open(object);
-    }
+    function onInsert(): void {
 
-    function onDelete(object: Character) {
-        exclusion.current!.open(object);
-    }
-
-    function onConfirmDelete(object: Character): void {
-        Meteor.call(EMethod.REMOVE_CHARACTER, object._id, function (error: Error) {
-            if (error) return enqueueSnackbar(t('message.error_remove_character'), {variant: "error"});
-            setSelected(undefined);
-            return enqueueSnackbar(t('message.success_remove_character'), {variant: "success"});
-        });
-    }
-
-    function content(): React.ReactElement {
-        return <div className={classes.boxFlex}>
-            <Grid spacing={2} container={true}>
-                <Grid item={true} xs={12}>
-                    <CharacterListBar datasource={characters} selected={selected} onSelect={onSelect}
-                                      disable={characters.length >= 3}/>
-                </Grid>
-                <Grid item={true} xs={12}>
-                    <CharacterView onEdit={onOpenForm} onDelete={onDelete} datasource={characters} selected={selected}/>
-                </Grid>
-            </Grid>
-        </div>
     }
 
     return (<Container maxWidth="lg" className={classes.root}>
-        <BreadcrumbPage title={t('item.characters')}/>
-        <div className={classes.content}>
-            <Fade timeout={500} in={true}>
-                {content()}
-            </Fade>
-        </div>
-        <CharacterConfirmExclusion ref={exclusion} onConfirm={onConfirmDelete}/>
-        <CharacterForm ref={form}/>
+        <TitlesPage title={t('view.characters')} icon={'mdi mdi-account-multiple'}/>
+        <Grid container={true} spacing={2}>
+            {allowInsert() && <Grid lg={3} md={4} sm={6} xs={12} item={true}>
+                <InsertCardButton label={t('action.insert')} description={t('item.character.insert_text')}
+                                  onClick={onInsert}/>
+            </Grid>}
+        </Grid>
     </Container>)
 }

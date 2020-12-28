@@ -6,7 +6,6 @@ export default interface ILang {
         back: string;
         open: string;
         insert: string;
-        insert_character: string;
         insert_horse: string;
         edit: string;
         delete: string;
@@ -31,7 +30,6 @@ export default interface ILang {
         account_services: {
             discord: string;
         }
-        characters: string;
         horses: string;
         class: {
             warrior: string;
@@ -74,8 +72,23 @@ export default interface ILang {
         guild_items: {
             manage: string;
             members: string;
+        },
+        //Manter abaixo
+        login: {
+            logo_text: string;
+            welcome_text: string;
+            description_text: string;
+            discord_name: string;
+            discord_text: string;
+        },
+        character: {
+            insert_text: string;
         }
     },
+    view: {
+        login: string;
+        characters: string;
+    }
     title: {
         application: string;
         welcome: string;
