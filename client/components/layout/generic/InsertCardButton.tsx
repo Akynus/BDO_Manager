@@ -9,7 +9,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        height: 200
+        height: 300
     },
     avatar: {
         backgroundColor: theme.palette.primary.main,

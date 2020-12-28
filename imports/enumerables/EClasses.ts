@@ -18,7 +18,8 @@ enum EClasses {
     ARCHER = "ARCHER",
     SHAI = "SHAI",
     GUARDIAN = "GUARDIAN",
-    HASHASHIN="HASHASHIN"
+    HASHASHIN = "HASHASHIN",
+    NOVA = "NOVA"
 }
 
 export default EClasses;

@@ -185,6 +185,15 @@ const ClassContext: ObjectType = {
             small: '/images/classes/small/hashashin.jpg',
             large: '/images/classes/large/hashashin.jpg'
         }
+    },
+    [EClasses.NOVA]:{
+        name: 'item.class.nova',
+        value: EClasses.NOVA,
+        icon: '/images/classes/icons/nova.png',
+        img: {
+            small: '/images/classes/small/nova.jpg',
+            large: '/images/classes/large/nova.jpg'
+        }
     }
 }
 
