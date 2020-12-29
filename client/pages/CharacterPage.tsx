@@ -38,13 +38,19 @@ export default function CharacterPage(): React.ReactElement {
 
     //<editor-folder desc="collapsed" desc="Component Loading">
     if (loading) return (<Container maxWidth="lg" className={classes.root}>
-        <TitlesPage title={t('view.characters')} icon={'mdi mdi-account-multiple'}/>
-        <SkeletonLoad>
-            <SkeletonLoad.Card/>
-            <SkeletonLoad.Card/>
-            <SkeletonLoad.Card/>
-            <SkeletonLoad.Card/>
-        </SkeletonLoad>
+        <Grid container={true} spacing={2}>
+            <Grid item={true} xs={12}>
+                <TitlesPage title={t('view.characters')} icon={'mdi mdi-account-multiple'}/>
+            </Grid>
+            <Grid item={true} xs={12}>
+                <SkeletonLoad>
+                    <SkeletonLoad.Card/>
+                    <SkeletonLoad.Card/>
+                    <SkeletonLoad.Card/>
+                    <SkeletonLoad.Card/>
+                </SkeletonLoad>
+            </Grid>
+        </Grid>
     </Container>)
 
     //</editor-folder>
@@ -66,8 +72,11 @@ export default function CharacterPage(): React.ReactElement {
 
     return <React.Fragment>
         <Container maxWidth="lg" className={classes.root}>
-            <TitlesPage title={t('view.characters')} icon={'mdi mdi-account-multiple'}/>
             <Grid container={true} spacing={2}>
+                <Grid item={true} xs={12}>
+                    <TitlesPage title={t('view.characters')} icon={'mdi mdi-account-multiple'}/>
+                </Grid>
+
                 {allowInsert() && <Grid lg={3} md={4} sm={6} xs={12} item={true}>
                     <InsertCardButton label={t('action.insert')} description={t('item.character.insert_text')}
                                       onClick={onOpenForm}/>

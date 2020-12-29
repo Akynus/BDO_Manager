@@ -34,7 +34,9 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
         background: red[400],
         color: theme.palette.getContrastText(red[400]),
         top: theme.spacing(4),
-        left: theme.spacing(4)
+        left: theme.spacing(4),
+        paddingLeft: theme.spacing(2),
+        paddingRight: theme.spacing(2)
     }
 }), {classNamePrefix: 'character-view'});
 //</editor-folder>
@@ -59,7 +61,7 @@ const CharacterView = React.forwardRef<CharacterViewRef, IProps>((props, ref) =>
     function content(): React.ReactNode {
         return <div className={classes.root}>
             <img alt={current!.name} className={classes.background} src={ClassContext[current!.class].img.large}/>
-            <Button className={classes.closeBtn} onClick={onClose}
+            <Button className={classes.closeBtn} size={"small"} onClick={onClose}
                     startIcon={<Icon className={'mdi mdi-close'}/>}>{t('action.close')}</Button>
         </div>
     }

@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 export default function InsertCardButton(props: IProps): React.ReactElement<IProps> {
     const classes = useStyles();
 
-    return <Card className={classes.root} elevation={0}>
+    return <Card className={classes.root} elevation={2}>
         <CardActionArea className={classes.root} onClick={() => props.onClick()}>
             <Avatar className={classes.avatar}>
                 <Icon className={'mdi mdi-plus-thick'}/>

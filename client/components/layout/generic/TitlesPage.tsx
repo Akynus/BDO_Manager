@@ -1,12 +1,20 @@
 import * as React from "react";
 import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
-import {Avatar, Divider, Icon, ListItem, ListItemAvatar, ListItemText, Typography} from "@material-ui/core";
+import {
+    Avatar,
+    Divider,
+    Icon,
+    ListItem,
+    ListItemAvatar,
+    ListItemSecondaryAction,
+    ListItemText,
+    Typography
+} from "@material-ui/core";
 import clsx from "clsx";
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
     root: {
-        display: "block",
-        marginBottom: theme.spacing(2)
+        display: "block"
     },
     avatar: {
         backgroundColor: theme.palette.primary.main,
@@ -27,6 +35,9 @@ export default function TitlesPage(props: IProps): React.ReactElement<IProps> {
                 </Avatar>
             </ListItemAvatar>
             <ListItemText primary={<Typography color={"textPrimary"} variant={"h4"}>{props.title}</Typography>}/>
+            {props.itemAction && <ListItemSecondaryAction>
+                {props.itemAction}
+            </ListItemSecondaryAction>}
         </ListItem>
         <Divider/>
     </div>
@@ -35,4 +46,5 @@ export default function TitlesPage(props: IProps): React.ReactElement<IProps> {
 interface IProps {
     title: string;
     icon: string;
+    itemAction?: React.ReactNode;
 }

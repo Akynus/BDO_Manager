@@ -10,7 +10,9 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
         padding: theme.spacing(2)
     },
     button: {
-        shadow: theme.shadows["2"]
+        border: 'none',
+        boxShadow: theme.shadows["2"],
+        padding: theme.spacing(1)
     },
     icon: {
         width: '100%',
@@ -22,7 +24,7 @@ export default function CharacterClassSelector(props: IProps): React.ReactElemen
     const classes = useStyles();
 
     function buildItem(value: EClasses): React.ReactNode {
-        return <Grid item={true} xs={3}>
+        return <Grid item={true} md={3} sm={2} xs={2}>
             <ToggleButton className={classes.button} selected={value == props.current} onClick={() => onSelect(value)}>
                 <img className={classes.icon} src={ClassContext[value].icon}/>
             </ToggleButton>
