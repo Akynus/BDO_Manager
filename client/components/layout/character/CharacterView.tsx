@@ -11,11 +11,11 @@ export interface CharacterViewRef {
     open(character: Character): void;
 }
 
+//<editor-folder desc="collapsed" desc="Styles">
 const TransitionDialog = React.forwardRef(function Transition(props: TransitionProps & { children?: React.ReactElement }, ref: React.Ref<unknown>) {
     return <Fade timeout={1000} ref={ref} {...props} />;
 });
 
-//<editor-folder desc="collapsed" desc="Styles">
 const useStyles = makeStyles((theme: Theme) => createStyles({
     root: {
         position: 'relative',

@@ -23,7 +23,7 @@ export default function InsertCardButton(props: IProps): React.ReactElement<IPro
     const classes = useStyles();
 
     return <Card className={classes.root} elevation={0}>
-        <CardActionArea className={classes.root}>
+        <CardActionArea className={classes.root} onClick={() => props.onClick()}>
             <Avatar className={classes.avatar}>
                 <Icon className={'mdi mdi-plus-thick'}/>
             </Avatar>

@@ -6,6 +6,7 @@ import {PaletteOptions} from "@material-ui/core/styles/createPalette";
 import Settings from "/imports/collections/SettingCollection";
 import Setting from "/imports/models/Setting";
 import {useMongoFetch} from "react-meteor-hooks";
+import {grey} from "@material-ui/core/colors";
 
 const Theming: React.FunctionComponent = function (props) {
     const settings: Setting[] = useMongoFetch(Settings.find());
@@ -57,11 +58,11 @@ const Theming: React.FunctionComponent = function (props) {
                 main: getSetting().theming.secondary,
             },
             background: getSetting().theming.type == "dark" ? {
-                default: '#404040',
-                paper: '#575757'
+                default: grey["700"],
+                paper: grey["600"]
             } : {
-                default: '#EFEFEF',
-                paper: '#FFFFFF'
+                default: grey["400"],
+                paper: grey["100"]
             }
         }
     }

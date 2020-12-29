@@ -47,7 +47,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     }
 }), {classNamePrefix: 'character-card-list'});
 
-export default function CharacterCardList(props: IProps): React.ReactElement<IProps> {
+export default function CharacterCard(props: IProps): React.ReactElement<IProps> {
     const [focus, setFocus] = React.useState<boolean>(false);
     const classes = useStyles();
     const {t} = useTranslation();

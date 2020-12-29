@@ -87,7 +87,7 @@ export type CharacterFormRef = {
 }
 //</editor-folder>
 
-const CharacterForm = React.forwardRef<CharacterFormRef>((props, ref) => {
+const _CharacterForm = React.forwardRef<CharacterFormRef>((props, ref) => {
     React.useImperativeHandle(ref, () => ({
         open: onOpen,
         close: () => setOpened(false)
@@ -343,4 +343,4 @@ const CharacterForm = React.forwardRef<CharacterFormRef>((props, ref) => {
     </Dialog>);
 });
 
-export default CharacterForm;
+export default _CharacterForm;

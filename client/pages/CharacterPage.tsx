@@ -9,8 +9,9 @@ import EPublish from "/imports/enumerables/EPublish";
 import Character from "/imports/models/Character";
 import Characters from "/imports/collections/CharacterCollection";
 import InsertCardButton from "/client/components/layout/generic/InsertCardButton";
-import CharacterCardList from "/client/components/layout/character/CharacterCardList";
+import CharacterCard from "/client/components/layout/character/CharacterCard";
 import CharacterView, {CharacterViewRef} from "/client/components/layout/character/CharacterView";
+import CharacterForm, {CharacterFormRef} from "/client/components/layout/character/CharacterForm";
 
 //<editor-folder desc="collapsed" desc="Styles">
 const useStyles = makeStyles((theme: Theme) => createStyles({
@@ -30,6 +31,7 @@ export default function CharacterPage(): React.ReactElement {
     const classes = useStyles();
     const {t} = useTranslation();
     const viewRef = React.createRef<CharacterViewRef>();
+    const formRef = React.createRef<CharacterFormRef>();
     const loading = useSubscription(EPublish.CHARACTERS);
     const datasource: Character[] = useMongoFetch(Characters.find());
     //</editor-folder>
@@ -51,15 +53,12 @@ export default function CharacterPage(): React.ReactElement {
         return true;
     }
 
-    function onInsert(): void {
-
-    }
-
-    function onView(character: Character): void {
+    function onOpenView(character: Character): void {
         if (viewRef.current) viewRef.current.open(character);
     }
 
-    function onEdit(character: Character): void {
+    function onOpenForm(character?: Character): void {
+        if (formRef.current) formRef.current.open(character);
     }
 
     function onDelete(character: Character): void {
@@ -71,13 +70,14 @@ export default function CharacterPage(): React.ReactElement {
             <Grid container={true} spacing={2}>
                 {allowInsert() && <Grid lg={3} md={4} sm={6} xs={12} item={true}>
                     <InsertCardButton label={t('action.insert')} description={t('item.character.insert_text')}
-                                      onClick={onInsert}/>
+                                      onClick={onOpenForm}/>
                 </Grid>}
                 {datasource.map(value => <Grid lg={3} md={4} sm={6} xs={12} item={true}>
-                    <CharacterCardList character={value} onClick={() => onView(value)}/>
+                    <CharacterCard character={value} onClick={() => onOpenView(value)}/>
                 </Grid>)}
             </Grid>
         </Container>
-        <CharacterView ref={viewRef} onEdit={onEdit} onDelete={onDelete}/>
+        <CharacterView ref={viewRef} onEdit={onOpenForm} onDelete={onDelete}/>
+        <CharacterForm ref={formRef}/>
     </React.Fragment>
 }

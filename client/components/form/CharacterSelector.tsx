@@ -6,7 +6,7 @@ import Character from "/imports/models/Character";
 import CharacterMiniCard from "/client/components/layout/CharacterMiniCard";
 import {Trans, useTranslation} from "react-i18next";
 import {Alert, AlertTitle} from "@material-ui/lab";
-import CharacterForm, {CharacterFormRef} from "/client/components/form/CharacterForm";
+import _CharacterForm, {CharacterFormRef} from "/client/components/form/CharacterForm";
 import EMethod from "/imports/enumerables/EMethod";
 import {useSnackbar} from "notistack";
 
@@ -75,7 +75,7 @@ const CharacterSelector = React.forwardRef<CharacterSelectorRef, IProps>((props,
                 </Grid>
             </DialogContent>
         </Dialog>
-        <CharacterForm ref={form}/>
+        <_CharacterForm ref={form}/>
     </div>
 });
 
